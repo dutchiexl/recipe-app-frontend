@@ -1,0 +1,25 @@
+<div [formGroup]="itemForm" class="ingredient-form">
+  <mat-form-field class="amount">
+    <mat-label>Hoeveelheid</mat-label>
+    <input matInput placeholder="Hoeveelheid" formControlName="amount" id="amount" (change)="updateItem($event)">
+  </mat-form-field>
+  <mat-form-field class="unit">
+    <input type="text" placeholder="Eenheid" matInput formControlName="unit"
+           [matAutocomplete]="unitsAutoComplete">
+    <mat-autocomplete #unitsAutoComplete="matAutocomplete" [displayWith]="displayUnit()">
+      <mat-option *ngFor="let unit of filteredUnits | async" [value]="unit" (onSelectionChange)="updateUnit(unit)">
+        {{unit.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field class="name">
+    <input type="text" placeholder="Naam" matInput formControlName="ingredient"
+           [matAutocomplete]="ingredientsAutoComplete">
+    <mat-autocomplete #ingredientsAutoComplete="matAutocomplete" [displayWith]="displayIngredient()">
+      <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient"
+                  (onSelectionChange)="updateIngredient(ingredient)">
+        {{ingredient.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

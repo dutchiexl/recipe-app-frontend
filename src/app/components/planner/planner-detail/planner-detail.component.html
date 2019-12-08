@@ -1,0 +1,34 @@
+<div class="recipe-detail container" *ngIf="mealPlan">
+  <div class="head flex-row">
+    <div class="name">
+      <h1>
+        {{ mealPlan.name }}
+      </h1>
+    </div>
+    <div class="description">
+    </div>
+  </div>
+  <div class="list-overview flex-row top-spacing">
+    <app-overview-item
+      class="list-item clickable"
+      *ngFor="let recipe of mealPlan.recipes" [recipe]="recipe"
+      (click)="goToRecipe(recipe)"
+    ></app-overview-item>
+  </div>
+</div>
+<eco-fab-speed-dial>
+  <eco-fab-speed-dial-trigger>
+    <button mat-fab color="primary">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </eco-fab-speed-dial-trigger>
+
+  <eco-fab-speed-dial-actions>
+    <button mat-mini-fab color="warn" (click)="deletePlan()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="editPlan()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </eco-fab-speed-dial-actions>
+</eco-fab-speed-dial>

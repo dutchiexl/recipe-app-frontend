@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="flex-row">
+    <div class="list-overview top-spacing">
+      <app-planner-overview-item
+        class="list-item clickable"
+        *ngFor="let mealplan of mealPlans" [mealPlan]="mealplan"
+        (click)="goToMealPlan(mealplan)"
+      ></app-planner-overview-item>
+    </div>
+  </div>
+</div>
+<eco-fab-speed-dial>
+  <eco-fab-speed-dial-trigger>
+    <button mat-fab color="primary">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </eco-fab-speed-dial-trigger>
+
+  <eco-fab-speed-dial-actions>
+    <button mat-mini-fab color="primary" (click)="createPlan()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </eco-fab-speed-dial-actions>
+</eco-fab-speed-dial>

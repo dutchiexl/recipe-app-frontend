@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <button mat-button (click)="goToOverview()">Overview</button>
+  <span class="spacer"></span>
+  <button mat-button *ngIf="selectedMealPlan" (click)="goToShoppingList()">Boodschappenlijstje</button>
+  <button mat-button [matMenuTriggerFor]="menu">{{ mode }}</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="setMode(stateEnum.RECIPES)">Recepten</button>
+    <button mat-menu-item (click)="setMode(stateEnum.MEALPLANS)">Planner</button>
+  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="optionsMenu" aria-label="">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #optionsMenu="matMenu">
+    <button mat-menu-item (click)="setMode(stateEnum.MANAGE_UNITS)">
+      <span>Manage units</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<router-outlet *ngIf="isLoaded"></router-outlet>
