@@ -87,7 +87,7 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
   }
 
   writeValue(obj: any): void {
-    //this.onChange(obj);
+     // this.onChange(obj);
   }
 
   private _filterUnits(value: string): Unit[] {
@@ -104,7 +104,7 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
 
       let ingredients = this.ingredients.filter(option => option.name.toLowerCase().includes(filterValue));
       if (ingredients.length < 1) {
-        let newIngredient = IngredientUtil.createEmpty();
+        const newIngredient = IngredientUtil.createEmpty();
         this.enteredValue = value;
         newIngredient.name = `Add '${value}'?`;
         ingredients = [newIngredient];
@@ -159,9 +159,9 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
       data: ingredient
     });
 
-    dialogRef.afterClosed().subscribe(ingredient => {
-      if (ingredient) {
-        this.itemForm.get('ingredient').setValue(ingredient);
+    dialogRef.afterClosed().subscribe(newIngredient => {
+      if (newIngredient) {
+        this.itemForm.get('ingredient').setValue(newIngredient);
         this.updateItem(null);
       }
     });

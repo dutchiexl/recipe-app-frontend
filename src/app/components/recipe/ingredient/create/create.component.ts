@@ -49,13 +49,13 @@ export class CreateIngredientComponent implements OnInit {
       this.store.select(RecipeState.getIngredients).pipe(
         find((ingredients) => {
           return ingredients.some((ingredient) => {
-            return ingredient.name === this.ingredientForm.get('name').value
-          })
+            return ingredient.name === this.ingredientForm.get('name').value;
+          });
         }),
         map((ingredients) => {
           return ingredients.find((ingredient) => {
-            return ingredient.name === this.ingredientForm.get('name').value
-          })
+            return ingredient.name === this.ingredientForm.get('name').value;
+          });
         })
       ).subscribe((ingredient) => {
         this.dialogRef.close(ingredient);

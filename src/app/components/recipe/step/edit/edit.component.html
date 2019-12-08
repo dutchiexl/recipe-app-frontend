@@ -1,4 +1,4 @@
-<div [formGroup]="stepItemFormgroup">
+<div [formGroup]="stepItemFormGroup">
   <mat-card class="example-card">
     <img mat-card-image src="{{ preview }}" alt="header" (click)="fileInput.click()">
     <input type="file" (change)="uploadFile($event)" #fileInput class="hidden">
