@@ -43,6 +43,8 @@ testem.log
 /typings
 yarn.lock
 package-lock.json
+*.iml
+*.idea
 
 # System Files
 .DS_Store
