@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { RecipeState } from '../../../store/recipe.state';
+import { Unit } from '../../../interfaces/unit/unit';
 
 @Component({
   selector: 'app-units',
@@ -6,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./units.component.scss']
 })
 export class UnitsComponent implements OnInit {
+  private units: Unit[];
 
-  constructor() { }
+  constructor(private store: Store) {
+    store.select(RecipeState.getUnits).subscribe((units) => {
+      this.units = units;
+    });
+  }
 
   ngOnInit() {
   }
 
+  createUnit() {
+
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { RecipeState } from '../../../store/recipe.state';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
-import { Navigate } from '@ngxs/router-plugin';
 import { NavigateAction } from '../../../store/recipe.actions';
 
 @Component({

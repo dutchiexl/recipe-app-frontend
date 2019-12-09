@@ -4,6 +4,6 @@
   },
 
   "/images/*": {
-    "target": "http://localhost:3334/", "secure": false
+    "target": "http://localhost:3333/", "secure": false
   }
 }

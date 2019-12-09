@@ -24,17 +24,16 @@ import { StepUtil } from '../../../../utils/step.util';
 export class EditStepComponent implements ControlValueAccessor, OnChanges, OnInit {
     @Input() step: Step = StepUtil.createEmpty();
     stepItemFormGroup: FormGroup;
-    test: FormControl;
     formStep: Step = StepUtil.createEmpty();
     preview = '/images/placeholder.jpg';
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
-
-    onChange = (step: Step) => {};
 
     constructor(
         private formBuilder: FormBuilder,
         private http: HttpClient) {
     }
+
+    onChange = (step: Step) => {};
 
     ngOnInit() {
         this.formStep.name = this.step.name ? this.step.name : null;
