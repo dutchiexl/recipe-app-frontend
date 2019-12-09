@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://fodmap-recipe-app-backend.herokuapp.com/", "secure": false
+  },
+
+  "/images/*": {
+    "target": "https://fodmap-recipe-app-backend.herokuapp.com/", "secure": false
+  }
+}
