@@ -1,5 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Unit } from '../../../../interfaces/unit/unit';
 import { RecipeState } from '../../../../store/recipe.state';
@@ -19,6 +19,11 @@ import { CreateIngredientComponent } from '../../ingredient/create/create.compon
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditItemComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
       useExisting: forwardRef(() => EditItemComponent),
       multi: true
     }
@@ -88,6 +93,18 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
 
   writeValue(obj: any): void {
      // this.onChange(obj);
+  }
+
+  validate({value: Step}: FormControl) {
+    if (!(
+        this.itemForm.get('ingredient').valid &&
+        this.itemForm.get('unit').valid &&
+        this.itemForm.get('amount').valid
+    )) {
+      return {
+        invalid: true
+      };
+    }
   }
 
   private _filterUnits(value: string): Unit[] {

@@ -28,23 +28,23 @@ body {
   flex: 0 0 100%;
 
   .columns-2 {
-    flex: 1 0 calc(20% - 20px);
+    flex: 0 0 calc(20% - 20px);
   }
 
   .columns-3 {
-    flex: 1 0 calc(100% / 3 - 20px);
+    flex: 0 0 calc(100% / 3 - 20px);
   }
 
   .columns-6 {
-    flex: 1 0 calc(50% - 20px);
+    flex: 0 0 calc(50% - 20px);
   }
 
   .columns-9 {
-    flex: 1 0 calc(100% / 3 * 2 - 20px);
+    flex: 0 0 calc(100% / 3 * 2 - 20px);
   }
 
   .columns-10 {
-    flex: 1 0 calc(80% - 20px);
+    flex: 0 0 calc(80% - 20px);
   }
 }
 

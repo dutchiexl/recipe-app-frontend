@@ -48,6 +48,7 @@ import { ItemComponent } from './components/recipe/item/item.component';
 import { EditItemComponent } from './components/recipe/item/edit/edit.component';
 import { IngredientService } from './services/ingredient.service';
 import { CreateIngredientComponent } from './components/recipe/ingredient/create/create.component';
+import { FormGroupDirective } from './directives/form-group-directive.directive';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { CreateIngredientComponent } from './components/recipe/ingredient/create
     ShoppinglistGroupComponent,
     UnitsComponent,
     ItemComponent,
-    CreateIngredientComponent
+    CreateIngredientComponent,
+    FormGroupDirective
   ],
   imports: [
     BrowserModule,

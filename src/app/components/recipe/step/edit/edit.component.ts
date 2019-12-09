@@ -1,5 +1,5 @@
 import { Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Step } from '../../../../interfaces/recipe/step.interface';
 import { HttpClient } from '@angular/common/http';
 import { StepUtil } from '../../../../utils/step.util';
@@ -13,12 +13,18 @@ import { StepUtil } from '../../../../utils/step.util';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => EditStepComponent),
             multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => EditStepComponent),
+            multi: true
         }
     ]
 })
 export class EditStepComponent implements ControlValueAccessor, OnChanges, OnInit {
     @Input() step: Step = StepUtil.createEmpty();
     stepItemFormGroup: FormGroup;
+    test: FormControl;
     formStep: Step = StepUtil.createEmpty();
     preview = '/images/placeholder.jpg';
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
@@ -31,14 +37,14 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
     }
 
     ngOnInit() {
-        this.formStep.name = this.step.name ? this.step.name : '';
-        this.formStep.text = this.step.text ? this.step.text : '';
-        this.formStep.imagePath = this.step.imagePath ? this.step.imagePath : '';
+        this.formStep.name = this.step.name ? this.step.name : null;
+        this.formStep.text = this.step.text ? this.step.text : null;
+        this.formStep.imagePath = this.step.imagePath ? this.step.imagePath : null;
 
         this.stepItemFormGroup = this.formBuilder.group({
             name: [this.formStep.name, Validators.required],
             text: [this.formStep.text, Validators.required],
-            imagePath: [this.formStep.imagePath, [Validators.required]]
+            imagePath: [this.formStep.imagePath, Validators.required]
         });
     }
 
@@ -56,6 +62,18 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
     }
 
     writeValue(obj: any): void {
+    }
+
+    validate({value: Step}: FormControl) {
+        if (!(
+            this.stepItemFormGroup.get('name').valid &&
+            this.stepItemFormGroup.get('text').valid &&
+            this.stepItemFormGroup.get('imagePath').valid
+        )) {
+            return {
+                invalid: true
+            };
+        }
     }
 
     updateStep(event: Event) {

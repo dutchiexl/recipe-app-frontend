@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="flex-row">
-    <app-shoppinglist-group
-      *ngFor="let shoppingListGroup of shoppingList.shoppinglistGroups"
-      [shoppingListGroup]="shoppingListGroup"></app-shoppinglist-group>
-  </div>
+    <div class="flex-row">
+        <app-shoppinglist-group
+                class="columns-2"
+                *ngFor="let shoppingListGroup of shoppingList.shoppinglistGroups"
+                [shoppingListGroup]="shoppingListGroup"></app-shoppinglist-group>
+    </div>
 </div>
