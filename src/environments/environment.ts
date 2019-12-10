@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3333/'
+    production: false,
+    apiUrl: 'http://localhost:3333/',
+    assetBasePath: 'https://fodmap-recipe-app.s3.eu-west-3.amazonaws.com/'
 };
 
 /*

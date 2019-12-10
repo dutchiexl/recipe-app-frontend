@@ -1,9 +1,6 @@
 {
-  "/api/*": {
-    "target": "http://localhost:3333/", "secure": false
-  },
-
   "/images/*": {
-    "target": "http://localhost:3333/", "secure": false
+    "target": "http://localhost:3333/",
+    "secure": false
   }
 }

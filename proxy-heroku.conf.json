@@ -1,9 +1,6 @@
 {
-  "/api/*": {
-    "target": "https://fodmap-recipe-app-backend.herokuapp.com/", "secure": false
-  },
-
   "/images/*": {
-    "target": "https://fodmap-recipe-app-backend.herokuapp.com/", "secure": false
+    "target": "https://fodmap-recipe-app.s3.eu-west-3.amazonaws.com/",
+    "secure": false
   }
 }
