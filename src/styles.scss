@@ -1,7 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color: #333;
+$secondary-color: #fff;
+$tertiary-color: #f4f4f4;
+
 body {
   margin: 0;
   font-family: 'Roboto';
+  background-color: #f4f4f4;
+}
+
+mat-toolbar {
+  &.primary {
+    background-color: $primary-color;
+    color: $secondary-color;
+  }
+  &.secondary {
+    background-color: $secondary-color;
+  }
 }
 
 .mat-card-header-text {
@@ -179,4 +194,9 @@ mat-list {
       }
     }
   }
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
 }

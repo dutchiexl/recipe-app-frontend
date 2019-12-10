@@ -99,9 +99,8 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
 
         this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
-                const filename = response['fileName'].split('/');
                 this.stepItemFormGroup.patchValue({
-                    imagePath: '/images/' + filename[filename.length - 1]
+                    imagePath: AssetUtil.getFilenameFromPath(response['fileName'])
                 });
                 this.stepItemFormGroup.get('imagePath').updateValueAndValidity();
                 this.updateStep(null);

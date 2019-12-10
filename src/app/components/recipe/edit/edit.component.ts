@@ -98,7 +98,7 @@ export class EditComponent implements OnInit {
         this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
                 this.form.patchValue({
-                    imagePath: AssetUtil.getAssetUrl(AssetUtil.getFilenameFromPath(response['fileName']))
+                    imagePath: AssetUtil.getFilenameFromPath(response['fileName'])
                 });
                 this.form.get('imagePath').updateValueAndValidity();
             });
