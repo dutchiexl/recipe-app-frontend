@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,7 +14,7 @@ import { RecipeUtil } from '../utils/recipe.util';
 @Injectable()
 export class MealPlanService {
 
-  callbackUrl = 'http://localhost:3333/api/mealplans';
+  callbackUrl = environment.apiUrl + 'api/mealplans';
 
   constructor(
     private http: HttpClient,

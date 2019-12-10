@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Unit } from '../interfaces/unit/unit';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -7,7 +8,7 @@ import { UnitMapper } from '../mappers/unit.mapper';
 
 export class UnitService {
   cache: Observable<Unit>;
-  callbackUrl = 'http://localhost:3333/api/units';
+  callbackUrl = environment.apiUrl + 'api/units';
 
   constructor(private http: HttpClient) {
   }

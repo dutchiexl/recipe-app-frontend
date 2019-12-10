@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -9,7 +10,7 @@ import { IngredientUtil } from '../utils/ingredient.util';
 
 export class IngredientService {
   cache: Observable<IngredientCategory>;
-  callbackUrl = 'http://localhost:3333/api/ingredients';
+  callbackUrl = environment.apiUrl + 'api/ingredients';
 
   constructor(private http: HttpClient) {
   }
