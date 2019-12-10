@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
@@ -116,7 +117,7 @@ export class EditComponent implements OnInit {
         const formData = new FormData();
         formData.append('image', file);
 
-        this.http.post('/api/upload', formData)
+        this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
                 const filename = response['fileName'].split('/');
                 this.form.patchValue({

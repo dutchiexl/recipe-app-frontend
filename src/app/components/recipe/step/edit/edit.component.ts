@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Step } from '../../../../interfaces/recipe/step.interface';
@@ -95,7 +96,7 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
         const formData = new FormData();
         formData.append('image', file);
 
-        this.http.post('/api/upload', formData)
+        this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
                 const filename = response['fileName'].split('/');
                 this.stepItemFormGroup.patchValue({
