@@ -1,6 +1,6 @@
 {
   "/images/*": {
-    "target": "http://localhost:3333/",
+    "target": "https://fodmap-recipe-app.s3.eu-west-3.amazonaws.com/public/",
     "secure": false
   }
 }

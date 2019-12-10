@@ -13,6 +13,7 @@ import { Step } from '../../../interfaces/recipe/step.interface';
 import { Item } from '../../../interfaces/recipe/item.interface';
 import { ItemUtil } from '../../../utils/item.util';
 import { UpdateOrCreateRecipeAction } from '../../../store/recipe.actions';
+import { AssetUtil } from '../../../utils/asset.util';
 
 @Component({
     selector: 'app-edit',
@@ -24,7 +25,7 @@ export class EditComponent implements OnInit {
     form: FormGroup;
     itemFormGroup: FormArray = new FormArray([]);
     stepFormGroup: FormArray = new FormArray([]);
-    preview = '/images/placeholder.jpg';
+    preview = AssetUtil.getPlaceholder();
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(
@@ -119,9 +120,8 @@ export class EditComponent implements OnInit {
 
         this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
-                const filename = response['fileName'].split('/');
                 this.form.patchValue({
-                    imagePath: '/images/' + filename[filename.length - 1]
+                    imagePath: AssetUtil.getAssetUrl(AssetUtil.getFilenameFromPath(response['fileName']))
                 });
                 this.form.get('imagePath').updateValueAndValidity();
             });

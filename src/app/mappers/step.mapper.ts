@@ -4,7 +4,7 @@ import { Step } from '../interfaces/recipe/step.interface';
 export class StepMapper {
 
   public static toModel(rawStep: RawStep): Step {
-    let step: Step = {
+    const step: Step = {
       name: rawStep.name,
       text: rawStep.text,
     };

@@ -4,6 +4,7 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATOR
 import { Step } from '../../../../interfaces/recipe/step.interface';
 import { HttpClient } from '@angular/common/http';
 import { StepUtil } from '../../../../utils/step.util';
+import { AssetUtil } from '../../../../utils/asset.util';
 
 @Component({
     selector: 'app-edit-step',
@@ -26,7 +27,7 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
     @Input() step: Step = StepUtil.createEmpty();
     stepItemFormGroup: FormGroup;
     formStep: Step = StepUtil.createEmpty();
-    preview = '/images/placeholder.jpg';
+    preview = AssetUtil.getPlaceholder();
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(

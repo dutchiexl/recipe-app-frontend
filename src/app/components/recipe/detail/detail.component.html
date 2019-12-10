@@ -1,6 +1,6 @@
 <div class="recipe-detail" *ngIf="recipe">
   <div class="header-image">
-    <img *ngIf="recipe.imagePath" src="{{recipe.imagePath}}" alt="header">
+    <img *ngIf="recipe.imagePath" src="{{recipe.imagePath | asset}}" alt="header">
   </div>
   <div class="container">
     <div class="head flex-row">

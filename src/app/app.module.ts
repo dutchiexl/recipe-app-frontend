@@ -49,6 +49,7 @@ import { EditItemComponent } from './components/recipe/item/edit/edit.component'
 import { IngredientService } from './services/ingredient.service';
 import { CreateIngredientComponent } from './components/recipe/ingredient/create/create.component';
 import { FormGroupDirective } from './directives/form-group-directive.directive';
+import { AssetPipe } from './pipes/asset.pipe';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { FormGroupDirective } from './directives/form-group-directive.directive'
     UnitsComponent,
     ItemComponent,
     CreateIngredientComponent,
-    FormGroupDirective
+    FormGroupDirective,
+    AssetPipe
   ],
   imports: [
     BrowserModule,

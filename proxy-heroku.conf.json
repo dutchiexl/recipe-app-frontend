@@ -1,5 +1,5 @@
 {
-  "/images/*": {
+  "/public/images/*": {
     "target": "https://fodmap-recipe-app.s3.eu-west-3.amazonaws.com/",
     "secure": false
   }
