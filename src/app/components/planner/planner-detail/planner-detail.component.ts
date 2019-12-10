@@ -10,47 +10,47 @@ import { ConfirmationComponent } from '../../shared/confirmation/confirmation.co
 import { DeleteMealPlanAction, NavigateAction } from '../../../store/recipe.actions';
 
 @Component({
-  selector: 'app-planner-detail',
-  templateUrl: './planner-detail.component.html',
-  styleUrls: ['./planner-detail.component.scss']
+    selector: 'app-planner-detail',
+    templateUrl: './planner-detail.component.html',
+    styleUrls: ['./planner-detail.component.scss']
 })
 export class PlannerDetailComponent implements OnInit {
-  mealPlans: MealPlan[];
-  mealPlan: MealPlan;
+    mealPlans: MealPlan[];
+    mealPlan: MealPlan;
 
-  constructor(
-    private store: Store,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
-  ) {}
+    constructor(
+        private store: Store,
+        private route: ActivatedRoute,
+        public dialog: MatDialog
+    ) {}
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.store.select(RecipeState.getMealPlans).subscribe((mealPlans) => {
-        this.mealPlans = mealPlans;
-        let mealPlanId = params.get('planId');
-        this.mealPlan = MealPlanListUtil.findById(this.mealPlans, mealPlanId);
-      });
-    });
-  }
+    ngOnInit() {
+        this.route.paramMap.subscribe((params) => {
+            this.store.select(RecipeState.getMealPlans).subscribe((mealPlans) => {
+                this.mealPlans = mealPlans;
+                let mealPlanId = params.get('planId');
+                this.mealPlan = MealPlanListUtil.findById(this.mealPlans, mealPlanId);
+            });
+        });
+    }
 
-  goToRecipe(recipe: Recipe) {
-    this.store.dispatch(new NavigateAction(['recipe', recipe.id]))
-  }
+    goToRecipe(recipe: Recipe) {
+        this.store.dispatch(new NavigateAction(['recipe', recipe.id]));
+    }
 
-  editPlan() {
-    this.store.dispatch(new NavigateAction(['plan', 'edit', this.mealPlan.id], this.mealPlan))
-  }
+    editPlan() {
+        this.store.dispatch(new NavigateAction(['plan', 'edit', this.mealPlan.id], this.mealPlan));
+    }
 
-  deletePlan() {
-    const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '400px',
-    });
+    deletePlan() {
+        const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '400px',
+        });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.store.dispatch(new DeleteMealPlanAction(this.mealPlan));
-      }
-    });
-  }
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.store.dispatch(new DeleteMealPlanAction(this.mealPlan));
+            }
+        });
+    }
 }

@@ -7,17 +7,17 @@ import { RawUnit } from '../interfaces/api/raw-unit.interface';
 import { UnitMapper } from '../mappers/unit.mapper';
 
 export class UnitService {
-  cache: Observable<Unit>;
-  callbackUrl = environment.apiUrl + 'api/units';
+    cache: Observable<Unit>;
+    callbackUrl = environment.apiUrl + 'api/units';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getAll(): Observable<Unit[]> {
-    return this.http.get(this.callbackUrl).pipe(
-      map((rawData: RawUnit[]) => {
-        return rawData.map((rawUnitData) => UnitMapper.toModel(rawUnitData));
-      })
-    );
-  }
+    getAll(): Observable<Unit[]> {
+        return this.http.get(this.callbackUrl).pipe(
+            map((rawData: RawUnit[]) => {
+                return rawData.map((rawUnitData) => UnitMapper.toModel(rawUnitData));
+            })
+        );
+    }
 }

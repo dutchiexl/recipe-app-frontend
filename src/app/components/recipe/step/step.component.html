@@ -1,11 +1,11 @@
 <mat-card *ngIf="step">
-  <img mat-card-image src="{{ step.imagePath | asset }}" alt="{{ step.name }}">
-  <mat-card-header>
-    <mat-card-title>{{ step.name }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{ step.text }}
-    </p>
-  </mat-card-content>
+    <img alt="{{ step.name }}" mat-card-image src="{{ step.imagePath | asset }}">
+    <mat-card-header>
+        <mat-card-title>{{ step.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ step.text }}
+        </p>
+    </mat-card-content>
 </mat-card>

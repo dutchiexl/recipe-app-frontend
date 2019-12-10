@@ -1,5 +1,5 @@
 export enum Metric {
-  ITEM = 'item',
-  WEIGHT = 'weight',
-  VOLUME = 'volume'
+    ITEM = 'item',
+    WEIGHT = 'weight',
+    VOLUME = 'volume'
 }

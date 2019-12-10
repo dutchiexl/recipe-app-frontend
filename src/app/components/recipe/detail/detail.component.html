@@ -1,51 +1,51 @@
-<div class="recipe-detail" *ngIf="recipe">
-  <div class="header-image">
-    <img *ngIf="recipe.imagePath" src="{{recipe.imagePath | asset}}" alt="header">
-  </div>
-  <div class="container">
-    <div class="head flex-row">
-      <div class="name columns-6">
-        <h1>
-          {{ recipe.name }}
-        </h1>
-        <h2>
-          {{ recipe.nameAddition }}
-        </h2>
-      </div>
-      <div class="description columns-6">
-        {{recipe.description }}
-      </div>
+<div *ngIf="recipe" class="recipe-detail">
+    <div class="header-image">
+        <img *ngIf="recipe.imagePath" alt="header" src="{{recipe.imagePath | asset}}">
     </div>
-    <div class="details flex-row">
-      <div class="info columns-2">
-        <div class="ingredients">
-          <h3>
-            Ingredienten
-          </h3>
-          <ul>
-            <app-item *ngFor="let item of recipe.items" [item]="item"></app-item>
-          </ul>
+    <div class="container">
+        <div class="head flex-row">
+            <div class="name columns-6">
+                <h1>
+                    {{ recipe.name }}
+                </h1>
+                <h2>
+                    {{ recipe.nameAddition }}
+                </h2>
+            </div>
+            <div class="description columns-6">
+                {{recipe.description }}
+            </div>
         </div>
-      </div>
-      <div class="steps list-overview columns-10">
-        <app-step class="list-item" *ngFor="let step of recipe.steps" [step]="step"></app-step>
-      </div>
+        <div class="details flex-row">
+            <div class="info columns-2">
+                <div class="ingredients">
+                    <h3>
+                        Ingredienten
+                    </h3>
+                    <ul>
+                        <app-item *ngFor="let item of recipe.items" [item]="item"></app-item>
+                    </ul>
+                </div>
+            </div>
+            <div class="steps list-overview columns-10">
+                <app-step *ngFor="let step of recipe.steps" [step]="step" class="list-item"></app-step>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <eco-fab-speed-dial>
-  <eco-fab-speed-dial-trigger>
-    <button mat-fab color="primary">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </eco-fab-speed-dial-trigger>
+    <eco-fab-speed-dial-trigger>
+        <button color="primary" mat-fab>
+            <mat-icon>menu</mat-icon>
+        </button>
+    </eco-fab-speed-dial-trigger>
 
-  <eco-fab-speed-dial-actions>
-    <button mat-mini-fab color="warn" (click)="delete()">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-mini-fab color="primary" (click)="editRecipe(recipe)">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </eco-fab-speed-dial-actions>
+    <eco-fab-speed-dial-actions>
+        <button (click)="delete()" color="warn" mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button (click)="editRecipe(recipe)" color="primary" mat-mini-fab>
+            <mat-icon>edit</mat-icon>
+        </button>
+    </eco-fab-speed-dial-actions>
 </eco-fab-speed-dial>

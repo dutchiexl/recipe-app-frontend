@@ -1,16 +1,17 @@
 <div [formGroup]="stepItemFormGroup">
-  <mat-card class="example-card">
-    <img mat-card-image src="{{ preview }}" alt="header" (click)="fileInput.click()">
-    <input type="file" (change)="uploadFile($event)" #fileInput class="hidden">
-    <mat-card-content>
-      <mat-form-field>
-        <mat-label>Naam</mat-label>
-        <input matInput placeholder="Naam" formControlName="name" (change)="updateStep($event)">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Tekst</mat-label>
-        <textarea matInput placeholder="Tekst" formControlName="text" (change)="updateStep($event)" rows="6"></textarea>
-      </mat-form-field>
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="example-card">
+        <img (click)="fileInput.click()" alt="header" mat-card-image src="{{ preview }}">
+        <input #fileInput (change)="uploadFile($event)" class="hidden" type="file">
+        <mat-card-content>
+            <mat-form-field>
+                <mat-label>Naam</mat-label>
+                <input (change)="updateStep($event)" formControlName="name" matInput placeholder="Naam">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tekst</mat-label>
+                <textarea (change)="updateStep($event)" formControlName="text" matInput placeholder="Tekst"
+                          rows="6"></textarea>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
 </div>

@@ -5,17 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatCardModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule, MatSelectModule,
-  MatToolbarModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatToolbarModule
 } from '@angular/material';
 import { OverviewComponent } from './components/recipe/overview/overview.component';
 import { DetailComponent } from './components/recipe/detail/detail.component';
@@ -52,71 +53,71 @@ import { FormGroupDirective } from './directives/form-group-directive.directive'
 import { AssetPipe } from './pipes/asset.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    OverviewItemComponent,
-    OverviewComponent,
-    DetailComponent,
-    StepComponent,
-    EditComponent,
-    EditItemComponent,
-    EditStepComponent,
-    PlannerOverviewComponent,
-    PlannerOverviewItemComponent,
-    PlannerDetailComponent,
-    PlannerEditComponent,
-    RecipeListItemComponent,
-    ConfirmationComponent,
-    ShoppinglistComponent,
-    ShoppinglistGroupComponent,
-    UnitsComponent,
-    ItemComponent,
-    CreateIngredientComponent,
-    FormGroupDirective,
-    AssetPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatDialogModule,
-    MatMenuModule,
-    MatAutocompleteModule,
-    MatSelectModule,
-    EcoFabSpeedDialModule,
-    NgxsModule.forRoot([
-      RecipeState
-    ]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsRouterPluginModule.forRoot()
-  ],
-  providers: [
-    RecipeService,
-    MealPlanService,
-    UnitService,
-    IngredientService,
-    IngredientCategoryService
-  ],
-  entryComponents: [
-    ConfirmationComponent,
-    CreateIngredientComponent
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        OverviewItemComponent,
+        OverviewComponent,
+        DetailComponent,
+        StepComponent,
+        EditComponent,
+        EditItemComponent,
+        EditStepComponent,
+        PlannerOverviewComponent,
+        PlannerOverviewItemComponent,
+        PlannerDetailComponent,
+        PlannerEditComponent,
+        RecipeListItemComponent,
+        ConfirmationComponent,
+        ShoppinglistComponent,
+        ShoppinglistGroupComponent,
+        UnitsComponent,
+        ItemComponent,
+        CreateIngredientComponent,
+        FormGroupDirective,
+        AssetPipe
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatListModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        EcoFabSpeedDialModule,
+        NgxsModule.forRoot([
+            RecipeState
+        ]),
+        NgxsReduxDevtoolsPluginModule.forRoot(),
+        NgxsRouterPluginModule.forRoot()
+    ],
+    providers: [
+        RecipeService,
+        MealPlanService,
+        UnitService,
+        IngredientService,
+        IngredientCategoryService
+    ],
+    entryComponents: [
+        ConfirmationComponent,
+        CreateIngredientComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  constructor(private store: Store) {
-    store.dispatch(new LoadApplicationAction());
-  }
+    constructor(private store: Store) {
+        store.dispatch(new LoadApplicationAction());
+    }
 }

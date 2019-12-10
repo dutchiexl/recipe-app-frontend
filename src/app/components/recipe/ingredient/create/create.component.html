@@ -1,22 +1,22 @@
 <h1 mat-dialog-title></h1>
 <div mat-dialog-content>
-  <div [formGroup]="ingredientForm" class="ingredient-form">
-    <mat-form-field class="amount">
-      <mat-label>Naam</mat-label>
-      <input matInput placeholder="Naam" formControlName="name" id="naam">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Category</mat-label>
-      <mat-select formControlName="category">
-        <mat-option *ngFor="let category of ingredientCategories" [value]="category.id">
-          {{category.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div [formGroup]="ingredientForm" class="ingredient-form">
+        <mat-form-field class="amount">
+            <mat-label>Naam</mat-label>
+            <input formControlName="name" id="naam" matInput placeholder="Naam">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of ingredientCategories" [value]="category.id">
+                    {{category.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onCreateClick()">Create</button>
+    <button (click)="onNoClick()" mat-button>Cancel</button>
+    <button (click)="onCreateClick()" mat-button>Create</button>
 </div>

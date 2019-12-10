@@ -4,23 +4,23 @@ import { RecipeState } from '../../../store/recipe.state';
 import { Unit } from '../../../interfaces/unit/unit';
 
 @Component({
-  selector: 'app-units',
-  templateUrl: './units.component.html',
-  styleUrls: ['./units.component.scss']
+    selector: 'app-units',
+    templateUrl: './units.component.html',
+    styleUrls: ['./units.component.scss']
 })
 export class UnitsComponent implements OnInit {
-  private units: Unit[];
+    private units: Unit[];
 
-  constructor(private store: Store) {
-    store.select(RecipeState.getUnits).subscribe((units) => {
-      this.units = units;
-    });
-  }
+    constructor(private store: Store) {
+        store.select(RecipeState.getUnits).subscribe((units) => {
+            this.units = units;
+        });
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  createUnit() {
+    createUnit() {
 
-  }
+    }
 }

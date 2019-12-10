@@ -5,27 +5,27 @@ import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { NavigateAction } from '../../../store/recipe.actions';
 
 @Component({
-  selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+    selector: 'app-overview',
+    templateUrl: './overview.component.html',
+    styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  recipes: Recipe[];
+    recipes: Recipe[];
 
-  constructor(private store: Store) {
-    store.select(RecipeState.getRecipes).subscribe((recipes) => {
-      this.recipes = recipes;
-    });
-  }
+    constructor(private store: Store) {
+        store.select(RecipeState.getRecipes).subscribe((recipes) => {
+            this.recipes = recipes;
+        });
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  goToRecipe(recipe: Recipe) {
-    this.store.dispatch(new NavigateAction(['recipe', recipe.id]))
-  }
+    goToRecipe(recipe: Recipe) {
+        this.store.dispatch(new NavigateAction(['recipe', recipe.id]));
+    }
 
-  createRecipe() {
-    this.store.dispatch(new NavigateAction(['recipe', 'create']))
-  }
+    createRecipe() {
+        this.store.dispatch(new NavigateAction(['recipe', 'create']));
+    }
 }

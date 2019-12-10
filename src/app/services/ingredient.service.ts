@@ -9,25 +9,25 @@ import { IngredientMapper } from '../mappers/ingredient.mapper';
 import { IngredientUtil } from '../utils/ingredient.util';
 
 export class IngredientService {
-  cache: Observable<IngredientCategory>;
-  callbackUrl = environment.apiUrl + 'api/ingredients';
+    cache: Observable<IngredientCategory>;
+    callbackUrl = environment.apiUrl + 'api/ingredients';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getAll(): Observable<Ingredient[]> {
-    return this.http.get(this.callbackUrl).pipe(
-      map((rawData: RawIngredient[]) => {
-        return rawData.map((rawIngredientData) => IngredientMapper.toModel(rawIngredientData));
-      })
-    );
-  }
+    getAll(): Observable<Ingredient[]> {
+        return this.http.get(this.callbackUrl).pipe(
+            map((rawData: RawIngredient[]) => {
+                return rawData.map((rawIngredientData) => IngredientMapper.toModel(rawIngredientData));
+            })
+        );
+    }
 
-  create(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post(this.callbackUrl, IngredientUtil.asJson(ingredient)).pipe(
-      map((rawIngredient: RawIngredient) => {
-        return IngredientMapper.toModel(rawIngredient);
-      })
-    );
-  }
+    create(ingredient: Ingredient): Observable<Ingredient> {
+        return this.http.post(this.callbackUrl, IngredientUtil.asJson(ingredient)).pipe(
+            map((rawIngredient: RawIngredient) => {
+                return IngredientMapper.toModel(rawIngredient);
+            })
+        );
+    }
 }

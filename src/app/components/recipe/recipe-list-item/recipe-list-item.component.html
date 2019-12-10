@@ -1,7 +1,7 @@
 <mat-card class="list-item">
-  <mat-card-header>
-    <mat-card-title>{{ recipe.name }}</mat-card-title>
-  </mat-card-header>
-  <img *ngIf="recipe.imagePath" mat-card-image src="{{ recipe.imagePath | asset}}" alt="{{ recipe.name }}">
-  <img *ngIf="!recipe.imagePath" mat-card-image src="{{ assetUtil.getPlaceholder() | asset}}" alt="{{ recipe.name }}">
+    <mat-card-header>
+        <mat-card-title>{{ recipe.name }}</mat-card-title>
+    </mat-card-header>
+    <img *ngIf="recipe.imagePath" alt="{{ recipe.name }}" mat-card-image src="{{ recipe.imagePath | asset}}">
+    <img *ngIf="!recipe.imagePath" alt="{{ recipe.name }}" mat-card-image src="{{ assetUtil.getPlaceholder() | asset}}">
 </mat-card>

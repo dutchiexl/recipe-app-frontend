@@ -14,38 +14,38 @@ import { RecipeUtil } from '../utils/recipe.util';
 @Injectable()
 export class MealPlanService {
 
-  callbackUrl = environment.apiUrl + 'api/mealplans';
+    callbackUrl = environment.apiUrl + 'api/mealplans';
 
-  constructor(
-    private http: HttpClient,
-    private recipeService: RecipeService
-  ) {}
+    constructor(
+        private http: HttpClient,
+        private recipeService: RecipeService
+    ) {}
 
-  getAll(): Observable<MealPlan[]> {
-    return this.recipeService.getRecipes().pipe(
-      mergeMap((recipes) => {
-        return this.http.get(this.callbackUrl).pipe(
-          map((rawData: RawMealPlan[]) => {
-            return rawData.map((RawMealPlan) => MealPlanMapper.toObject(RawMealPlan, recipes));
-          })
-        )
-      })
-    );
-  }
+    getAll(): Observable<MealPlan[]> {
+        return this.recipeService.getRecipes().pipe(
+            mergeMap((recipes) => {
+                return this.http.get(this.callbackUrl).pipe(
+                    map((rawData: RawMealPlan[]) => {
+                        return rawData.map((RawMealPlan) => MealPlanMapper.toObject(RawMealPlan, recipes));
+                    })
+                );
+            })
+        );
+    }
 
-  create(mealPlan: MealPlan): Observable<Object> {
-    return this.http.post(this.callbackUrl, MealPlanUtil.asJson(mealPlan));
-  }
+    create(mealPlan: MealPlan): Observable<Object> {
+        return this.http.post(this.callbackUrl, MealPlanUtil.asJson(mealPlan));
+    }
 
-  update(mealPlan: MealPlan) {
-    return this.http.patch(this.callbackUrl + '/' + mealPlan.id, MealPlanUtil.asJson(mealPlan));
-  }
+    update(mealPlan: MealPlan) {
+        return this.http.patch(this.callbackUrl + '/' + mealPlan.id, MealPlanUtil.asJson(mealPlan));
+    }
 
-  delete(mealPlan: MealPlan) {
-    return this.http.delete(this.callbackUrl + '/' + mealPlan.id);
-  }
+    delete(mealPlan: MealPlan) {
+        return this.http.delete(this.callbackUrl + '/' + mealPlan.id);
+    }
 
-  updateRecipes(plan: MealPlan, recipes: Recipe[]) {
-    return this.http.patch(this.callbackUrl + '/' + plan.id, RecipeUtil.recipeListAsJson(recipes));
-  }
+    updateRecipes(plan: MealPlan, recipes: Recipe[]) {
+        return this.http.patch(this.callbackUrl + '/' + plan.id, RecipeUtil.recipeListAsJson(recipes));
+    }
 }

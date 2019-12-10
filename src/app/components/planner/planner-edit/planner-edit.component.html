@@ -1,38 +1,38 @@
-<form [formGroup]="form" (ngSubmit)="submitForm()" class="container">
-  <div class="head flex-row">
-    <div class="name">
-      <mat-form-field>
-        <input matInput formControlName="name" placeholder="Naam">
-      </mat-form-field>
+<form (ngSubmit)="submitForm()" [formGroup]="form" class="container">
+    <div class="head flex-row">
+        <div class="name">
+            <mat-form-field>
+                <input formControlName="name" matInput placeholder="Naam">
+            </mat-form-field>
+        </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-  <div class="flex-row top-spacing">
-    <div class="columns-2">
-      <mat-list class="flex">
-        <mat-list-item
-          *ngFor="let recipe of mealPlanRecipes"
-          (click)="removeRecipeFromMealPlan(recipe)"
-        >
-          <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
-        </mat-list-item>
-      </mat-list>
+    <mat-divider></mat-divider>
+    <div class="flex-row top-spacing">
+        <div class="columns-2">
+            <mat-list class="flex">
+                <mat-list-item
+                        (click)="removeRecipeFromMealPlan(recipe)"
+                        *ngFor="let recipe of mealPlanRecipes"
+                >
+                    <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="columns-10 list-overview container">
+            <app-overview-item
+                    (click)="addRecipeToMealPlan(recipe)"
+                    *ngFor="let recipe of filteredRecipes"
+                    [recipe]="recipe"
+                    class="list-item clickable"
+            >
+            </app-overview-item>
+        </div>
     </div>
-    <div class="columns-10 list-overview container">
-      <app-overview-item
-        class="list-item clickable"
-        *ngFor="let recipe of filteredRecipes"
-        [recipe]="recipe"
-        (click)="addRecipeToMealPlan(recipe)"
-      >
-      </app-overview-item>
-    </div>
-  </div>
-  <eco-fab-speed-dial>
-    <eco-fab-speed-dial-trigger>
-      <button mat-fab color="primary">
-        <mat-icon>done</mat-icon>
-      </button>
-    </eco-fab-speed-dial-trigger>
-  </eco-fab-speed-dial>
+    <eco-fab-speed-dial>
+        <eco-fab-speed-dial-trigger>
+            <button color="primary" mat-fab>
+                <mat-icon>done</mat-icon>
+            </button>
+        </eco-fab-speed-dial-trigger>
+    </eco-fab-speed-dial>
 </form>

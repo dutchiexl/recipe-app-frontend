@@ -1,3 +1,3 @@
 export interface IngredientCategory {
-  name: string;
+    name: string;
 }

@@ -1,64 +1,64 @@
-<form [formGroup]="form" (ngSubmit)="submitForm()" *ngIf="recipe">
-  <div class="recipe-detail">
-    <div class="header-image">
-      <img src="{{ preview }}" alt="header" (click)="fileInput.click()">
-      <input type="file" (change)="uploadFile($event)" #fileInput class="hidden">
-    </div>
-    <mat-divider></mat-divider>
-    <div class="head">
-      <div class="name">
-        <mat-form-field>
-          <input matInput formControlName="name" placeholder="Naam">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="nameAddition" placeholder="Subtitel">
-        </mat-form-field>
-      </div>
-      <div class="description">
-        <mat-form-field>
-          <textarea matInput formControlName="description" placeholder="Description"></textarea>
-        </mat-form-field>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="details container">
-      <div class="info">
-        <div class="ingredients">
-          <h3>
-            Ingredienten
-          </h3>
-          <div formArrayName="items" [formGroup]="itemFormGroup">
-            <div *ngFor="let item of itemFormGroup.controls; let i = index;">
-              <app-edit-item
-                formControlName="{{ i }}"
-                [item]="item.value"
-                (addItem)="addItem()">
-              </app-edit-item>
+<form (ngSubmit)="submitForm()" *ngIf="recipe" [formGroup]="form">
+    <div class="recipe-detail">
+        <div class="header-image">
+            <img (click)="fileInput.click()" alt="header" src="{{ preview }}">
+            <input #fileInput (change)="uploadFile($event)" class="hidden" type="file">
+        </div>
+        <mat-divider></mat-divider>
+        <div class="head">
+            <div class="name">
+                <mat-form-field>
+                    <input formControlName="name" matInput placeholder="Naam">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="nameAddition" matInput placeholder="Subtitel">
+                </mat-form-field>
             </div>
-          </div>
-          <a mat-raised-button color="primary" (click)="addItem()">Voeg ingredient toe</a>
+            <div class="description">
+                <mat-form-field>
+                    <textarea formControlName="description" matInput placeholder="Description"></textarea>
+                </mat-form-field>
+            </div>
         </div>
-      </div>
-      <div class="steps list-overview columns-3" formArrayName="steps">
-        <div *ngFor="let step of stepFormGroup.controls; let i = index;" class="list-item">
-          <app-edit-step
-            formControlName="{{ i }}"
-            [step]="step.value">
-          </app-edit-step>
+        <mat-divider></mat-divider>
+        <div class="details container">
+            <div class="info">
+                <div class="ingredients">
+                    <h3>
+                        Ingredienten
+                    </h3>
+                    <div [formGroup]="itemFormGroup" formArrayName="items">
+                        <div *ngFor="let item of itemFormGroup.controls; let i = index;">
+                            <app-edit-item
+                                    (addItem)="addItem()"
+                                    [item]="item.value"
+                                    formControlName="{{ i }}">
+                            </app-edit-item>
+                        </div>
+                    </div>
+                    <a (click)="addItem()" color="primary" mat-raised-button>Voeg ingredient toe</a>
+                </div>
+            </div>
+            <div class="steps list-overview columns-3" formArrayName="steps">
+                <div *ngFor="let step of stepFormGroup.controls; let i = index;" class="list-item">
+                    <app-edit-step
+                            [step]="step.value"
+                            formControlName="{{ i }}">
+                    </app-edit-step>
+                </div>
+                <div class="list-item">
+                    <div>
+                        <a (click)="addStep()" class="add-step" color="primary" mat-raised-button>Voeg stap toe</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="list-item">
-          <div>
-            <a mat-raised-button color="primary" class="add-step" (click)="addStep()">Voeg stap toe</a>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <eco-fab-speed-dial>
-    <eco-fab-speed-dial-trigger>
-      <button mat-fab color="primary">
-        <mat-icon>done</mat-icon>
-      </button>
-    </eco-fab-speed-dial-trigger>
-  </eco-fab-speed-dial>
+    <eco-fab-speed-dial>
+        <eco-fab-speed-dial-trigger>
+            <button color="primary" mat-fab>
+                <mat-icon>done</mat-icon>
+            </button>
+        </eco-fab-speed-dial-trigger>
+    </eco-fab-speed-dial>
 </form>

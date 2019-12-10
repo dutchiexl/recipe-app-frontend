@@ -9,37 +9,37 @@ import { ShoppingListUtil } from '../../utils/shopping-list-util';
 import { Unit } from '../../interfaces/unit/unit';
 
 @Component({
-  selector: 'app-shoppinglist',
-  templateUrl: './shoppinglist.component.html',
-  styleUrls: ['./shoppinglist.component.scss']
+    selector: 'app-shoppinglist',
+    templateUrl: './shoppinglist.component.html',
+    styleUrls: ['./shoppinglist.component.scss']
 })
 export class ShoppinglistComponent implements OnInit {
-  mealPlan: MealPlan;
-  shoppingList: Shoppinglist;
-  units: Unit[];
-  loaded = false;
+    mealPlan: MealPlan;
+    shoppingList: Shoppinglist;
+    units: Unit[];
+    loaded = false;
 
-  constructor(
-    private store: Store,
-    private route: ActivatedRoute
-  ) {
-    const mealPlanId = this.route.snapshot.paramMap.get('planId');
-    this.mealPlan = MealPlanListUtil.findById(this.store.selectSnapshot(RecipeState.getMealPlans), mealPlanId);
-    this.store.select(RecipeState.getUnits).subscribe((units) => {
-      this.units = units;
-      this.loadShoppingList();
-    });
-    if (this.loaded) {
-      this.loadShoppingList();
+    constructor(
+        private store: Store,
+        private route: ActivatedRoute
+    ) {
+        const mealPlanId = this.route.snapshot.paramMap.get('planId');
+        this.mealPlan = MealPlanListUtil.findById(this.store.selectSnapshot(RecipeState.getMealPlans), mealPlanId);
+        this.store.select(RecipeState.getUnits).subscribe((units) => {
+            this.units = units;
+            this.loadShoppingList();
+        });
+        if (this.loaded) {
+            this.loadShoppingList();
+        }
     }
-  }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
+    }
 
-  private loadShoppingList() {
-    this.shoppingList = ShoppingListUtil.convertMealplanToShoppingList(this.mealPlan, this.units);
-    this.loaded = true;
-  }
+    private loadShoppingList() {
+        this.shoppingList = ShoppingListUtil.convertMealplanToShoppingList(this.mealPlan, this.units);
+        this.loaded = true;
+    }
 }

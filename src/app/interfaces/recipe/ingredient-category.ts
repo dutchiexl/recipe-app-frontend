@@ -1,4 +1,4 @@
 export interface IngredientCategory {
-  id: string;
-  name: string;
+    id: string;
+    name: string;
 }

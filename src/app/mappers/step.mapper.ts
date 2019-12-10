@@ -3,16 +3,16 @@ import { Step } from '../interfaces/recipe/step.interface';
 
 export class StepMapper {
 
-  public static toModel(rawStep: RawStep): Step {
-    const step: Step = {
-      name: rawStep.name,
-      text: rawStep.text,
-    };
+    public static toModel(rawStep: RawStep): Step {
+        const step: Step = {
+            name: rawStep.name,
+            text: rawStep.text,
+        };
 
-    if (rawStep.imagePath) {
-      step.imagePath = rawStep.imagePath;
+        if (rawStep.imagePath) {
+            step.imagePath = rawStep.imagePath;
+        }
+
+        return step;
     }
-
-    return step;
-  }
 }

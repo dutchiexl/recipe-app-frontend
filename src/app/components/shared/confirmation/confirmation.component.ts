@@ -3,19 +3,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Confirmation } from '../../../interfaces/confirmation/confirmation.interface';
 
 @Component({
-  selector: 'app-confirmation',
-  templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.scss']
+    selector: 'app-confirmation',
+    templateUrl: './confirmation.component.html',
+    styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<ConfirmationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Confirmation) {}
+    constructor(
+        public dialogRef: MatDialogRef<ConfirmationComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: Confirmation) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

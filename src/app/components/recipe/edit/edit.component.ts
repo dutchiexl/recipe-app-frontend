@@ -53,29 +53,6 @@ export class EditComponent implements OnInit {
         this.createStepsForm();
     }
 
-    private createForm() {
-        this.form = this.formBuilder.group({
-            name: [this.recipe.name, Validators.required],
-            nameAddition: [this.recipe.nameAddition, Validators.required],
-            description: [this.recipe.description, Validators.required],
-            imagePath: [this.recipe.imagePath, Validators.required],
-            items: this.itemFormGroup,
-            steps: this.stepFormGroup
-        });
-    }
-
-    private createItemForm() {
-        this.recipe.items.forEach((item) => {
-            this.itemFormGroup.push(new FormControl(item, Validators.required));
-        });
-    }
-
-    private createStepsForm() {
-        this.recipe.steps.forEach((step) => {
-            this.stepFormGroup.push(new FormControl(step, Validators.required));
-        });
-    }
-
     submitForm() {
         console.log(this.form);
         if (this.form.valid) {
@@ -125,6 +102,29 @@ export class EditComponent implements OnInit {
                 });
                 this.form.get('imagePath').updateValueAndValidity();
             });
+    }
+
+    private createForm() {
+        this.form = this.formBuilder.group({
+            name: [this.recipe.name, Validators.required],
+            nameAddition: [this.recipe.nameAddition, Validators.required],
+            description: [this.recipe.description, Validators.required],
+            imagePath: [this.recipe.imagePath, Validators.required],
+            items: this.itemFormGroup,
+            steps: this.stepFormGroup
+        });
+    }
+
+    private createItemForm() {
+        this.recipe.items.forEach((item) => {
+            this.itemFormGroup.push(new FormControl(item, Validators.required));
+        });
+    }
+
+    private createStepsForm() {
+        this.recipe.steps.forEach((step) => {
+            this.stepFormGroup.push(new FormControl(step, Validators.required));
+        });
     }
 
     private cleanItems(items: Item[]) {
