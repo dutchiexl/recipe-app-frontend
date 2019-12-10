@@ -1,7 +1,7 @@
 <form (ngSubmit)="submitForm()" *ngIf="recipe" [formGroup]="form">
     <div class="recipe-detail">
         <div class="header-image">
-            <img (click)="fileInput.click()" alt="header" src="{{ preview }}">
+            <img (click)="fileInput.click()" alt="header" src="{{ preview | asset}}">
             <input #fileInput (change)="uploadFile($event)" class="hidden" type="file">
         </div>
         <mat-divider></mat-divider>
