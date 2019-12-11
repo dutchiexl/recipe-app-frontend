@@ -54,9 +54,7 @@ export class EditComponent implements OnInit {
     }
 
     submitForm() {
-        console.log(this.form);
         if (this.form.valid) {
-            console.log('valide');
             const recipeToSubmit = RecipeUtil.createEmpty();
             recipeToSubmit.name = this.form.get('name').value;
             recipeToSubmit.nameAddition = this.form.get('nameAddition').value;
@@ -83,22 +81,18 @@ export class EditComponent implements OnInit {
     }
 
     uploadFile(event) {
+        // @TODO: Put upload in centralised service
         const file = (event.target as HTMLInputElement).files[0];
-
-        // File Preview
-        const reader = new FileReader();
-        reader.onload = () => {
-            this.preview = reader.result as string;
-        };
-        reader.readAsDataURL(file);
 
         const formData = new FormData();
         formData.append('image', file);
 
         this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
+                const filename = AssetUtil.getFilenameFromPath(response['fileName']);
+                this.preview = filename;
                 this.form.patchValue({
-                    imagePath: AssetUtil.getFilenameFromPath(response['fileName'])
+                    imagePath: filename
                 });
                 this.form.get('imagePath').updateValueAndValidity();
             });
