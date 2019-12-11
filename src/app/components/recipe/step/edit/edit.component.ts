@@ -87,20 +87,15 @@ export class EditStepComponent implements ControlValueAccessor, OnChanges, OnIni
     uploadFile(event) {
         const file = (event.target as HTMLInputElement).files[0];
 
-        // File Preview
-        const reader = new FileReader();
-        reader.onload = () => {
-            this.preview = reader.result as string;
-        };
-        reader.readAsDataURL(file);
-
         const formData = new FormData();
         formData.append('image', file);
 
         this.http.post(environment.apiUrl + 'api/upload', formData)
             .subscribe((response) => {
+                const filename = AssetUtil.getFilenameFromPath(response['fileName']);
+                this.preview = filename;
                 this.stepItemFormGroup.patchValue({
-                    imagePath: AssetUtil.getFilenameFromPath(response['fileName'])
+                    imagePath: filename
                 });
                 this.stepItemFormGroup.get('imagePath').updateValueAndValidity();
                 this.updateStep(null);
