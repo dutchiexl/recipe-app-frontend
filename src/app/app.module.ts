@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { NgxsModule, Store } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { LoadApplicationAction } from './recipe/store/app.actions';
-import { FormGroupDirective } from './recipe/directives/form-group-directive.directive';
-import { AppState } from './recipe/store/app.state';
-import { RecipeModule } from './recipe/recipe.module';
-import { MaterialModule } from './material/material.module';
+import { LoadApplicationAction } from './modules/recipe/store/app.actions';
+import { FormGroupDirective } from './modules/recipe/directives/form-group-directive.directive';
+import { AppState } from './modules/recipe/store/app.state';
+import { RecipeModule } from './modules/recipe/recipe.module';
+import { MaterialModule } from './core/material/material.module';
 
 @NgModule({
     declarations: [

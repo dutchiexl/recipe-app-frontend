@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OverviewComponent } from './recipe/components/recipe/overview/overview.component';
-import { DetailComponent } from './recipe/components/recipe/detail/detail.component';
-import { EditComponent } from './recipe/components/recipe/edit/edit.component';
-import { PlannerOverviewComponent } from './recipe/components/planner/planner-overview/planner-overview.component';
-import { PlannerDetailComponent } from './recipe/components/planner/planner-detail/planner-detail.component';
-import { PlannerEditComponent } from './recipe/components/planner/planner-edit/planner-edit.component';
-import { ShoppinglistComponent } from './recipe/components/shoppinglist/shoppinglist.component';
-import { UnitsComponent } from './recipe/components/settings/units/units.component';
+import { OverviewComponent } from './modules/recipe/components/recipe/overview/overview.component';
+import { DetailComponent } from './modules/recipe/components/recipe/detail/detail.component';
+import { EditComponent } from './modules/recipe/components/recipe/edit/edit.component';
+import { PlannerOverviewComponent } from './modules/recipe/components/planner/planner-overview/planner-overview.component';
+import { PlannerDetailComponent } from './modules/recipe/components/planner/planner-detail/planner-detail.component';
+import { PlannerEditComponent } from './modules/recipe/components/planner/planner-edit/planner-edit.component';
+import { ShoppinglistComponent } from './modules/recipe/components/shoppinglist/shoppinglist.component';
+import { UnitsComponent } from './modules/recipe/components/settings/units/units.component';
 
 const routes: Routes = [
     {path: '', component: OverviewComponent},

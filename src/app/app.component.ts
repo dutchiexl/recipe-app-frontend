@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AppState } from './recipe/store/app.state';
-import { AppModeEnum } from './recipe/enums/app-mode.enum';
-import { NavigateAction, SetModeAction } from './recipe/store/app.actions';
-import { MealPlan } from './recipe/interfaces/planner/meal-plan';
+import { AppState } from './modules/recipe/store/app.state';
+import { AppModeEnum } from './modules/recipe/enums/app-mode.enum';
+import { NavigateAction, SetModeAction } from './modules/recipe/store/app.actions';
+import { MealPlan } from './modules/recipe/interfaces/planner/meal-plan';
 
 @Component({
     selector: 'app-root',

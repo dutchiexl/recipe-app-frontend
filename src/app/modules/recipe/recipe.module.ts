@@ -22,7 +22,7 @@ import { AssetPipe } from './pipes/asset.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '../../core/material/material.module';
 import { RecipeService } from './services/recipe.service';
 import { MealPlanService } from './services/meal-plan.service';
 import { UnitService } from './services/unit.service';
