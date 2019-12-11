@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MealPlan } from '../../../interfaces/planner/meal-plan';
 import { Store } from '@ngxs/store';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeState } from '../../../store/recipe.state';
+import { AppState } from '../../../store/app.state';
 import { MealPlanListUtil } from '../../../utils/meal-plan-list.util';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import { DeleteMealPlanAction, NavigateAction } from '../../../store/recipe.actions';
+import { DeleteMealPlanAction, NavigateAction } from '../../../store/app.actions';
 
 @Component({
     selector: 'app-planner-detail',
@@ -26,7 +26,7 @@ export class PlannerDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.subscribe((params) => {
-            this.store.select(RecipeState.getMealPlans).subscribe((mealPlans) => {
+            this.store.select(AppState.getMealPlans).subscribe((mealPlans) => {
                 this.mealPlans = mealPlans;
                 let mealPlanId = params.get('planId');
                 this.mealPlan = MealPlanListUtil.findById(this.mealPlans, mealPlanId);

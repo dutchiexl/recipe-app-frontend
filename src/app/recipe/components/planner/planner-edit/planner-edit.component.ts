@@ -5,8 +5,8 @@ import { Store } from '@ngxs/store';
 import { HttpClient } from '@angular/common/http';
 import { MealPlanUtil } from '../../../utils/mealPlanUtil';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
-import { RecipeState } from '../../../store/recipe.state';
-import { UpdateOrCreateMealPlanAction } from '../../../store/recipe.actions';
+import { AppState } from '../../../store/app.state';
+import { UpdateOrCreateMealPlanAction } from '../../../store/app.actions';
 import { MealPlanListUtil } from '../../../utils/meal-plan-list.util';
 import { ActivatedRoute } from '@angular/router';
 
@@ -29,7 +29,7 @@ export class PlannerEditComponent implements OnInit {
         private formBuilder: FormBuilder
     ) {
         this.mealPlan = MealPlanUtil.createEmpty();
-        store.select(RecipeState.getRecipes).subscribe((recipes) => {
+        store.select(AppState.getRecipes).subscribe((recipes) => {
             this.recipes = recipes;
             this.filterRecipes();
         });
@@ -40,7 +40,7 @@ export class PlannerEditComponent implements OnInit {
 
         if (mealPlanIdParameter) {
             const mealPlanId = mealPlanIdParameter;
-            this.mealPlan = MealPlanListUtil.findById(this.store.selectSnapshot(RecipeState.getMealPlans), mealPlanId);
+            this.mealPlan = MealPlanListUtil.findById(this.store.selectSnapshot(AppState.getMealPlans), mealPlanId);
             this.mealPlanRecipes = this.mealPlan.recipes.map((recipe) => recipe);
         } else {
             this.mealPlan = MealPlanUtil.createEmpty();

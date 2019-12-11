@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RecipeState } from '../../../store/recipe.state';
+import { AppState } from '../../../store/app.state';
 import { Unit } from '../../../interfaces/unit/unit';
 
 @Component({
@@ -12,7 +12,7 @@ export class UnitsComponent implements OnInit {
     private units: Unit[];
 
     constructor(private store: Store) {
-        store.select(RecipeState.getUnits).subscribe((units) => {
+        store.select(AppState.getUnits).subscribe((units) => {
             this.units = units;
         });
     }

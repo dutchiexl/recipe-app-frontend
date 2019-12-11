@@ -14,7 +14,7 @@ import {
     SetModeAction,
     UpdateOrCreateMealPlanAction,
     UpdateOrCreateRecipeAction
-} from './recipe.actions';
+} from './app.actions';
 import { Recipe } from '../interfaces/recipe/recipe.interface';
 import produce from 'immer';
 import { RecipeService } from '../services/recipe.service';
@@ -31,7 +31,7 @@ import { UnitService } from '../services/unit.service';
 import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
 
-export interface RecipeStateModel {
+export interface AppStateModel {
     mode: AppModeEnum;
     selectedMealplan: MealPlan;
     isLoaded: boolean;
@@ -42,7 +42,7 @@ export interface RecipeStateModel {
     ingredientCategories: IngredientCategory[];
 }
 
-@State<RecipeStateModel>({
+@State<AppStateModel>({
     name: 'recipe',
     defaults: {
         mode: AppModeEnum.RECIPES,
@@ -55,7 +55,7 @@ export interface RecipeStateModel {
         ingredientCategories: undefined
     }
 })
-export class RecipeState {
+export class AppState {
 
     constructor(
         private recipeService: RecipeService,
@@ -67,52 +67,52 @@ export class RecipeState {
     }
 
     @Selector()
-    public static getState(state: RecipeStateModel) {
+    public static getState(state: AppStateModel) {
         return state;
     }
 
     @Selector()
-    public static getMode(state: RecipeStateModel) {
+    public static getMode(state: AppStateModel) {
         return state.mode;
     }
 
     @Selector()
-    public static getLoadedState(state: RecipeStateModel) {
+    public static getLoadedState(state: AppStateModel) {
         return state.isLoaded;
     }
 
     @Selector()
-    public static getRecipes(state: RecipeStateModel): Recipe[] {
+    public static getRecipes(state: AppStateModel): Recipe[] {
         return state.recipes;
     }
 
     @Selector()
-    public static getSelectedMealplan(state: RecipeStateModel): MealPlan {
+    public static getSelectedMealplan(state: AppStateModel): MealPlan {
         return state.selectedMealplan;
     }
 
     @Selector()
-    public static getMealPlans(state: RecipeStateModel): MealPlan[] {
+    public static getMealPlans(state: AppStateModel): MealPlan[] {
         return state.mealPlans;
     }
 
     @Selector()
-    public static getUnits(state: RecipeStateModel): Unit[] {
+    public static getUnits(state: AppStateModel): Unit[] {
         return state.units;
     }
 
     @Selector()
-    public static getIngredients(state: RecipeStateModel): Ingredient[] {
+    public static getIngredients(state: AppStateModel): Ingredient[] {
         return state.ingredients;
     }
 
     @Selector()
-    public static getIngredientCategories(state: RecipeStateModel): IngredientCategory[] {
+    public static getIngredientCategories(state: AppStateModel): IngredientCategory[] {
         return state.ingredientCategories;
     }
 
     @Action(SetModeAction)
-    public setMode(ctx: StateContext<RecipeStateModel>, action: SetModeAction) {
+    public setMode(ctx: StateContext<AppStateModel>, action: SetModeAction) {
         ctx.setState(
             produce(ctx.getState(), (draft) => {
                 draft.mode = action.mode;
@@ -132,7 +132,7 @@ export class RecipeState {
     }
 
     @Action(LoadApplicationAction)
-    public loadAPI(ctx: StateContext<RecipeStateModel>, {}: LoadApplicationAction) {
+    public loadAPI(ctx: StateContext<AppStateModel>, {}: LoadApplicationAction) {
         this.setLoadedState(ctx, false);
         ctx.dispatch(new LoadRecipesAction());
         ctx.dispatch(new LoadMealPlansAction());
@@ -142,7 +142,7 @@ export class RecipeState {
     }
 
     @Action(LoadRecipesAction)
-    public loadRecipes(ctx: StateContext<RecipeStateModel>, {}: LoadRecipesAction) {
+    public loadRecipes(ctx: StateContext<AppStateModel>, {}: LoadRecipesAction) {
         this.setLoadedState(ctx, false);
         this.recipeService.getRecipes().subscribe((recipes) => {
             ctx.setState(
@@ -155,7 +155,7 @@ export class RecipeState {
     }
 
     @Action(LoadMealPlansAction)
-    public loadMealPlans(ctx: StateContext<RecipeStateModel>, {}: LoadMealPlansAction) {
+    public loadMealPlans(ctx: StateContext<AppStateModel>, {}: LoadMealPlansAction) {
         this.setLoadedState(ctx, false);
         this.mealPlanService.getAll().subscribe((mealPlans) => {
             ctx.setState(
@@ -168,7 +168,7 @@ export class RecipeState {
     }
 
     @Action(LoadUnitsAction)
-    public loadUnits(ctx: StateContext<RecipeStateModel>, {}: LoadUnitsAction) {
+    public loadUnits(ctx: StateContext<AppStateModel>, {}: LoadUnitsAction) {
         this.setLoadedState(ctx, false);
         this.unitService.getAll().subscribe((units) => {
             ctx.setState(
@@ -181,7 +181,7 @@ export class RecipeState {
     }
 
     @Action(LoadIngredientsAction)
-    public loadIngredients(ctx: StateContext<RecipeStateModel>, {}: LoadIngredientsAction) {
+    public loadIngredients(ctx: StateContext<AppStateModel>, {}: LoadIngredientsAction) {
         this.setLoadedState(ctx, false);
         this.ingredientService.getAll().subscribe((ingredients) => {
             ctx.setState(
@@ -194,7 +194,7 @@ export class RecipeState {
     }
 
     @Action(LoadIngredientCategoriesAction)
-    public loadIngredientCategories(ctx: StateContext<RecipeStateModel>, {}: LoadIngredientCategoriesAction) {
+    public loadIngredientCategories(ctx: StateContext<AppStateModel>, {}: LoadIngredientCategoriesAction) {
         this.setLoadedState(ctx, false);
         this.ingredientCategoryService.getAll().subscribe((ingredientCategories) => {
             ctx.setState(
@@ -207,7 +207,7 @@ export class RecipeState {
     }
 
     @Action(UpdateOrCreateRecipeAction)
-    public updateOrCreateRecipe(ctx: StateContext<RecipeStateModel>, action: UpdateOrCreateRecipeAction) {
+    public updateOrCreateRecipe(ctx: StateContext<AppStateModel>, action: UpdateOrCreateRecipeAction) {
         if (action.recipe.id) {
             this.recipeService.update(action.recipe).subscribe(() => {
                 ctx.dispatch(new LoadRecipesAction());
@@ -224,7 +224,7 @@ export class RecipeState {
     }
 
     @Action(DeleteRecipeAction)
-    public deleteRecipe(ctx: StateContext<RecipeStateModel>, action: DeleteRecipeAction) {
+    public deleteRecipe(ctx: StateContext<AppStateModel>, action: DeleteRecipeAction) {
         ctx.getState().mealPlans.filter((plan) => {
             return plan.recipes.some((recipe) => {
                 return recipe.id === action.recipe.id;
@@ -243,7 +243,7 @@ export class RecipeState {
     }
 
     @Action(UpdateOrCreateMealPlanAction)
-    public updateOrCreateMealPlan(ctx: StateContext<RecipeStateModel>, action: UpdateOrCreateMealPlanAction) {
+    public updateOrCreateMealPlan(ctx: StateContext<AppStateModel>, action: UpdateOrCreateMealPlanAction) {
         if (action.mealPlan.id) {
             this.mealPlanService.update(action.mealPlan).subscribe(() => {
                 ctx.dispatch(new LoadMealPlansAction());
@@ -258,7 +258,7 @@ export class RecipeState {
     }
 
     @Action(SetMealplanAction)
-    public setMealPlan(ctx: StateContext<RecipeStateModel>, action: SetMealplanAction) {
+    public setMealPlan(ctx: StateContext<AppStateModel>, action: SetMealplanAction) {
         ctx.setState(
             produce(ctx.getState(), (draft) => {
                 draft.selectedMealplan = action.mealPlan;
@@ -268,7 +268,7 @@ export class RecipeState {
     }
 
     @Action(CreateIngredientAction)
-    public createIngredient(ctx: StateContext<RecipeStateModel>, action: CreateIngredientAction) {
+    public createIngredient(ctx: StateContext<AppStateModel>, action: CreateIngredientAction) {
         console.log(action.ingredient);
         return this.ingredientService.create(action.ingredient).subscribe((ingredient) => {
             ctx.setState(
@@ -280,7 +280,7 @@ export class RecipeState {
     }
 
     @Action(DeleteMealPlanAction)
-    public deleteMealplan(ctx: StateContext<RecipeStateModel>, action: DeleteMealPlanAction) {
+    public deleteMealplan(ctx: StateContext<AppStateModel>, action: DeleteMealPlanAction) {
         this.mealPlanService.delete(action.mealPlan).subscribe(() => {
             ctx.dispatch(new LoadMealPlansAction());
             ctx.dispatch(new NavigateAction(['plan']));
@@ -288,7 +288,7 @@ export class RecipeState {
     }
 
     @Action(NavigateAction)
-    public navigate(ctx: StateContext<RecipeStateModel>, action: NavigateAction) {
+    public navigate(ctx: StateContext<AppStateModel>, action: NavigateAction) {
         if (action.mealplan) {
             ctx.setState(
                 produce(ctx.getState(), (draft) => {
@@ -305,13 +305,13 @@ export class RecipeState {
         ctx.dispatch(new Navigate(action.path));
     }
 
-    private checkLoadedState(ctx: StateContext<RecipeStateModel>): void {
+    private checkLoadedState(ctx: StateContext<AppStateModel>): void {
         if (ctx.getState().recipes && ctx.getState().mealPlans) {
             this.setLoadedState(ctx, true);
         }
     }
 
-    private setLoadedState(ctx: StateContext<RecipeStateModel>, state: boolean) {
+    private setLoadedState(ctx: StateContext<AppStateModel>, state: boolean) {
         ctx.setState(
             produce(ctx.getState(), (draft) => {
                 draft.isLoaded = state;

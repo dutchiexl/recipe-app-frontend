@@ -1,10 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Ingredient } from '../../../../interfaces/recipe/ingredient.interface';
-import { RecipeState } from '../../../../store/recipe.state';
+import { AppState } from '../../../../store/app.state';
 import { Store } from '@ngxs/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreateIngredientAction } from '../../../../store/recipe.actions';
+import { CreateIngredientAction } from '../../../../store/app.actions';
 import { IngredientCategory } from '../../../../interfaces/recipe/ingredient-category';
 import { find, map } from 'rxjs/operators';
 
@@ -25,10 +25,10 @@ export class CreateIngredientComponent implements OnInit {
         public dialogRef: MatDialogRef<CreateIngredientComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Ingredient) {
         this.ingredient = data;
-        this.store.select(RecipeState.getIngredients).subscribe((ingredients) => {
+        this.store.select(AppState.getIngredients).subscribe((ingredients) => {
             this.ingredients = ingredients;
         });
-        this.store.select(RecipeState.getIngredientCategories).subscribe((categories) => {
+        this.store.select(AppState.getIngredientCategories).subscribe((categories) => {
             this.ingredientCategories = categories;
         });
     }
@@ -46,7 +46,7 @@ export class CreateIngredientComponent implements OnInit {
 
     onCreateClick() {
         if (this.ingredientForm.valid) {
-            this.store.select(RecipeState.getIngredients).pipe(
+            this.store.select(AppState.getIngredients).pipe(
                 find((ingredients) => {
                     return ingredients.some((ingredient) => {
                         return ingredient.name === this.ingredientForm.get('name').value;
