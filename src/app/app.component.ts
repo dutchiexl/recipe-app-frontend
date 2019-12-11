@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Actions, ofActionDispatched, Store } from '@ngxs/store';
 import { AppState } from './modules/recipe/store/app.state';
 import { AppModeEnum } from './modules/recipe/enums/app-mode.enum';
 import { NavigateAction, SetModeAction } from './modules/recipe/store/app.actions';
 import { MealPlan } from './modules/recipe/interfaces/planner/meal-plan';
+import { LogoutAction } from './core/authentication/store/auth.actions';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,10 @@ export class AppComponent {
     mode: AppModeEnum;
     isLoaded = false;
 
-    constructor(private store: Store) {
+    constructor(
+        private store: Store,
+        private actions: Actions
+    ) {
         store.select(AppState.getMode).subscribe((mode) => {
             this.mode = mode;
         });
@@ -26,6 +30,9 @@ export class AppComponent {
         store.select(AppState.getSelectedMealplan).subscribe((mealplan) => {
             this.selectedMealPlan = mealplan;
         });
+        this.actions.pipe(ofActionDispatched(LogoutAction))
+            .subscribe(() => this.store.dispatch(new NavigateAction(['login'])));
+
     }
 
     setMode(mode: AppModeEnum) {
@@ -37,7 +44,6 @@ export class AppComponent {
     }
 
     goToOverview() {
-        console.log(this.mode);
         switch (this.mode) {
             case AppModeEnum.RECIPES:
                 this.store.dispatch(new NavigateAction(['']));

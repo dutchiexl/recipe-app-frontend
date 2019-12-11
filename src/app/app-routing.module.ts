@@ -8,18 +8,43 @@ import { PlannerDetailComponent } from './modules/recipe/components/planner/plan
 import { PlannerEditComponent } from './modules/recipe/components/planner/planner-edit/planner-edit.component';
 import { ShoppinglistComponent } from './modules/recipe/components/shoppinglist/shoppinglist.component';
 import { UnitsComponent } from './modules/recipe/components/settings/units/units.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './shared/login/components/login/login.component';
 
 const routes: Routes = [
-    {path: '', component: OverviewComponent},
-    {path: 'recipe/create', component: EditComponent, pathMatch: 'full'},
-    {path: 'recipe/edit/:recipeId', component: EditComponent, pathMatch: 'full'},
-    {path: 'recipe/:recipeId', component: DetailComponent},
-    {path: 'plan/:planId/shoppinglist', component: ShoppinglistComponent, pathMatch: 'full'},
-    {path: 'plan/create', component: PlannerEditComponent, pathMatch: 'full'},
-    {path: 'plan/edit/:mealPlanId', component: PlannerEditComponent, pathMatch: 'full'},
-    {path: 'plan/:planId', component: PlannerDetailComponent},
-    {path: 'plan', component: PlannerOverviewComponent},
-    {path: 'manage/units', component: UnitsComponent},
+    {
+        path: '', component: OverviewComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'login', component: LoginComponent, pathMatch: 'full'
+    },
+    {
+        path: 'recipe/create', component: EditComponent, pathMatch: 'full', canActivate: [AuthGuard]
+    },
+    {
+        path: 'recipe/edit/:recipeId', component: EditComponent, pathMatch: 'full', canActivate: [AuthGuard]
+    },
+    {
+        path: 'recipe/:recipeId', component: DetailComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'plan/:planId/shoppinglist', component: ShoppinglistComponent, pathMatch: 'full', canActivate: [AuthGuard]
+    },
+    {
+        path: 'plan/create', component: PlannerEditComponent, pathMatch: 'full', canActivate: [AuthGuard]
+    },
+    {
+        path: 'plan/edit/:mealPlanId', component: PlannerEditComponent, pathMatch: 'full', canActivate: [AuthGuard]
+    },
+    {
+        path: 'plan/:planId', component: PlannerDetailComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'plan', component: PlannerOverviewComponent
+    },
+    {
+        path: 'manage/units', component: UnitsComponent, canActivate: [AuthGuard]
+    }
 ];
 
 @NgModule({
