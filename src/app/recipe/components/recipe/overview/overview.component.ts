@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RecipeState } from '../../../store/recipe.state';
+import { AppState } from '../../../store/app.state';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
-import { NavigateAction } from '../../../store/recipe.actions';
+import { NavigateAction } from '../../../store/app.actions';
 
 @Component({
     selector: 'app-overview',
@@ -13,7 +13,7 @@ export class OverviewComponent implements OnInit {
     recipes: Recipe[];
 
     constructor(private store: Store) {
-        store.select(RecipeState.getRecipes).subscribe((recipes) => {
+        store.select(AppState.getRecipes).subscribe((recipes) => {
             this.recipes = recipes;
         });
     }

@@ -6,13 +6,13 @@ import { RecipeUtil } from '../../../utils/recipe.util';
 import { Store } from '@ngxs/store';
 import { StepUtil } from '../../../utils/step.util';
 import { HttpClient } from '@angular/common/http';
-import { RecipeState } from '../../../store/recipe.state';
+import { AppState } from '../../../store/app.state';
 import { RecipeListUtil } from '../../../utils/recipe-list.util';
 import { ActivatedRoute } from '@angular/router';
 import { Step } from '../../../interfaces/recipe/step.interface';
 import { Item } from '../../../interfaces/recipe/item.interface';
 import { ItemUtil } from '../../../utils/item.util';
-import { UpdateOrCreateRecipeAction } from '../../../store/recipe.actions';
+import { UpdateOrCreateRecipeAction } from '../../../store/app.actions';
 import { AssetUtil } from '../../../utils/asset.util';
 
 @Component({
@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
     ngOnInit() {
         const recipeIdParameter = this.route.snapshot.paramMap.get('recipeId');
         if (recipeIdParameter) {
-            this.recipe = RecipeListUtil.findRecipeById(this.store.selectSnapshot(RecipeState.getRecipes), recipeIdParameter);
+            this.recipe = RecipeListUtil.findRecipeById(this.store.selectSnapshot(AppState.getRecipes), recipeIdParameter);
 
             if (this.recipe) {
                 if (this.recipe.imagePath) {

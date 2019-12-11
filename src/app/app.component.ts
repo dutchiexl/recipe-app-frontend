@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RecipeState } from './store/recipe.state';
-import { AppModeEnum } from './enums/app-mode.enum';
-import { NavigateAction, SetModeAction } from './store/recipe.actions';
-import { MealPlan } from './interfaces/planner/meal-plan';
+import { AppState } from './recipe/store/app.state';
+import { AppModeEnum } from './recipe/enums/app-mode.enum';
+import { NavigateAction, SetModeAction } from './recipe/store/app.actions';
+import { MealPlan } from './recipe/interfaces/planner/meal-plan';
 
 @Component({
     selector: 'app-root',
@@ -17,13 +17,13 @@ export class AppComponent {
     isLoaded = false;
 
     constructor(private store: Store) {
-        store.select(RecipeState.getMode).subscribe((mode) => {
+        store.select(AppState.getMode).subscribe((mode) => {
             this.mode = mode;
         });
-        store.select(RecipeState.getLoadedState).subscribe((state) => {
+        store.select(AppState.getLoadedState).subscribe((state) => {
             this.isLoaded = state;
         });
-        store.select(RecipeState.getSelectedMealplan).subscribe((mealplan) => {
+        store.select(AppState.getSelectedMealplan).subscribe((mealplan) => {
             this.selectedMealPlan = mealplan;
         });
     }

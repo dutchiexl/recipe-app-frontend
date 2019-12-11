@@ -2,7 +2,7 @@ import { Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, 
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Unit } from '../../../../interfaces/unit/unit';
-import { RecipeState } from '../../../../store/recipe.state';
+import { AppState } from '../../../../store/app.state';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ItemUtil } from '../../../../utils/item.util';
@@ -47,10 +47,10 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
         private formBuilder: FormBuilder,
         public dialog: MatDialog
     ) {
-        this.store.select(RecipeState.getUnits).subscribe((units) => {
+        this.store.select(AppState.getUnits).subscribe((units) => {
             this.units = units;
         });
-        this.store.select(RecipeState.getIngredients).subscribe((ingredients) => {
+        this.store.select(AppState.getIngredients).subscribe((ingredients) => {
             this.ingredients = ingredients;
         });
     }

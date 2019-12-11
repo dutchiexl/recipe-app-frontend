@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { RecipeListUtil } from '../../../utils/recipe-list.util';
-import { RecipeState } from '../../../store/recipe.state';
+import { AppState } from '../../../store/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import { DeleteRecipeAction, NavigateAction } from '../../../store/recipe.actions';
+import { DeleteRecipeAction, NavigateAction } from '../../../store/app.actions';
 
 @Component({
     selector: 'app-detail',
@@ -25,7 +25,7 @@ export class DetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.subscribe((params) => {
-            this.store.select(RecipeState.getRecipes).subscribe((recipes) => {
+            this.store.select(AppState.getRecipes).subscribe((recipes) => {
                 this.recipes = recipes;
                 let recipeId = params.get('recipeId');
                 this.recipe = RecipeListUtil.findRecipeById(this.recipes, recipeId);
