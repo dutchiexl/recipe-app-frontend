@@ -11,6 +11,7 @@ import { Ingredient } from '../../../../interfaces/recipe/ingredient.interface';
 import { IngredientUtil } from '../../../../utils/ingredient.util';
 import { MatDialog } from '@angular/material';
 import { CreateIngredientComponent } from '../../ingredient/create/create.component';
+import { RecipeValidator } from '../../../../validators/recipe.validator';
 
 @Component({
     selector: 'app-edit-item',
@@ -62,9 +63,9 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
         this.formItem.amount = this.item.amount ? Number(this.item.amount) : null;
 
         this.itemForm = this.formBuilder.group({
-            ingredient: [this.item.ingredient, Validators.required],
-            unit: [this.item.unit, Validators.required],
-            amount: [this.item.amount, [Validators.required]]
+            amount: [this.item.amount, [Validators.required]],
+            unit: [this.item.unit, [Validators.required, RecipeValidator.isUnit(this.units)]],
+            ingredient: [this.item.ingredient, [Validators.required, RecipeValidator.isIngredient(this.ingredients)]]
         });
 
         this.filteredUnits = this.itemForm.get('unit').valueChanges.pipe(

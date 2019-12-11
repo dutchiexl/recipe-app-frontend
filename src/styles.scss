@@ -1,18 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-$primary-color: #333;
-$secondary-color: #fff;
-$tertiary-color: #f4f4f4;
+$primary-color: #fff;
+$secondary-color: #edf2f7;
+$tertiary-color: #fafafa;
 
 body {
   margin: 0;
   font-family: 'Roboto';
-  background-color: #f4f4f4;
+  background-color: $tertiary-color;
 }
 
 mat-toolbar {
   &.primary {
     background-color: $primary-color;
-    color: $secondary-color;
+    color: black;
   }
   &.secondary {
     background-color: $secondary-color;
