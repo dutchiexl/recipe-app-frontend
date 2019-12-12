@@ -11,7 +11,7 @@ export class AuthStateModel {
 }
 
 @State<AuthStateModel>({
-    name: 'Authentication',
+    name: 'auth',
     defaults: {
         token: undefined,
         username: undefined
@@ -27,6 +27,11 @@ export class AuthState {
     }
 
     @Selector()
+    public static isLoggedIn(state: AuthStateModel) {
+        return !!state.token;
+    }
+
+    @Selector()
     static token(state: AuthStateModel) { return state.token; }
 
     @Action(LoginAction)
@@ -34,6 +39,7 @@ export class AuthState {
         return this.authService.login(action.username, action.password).pipe(tap((result: { token: string, redirect }) => {
             ctx.setState(
                 produce(ctx.getState(), (draft) => {
+                    draft.username = action.username;
                     draft.token = result.token;
                 }),
             );
@@ -42,15 +48,12 @@ export class AuthState {
     }
 
     @Action(LogoutAction)
-    logout({setState, getState}: StateContext<AuthStateModel>) {
-        const {token} = getState();
-        return this.authService.logout(token).pipe(tap(() => {
-                setState(
-                    produce(getState(), (draft) => {
-                        draft.token = undefined;
-                    }),
-                );
-            })
+    logout(ctx: StateContext<AuthStateModel>) {
+        ctx.setState(
+            produce(ctx.getState(), (draft) => {
+                draft.token = undefined;
+                draft.username = undefined;
+            }),
         );
     }
 }

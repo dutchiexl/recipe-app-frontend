@@ -53,4 +53,8 @@ export class AppComponent {
                 break;
         }
     }
+
+    logout() {
+        this.store.dispatch(new LogoutAction());
+    }
 }
