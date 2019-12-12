@@ -7,13 +7,14 @@ import {
     LoadIngredientCategoriesAction,
     LoadIngredientsAction,
     LoadMealPlansAction,
+    ArchiveMealPlanAction,
     LoadRecipesAction,
     LoadUnitsAction,
     NavigateAction,
     SetMealplanAction,
     SetModeAction,
     UpdateOrCreateMealPlanAction,
-    UpdateOrCreateRecipeAction
+    UpdateOrCreateRecipeAction, showArchivedMealPlansAction
 } from './app.actions';
 import { Recipe } from '../interfaces/recipe/recipe.interface';
 import produce from 'immer';
@@ -30,10 +31,12 @@ import { IngredientCategory } from '../interfaces/recipe/ingredient-category';
 import { UnitService } from '../services/unit.service';
 import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
+import {MealPlanUtil} from "../utils/mealPlanUtil";
 
 export interface AppStateModel {
     mode: AppModeEnum;
     selectedMealplan: MealPlan;
+    showArchivedMealplans: boolean;
     isLoaded: boolean;
     recipes: Recipe[];
     mealPlans: MealPlan[];
@@ -47,6 +50,7 @@ export interface AppStateModel {
     defaults: {
         mode: AppModeEnum.RECIPES,
         selectedMealplan: undefined,
+        showArchivedMealplans: false,
         isLoaded: false,
         recipes: undefined,
         mealPlans: undefined,
@@ -94,6 +98,11 @@ export class AppState {
     @Selector()
     public static getMealPlans(state: AppStateModel): MealPlan[] {
         return state.mealPlans;
+    }
+
+    @Selector()
+    public static showArchivedMealPlans(state: AppStateModel): boolean {
+        return state.showArchivedMealplans;
     }
 
     @Selector()
@@ -165,6 +174,26 @@ export class AppState {
             );
             this.checkLoadedState(ctx);
         });
+    }
+
+    @Action(ArchiveMealPlanAction)
+    public archiveMealPlan(ctx: StateContext<AppStateModel>, action: ArchiveMealPlanAction) {
+        let manipulatedMealPlan: MealPlan = MealPlanUtil.createEmpty(action.mealPlan);
+        manipulatedMealPlan.archived = action.archive;
+
+        this.mealPlanService.update(manipulatedMealPlan).subscribe(() => {
+            ctx.dispatch(new LoadMealPlansAction());
+            ctx.dispatch(new NavigateAction(['plan']));
+        });
+    }
+
+    @Action(showArchivedMealPlansAction)
+    public showArchivedMealPlans(ctx: StateContext<AppStateModel>, action: showArchivedMealPlansAction) {
+        ctx.setState(
+            produce(ctx.getState(), (draft) => {
+                draft.showArchivedMealplans = action.show;
+            }),
+        );
     }
 
     @Action(LoadUnitsAction)

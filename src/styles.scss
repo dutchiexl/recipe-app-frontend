@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-$primary-color: #fff;
-$secondary-color: #edf2f7;
-$tertiary-color: #fafafa;
+@import "colors";
 
 body {
   margin: 0;

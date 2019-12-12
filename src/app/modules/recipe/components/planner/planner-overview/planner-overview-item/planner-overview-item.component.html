@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" [class.archived]="mealPlan.archived==true" [class.not-archived]="mealPlan.archived==false">
     <mat-card-header>
         <mat-card-title>{{ mealPlan.name }}</mat-card-title>
         <mat-card-subtitle>{{ mealPlan.recipes.length }} recepten</mat-card-subtitle>

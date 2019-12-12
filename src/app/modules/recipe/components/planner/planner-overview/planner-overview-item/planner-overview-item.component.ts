@@ -13,5 +13,4 @@ export class PlannerOverviewItemComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }

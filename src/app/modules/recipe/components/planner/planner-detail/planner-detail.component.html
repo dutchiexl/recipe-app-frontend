@@ -27,6 +27,12 @@
         <button (click)="deletePlan()" color="warn" mat-mini-fab>
             <mat-icon>delete</mat-icon>
         </button>
+        <button (click)="archiveMealPlan(mealPlan)" mat-mini-fab *ngIf="!mealPlan.archived">
+            <mat-icon>archive</mat-icon>
+        </button>
+        <button (click)="unarchiveMealPlan(mealPlan)" mat-mini-fab *ngIf="mealPlan.archived">
+            <mat-icon>unarchive</mat-icon>
+        </button>
         <button (click)="editPlan()" color="primary" mat-mini-fab>
             <mat-icon>edit</mat-icon>
         </button>

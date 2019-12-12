@@ -4,4 +4,5 @@ export interface MealPlan {
     id?: string;
     name: string;
     recipes: Recipe[];
+    archived: boolean;
 }
