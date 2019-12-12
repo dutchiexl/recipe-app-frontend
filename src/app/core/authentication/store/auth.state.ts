@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { tap } from 'rxjs/operators';
 import { LoginAction, LogoutAction } from './auth.actions';
 import produce from 'immer';
+import { Navigate } from '@ngxs/router-plugin';
 
 export class AuthStateModel {
     token: string;
@@ -30,12 +31,13 @@ export class AuthState {
 
     @Action(LoginAction)
     login(ctx: StateContext<AuthStateModel>, action: LoginAction) {
-        return this.authService.login(action.username, action.password).pipe(tap((result: { token: string }) => {
+        return this.authService.login(action.username, action.password).pipe(tap((result: { token: string, redirect }) => {
             ctx.setState(
                 produce(ctx.getState(), (draft) => {
                     draft.token = result.token;
                 }),
             );
+            ctx.dispatch(new Navigate(['']));
         }));
     }
 

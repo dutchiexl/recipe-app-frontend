@@ -40,7 +40,7 @@ const routes: Routes = [
         path: 'plan/:planId', component: PlannerDetailComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'plan', component: PlannerOverviewComponent
+        path: 'plan', component: PlannerOverviewComponent, canActivate: [AuthGuard]
     },
     {
         path: 'manage/units', component: UnitsComponent, canActivate: [AuthGuard]
