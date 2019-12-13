@@ -27,6 +27,18 @@ export class LoadMealPlansAction {
     constructor() { }
 }
 
+export class ArchiveMealPlanAction {
+    public static readonly type = '[Recipe] Archive meal plan';
+
+    constructor(public mealPlan:MealPlan, public archive: boolean) { }
+}
+
+export class showArchivedMealPlansAction {
+    public static readonly type = '[Recipe] show/hide archived meal plans';
+
+    constructor(public show: boolean) { }
+}
+
 export class LoadUnitsAction {
     public static readonly type = '[Recipe] Load units';
 

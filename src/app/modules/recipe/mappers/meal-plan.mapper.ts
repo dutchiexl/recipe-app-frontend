@@ -10,7 +10,8 @@ export class MealPlanMapper {
             name: rawData.name,
             recipes: rawData.recipes.map((recipeId) => {
                 return recipes.find((recipe) => recipe.id === recipeId);
-            })
+            }),
+            archived: rawData.archived
         };
     }
 }

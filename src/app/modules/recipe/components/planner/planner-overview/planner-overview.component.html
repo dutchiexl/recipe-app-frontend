@@ -3,7 +3,7 @@
         <div class="list-overview top-spacing">
             <app-planner-overview-item
                     (click)="goToMealPlan(mealplan)"
-                    *ngFor="let mealplan of mealPlans" [mealPlan]="mealplan"
+                    *ngFor="let mealplan of filteredMealPlans" [mealPlan]="mealplan"
                     class="list-item clickable"
             ></app-planner-overview-item>
         </div>
@@ -19,6 +19,9 @@
     <eco-fab-speed-dial-actions>
         <button (click)="createPlan()" color="primary" mat-mini-fab>
             <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="showArchived()" color="primary" mat-mini-fab>
+            <mat-icon>list_alt</mat-icon>
         </button>
     </eco-fab-speed-dial-actions>
 </eco-fab-speed-dial>

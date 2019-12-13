@@ -7,7 +7,7 @@ import { MealPlanListUtil } from '../../../utils/meal-plan-list.util';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import { DeleteMealPlanAction, NavigateAction } from '../../../store/app.actions';
+import {ArchiveMealPlanAction, DeleteMealPlanAction, NavigateAction} from '../../../store/app.actions';
 
 @Component({
     selector: 'app-planner-detail',
@@ -52,5 +52,13 @@ export class PlannerDetailComponent implements OnInit {
                 this.store.dispatch(new DeleteMealPlanAction(this.mealPlan));
             }
         });
+    }
+
+    archiveMealPlan(mealPlan: MealPlan) {
+        this.store.dispatch(new ArchiveMealPlanAction(mealPlan, true));
+    }
+
+    unarchiveMealPlan(mealPlan: MealPlan) {
+        this.store.dispatch(new ArchiveMealPlanAction(mealPlan, false));
     }
 }
