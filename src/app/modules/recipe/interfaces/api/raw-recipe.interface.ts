@@ -7,7 +7,7 @@ export interface RawRecipe {
     nameAddition: string,
     description: string,
     imagePath?: string,
-    creationDate: Date,
+    createdAt?: Date,
     steps: RawStep[],
     items: RawItem[],
     nutrients: [],

@@ -13,7 +13,7 @@ export class RecipeMapper {
             nameAddition: rawData.nameAddition,
             description: rawData.description,
             imagePath: rawData.imagePath,
-            creationDate: new Date(rawData.creationDate),
+            creationDate: new Date(rawData.createdAt),
             items: rawData.items.map((rawItem) => {
                 return {
                     amount: rawItem.amount,
