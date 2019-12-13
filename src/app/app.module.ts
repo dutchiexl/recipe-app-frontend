@@ -29,10 +29,10 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
         AuthenticationModule,
         SharedModule,
         NgxsModule.forRoot([
-            AppState,
-            AuthState
-        ],
-            { developmentMode: !environment.production }),
+                AppState,
+                AuthState
+            ],
+            {developmentMode: !environment.production}),
         NgxsReduxDevtoolsPluginModule.forRoot(),
         NgxsRouterPluginModule.forRoot()
     ],
@@ -41,6 +41,6 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
 export class AppModule {
 
     constructor(private store: Store) {
-        store.dispatch(new LoadApplicationAction());
+        store.dispatch(new LoadApplicationAction(store.selectSnapshot(AuthState.isLoggedIn)));
     }
 }

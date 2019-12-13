@@ -28,6 +28,11 @@ export class AuthState {
     }
 
     @Selector()
+    public static getToken(state: AuthStateModel) {
+        return state.token;
+    }
+
+    @Selector()
     public static isLoggedIn(state: AuthStateModel) {
         return !!state.token;
     }

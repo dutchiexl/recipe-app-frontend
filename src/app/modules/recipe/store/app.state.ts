@@ -1,5 +1,6 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {
+    ArchiveMealPlanAction,
     CreateIngredientAction,
     DeleteMealPlanAction,
     DeleteRecipeAction,
@@ -7,14 +8,14 @@ import {
     LoadIngredientCategoriesAction,
     LoadIngredientsAction,
     LoadMealPlansAction,
-    ArchiveMealPlanAction,
     LoadRecipesAction,
     LoadUnitsAction,
     NavigateAction,
     SetMealplanAction,
     SetModeAction,
+    showArchivedMealPlansAction,
     UpdateOrCreateMealPlanAction,
-    UpdateOrCreateRecipeAction, showArchivedMealPlansAction
+    UpdateOrCreateRecipeAction
 } from './app.actions';
 import { Recipe } from '../interfaces/recipe/recipe.interface';
 import produce from 'immer';
@@ -31,7 +32,7 @@ import { IngredientCategory } from '../interfaces/recipe/ingredient-category';
 import { UnitService } from '../services/unit.service';
 import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
-import {MealPlanUtil} from "../utils/mealPlanUtil";
+import { MealPlanUtil } from '../utils/mealPlanUtil';
 
 export interface AppStateModel {
     mode: AppModeEnum;
@@ -141,13 +142,17 @@ export class AppState {
     }
 
     @Action(LoadApplicationAction)
-    public loadAPI(ctx: StateContext<AppStateModel>, {}: LoadApplicationAction) {
+    public loadAPI(ctx: StateContext<AppStateModel>, action: LoadApplicationAction) {
         this.setLoadedState(ctx, false);
-        ctx.dispatch(new LoadRecipesAction());
-        ctx.dispatch(new LoadMealPlansAction());
-        ctx.dispatch(new LoadUnitsAction());
-        ctx.dispatch(new LoadIngredientCategoriesAction());
-        ctx.dispatch(new LoadIngredientsAction());
+        if (action.isAuthenticated) {
+            ctx.dispatch(new LoadRecipesAction());
+            ctx.dispatch(new LoadMealPlansAction());
+            ctx.dispatch(new LoadUnitsAction());
+            ctx.dispatch(new LoadIngredientCategoriesAction());
+            ctx.dispatch(new LoadIngredientsAction());
+        } else {
+            this.setLoadedState(ctx, true);
+        }
     }
 
     @Action(LoadRecipesAction)

@@ -12,7 +12,7 @@ export class SetModeAction {
 export class LoadApplicationAction {
     public static readonly type = '[Recipe] Load Application';
 
-    constructor() { }
+    constructor(public isAuthenticated: boolean = true) { }
 }
 
 export class LoadRecipesAction {

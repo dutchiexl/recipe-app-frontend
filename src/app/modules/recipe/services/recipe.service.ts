@@ -11,29 +11,33 @@ import { Unit } from '../interfaces/unit/unit';
 import { UnitService } from './unit.service';
 import { IngredientService } from './ingredient.service';
 import { Ingredient } from '../interfaces/recipe/ingredient.interface';
+import { ApiService } from './api.service';
+import { Store } from '@ngxs/store';
 
 @Injectable()
-export class RecipeService {
+export class RecipeService extends ApiService {
     cache: Observable<Recipe>;
     callbackUrl = environment.apiUrl + 'api/recipes';
 
     constructor(
         private http: HttpClient,
         private unitService: UnitService,
-        private ingredientService: IngredientService
+        private ingredientService: IngredientService,
+        private store: Store
     ) {
+        super(store);
     }
 
     getRecipes(): Observable<Recipe[]> {
-        let recipes$ = this.http.get(this.callbackUrl);
-        let units$ = this.unitService.getAll();
-        let ingredients$ = this.ingredientService.getAll();
+        const recipes$ = this.http.get(this.callbackUrl, {headers: this.getHeader()});
+        const units$ = this.unitService.getAll();
+        const ingredients$ = this.ingredientService.getAll();
 
         return forkJoin([recipes$, units$, ingredients$]).pipe(
             map((result) => {
-                let recipes = result[0] as RawRecipe[];
-                let units = result[1] as Unit[];
-                let ingredients = result[2] as Ingredient[];
+                const recipes = result[0] as RawRecipe[];
+                const units = result[1] as Unit[];
+                const ingredients = result[2] as Ingredient[];
                 return recipes.map((rawRecipeData: RawRecipe) => {
                     return RecipeMapper.toObject(rawRecipeData, units, ingredients);
                 });
@@ -42,14 +46,14 @@ export class RecipeService {
     }
 
     create(recipe: Recipe): Observable<Object> {
-        return this.http.post(this.callbackUrl, RecipeUtil.recipeAsJSON(recipe));
+        return this.http.post(this.callbackUrl, RecipeUtil.recipeAsJSON(recipe), {headers: this.getHeader()});
     }
 
     update(recipe: Recipe): Observable<Object> {
-        return this.http.patch(this.callbackUrl + '/' + recipe.id, RecipeUtil.recipeAsJSON(recipe));
+        return this.http.patch(this.callbackUrl + '/' + recipe.id, RecipeUtil.recipeAsJSON(recipe), {headers: this.getHeader()});
     }
 
     delete(recipe: Recipe) {
-        return this.http.delete(this.callbackUrl + '/' + recipe.id);
+        return this.http.delete(this.callbackUrl + '/' + recipe.id, {headers: this.getHeader()});
     }
 }

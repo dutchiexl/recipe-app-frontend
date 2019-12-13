@@ -5,6 +5,7 @@ import { LoginAction } from '../../../../core/authentication/store/auth.actions'
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { invalid } from '@angular/compiler/src/render3/view/util';
+import { LoadApplicationAction } from '../../../../modules/recipe/store/app.actions';
 
 @Component({
     selector: 'app-login',
@@ -39,7 +40,9 @@ export class LoginComponent implements OnInit {
                     this.loginForm.setErrors({auth: 'invalid'});
                     return EMPTY;
                 })
-            ).subscribe();
+            ).subscribe(() => {
+                this.store.dispatch(new LoadApplicationAction());
+            });
         }
     }
 
