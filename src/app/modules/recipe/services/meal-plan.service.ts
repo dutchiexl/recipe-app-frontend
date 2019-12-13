@@ -10,26 +10,21 @@ import { RecipeService } from './recipe.service';
 import { MealPlanUtil } from '../utils/mealPlanUtil';
 import { Recipe } from '../interfaces/recipe/recipe.interface';
 import { RecipeUtil } from '../utils/recipe.util';
-import { ApiService } from './api.service';
-import { Store } from '@ngxs/store';
 
 @Injectable()
-export class MealPlanService extends ApiService {
+export class MealPlanService {
 
     callbackUrl = environment.apiUrl + 'api/mealplans';
 
     constructor(
         private http: HttpClient,
-        private recipeService: RecipeService,
-        private store: Store
-    ) {
-        super(store);
-    }
+        private recipeService: RecipeService
+    ) {}
 
     getAll(): Observable<MealPlan[]> {
         return this.recipeService.getRecipes().pipe(
             mergeMap((recipes) => {
-                return this.http.get(this.callbackUrl, {headers: this.getHeader()}).pipe(
+                return this.http.get(this.callbackUrl).pipe(
                     map((rawData: RawMealPlan[]) => {
                         return rawData.map((RawMealPlan) => MealPlanMapper.toObject(RawMealPlan, recipes));
                     })
@@ -39,18 +34,18 @@ export class MealPlanService extends ApiService {
     }
 
     create(mealPlan: MealPlan): Observable<Object> {
-        return this.http.post(this.callbackUrl, MealPlanUtil.asJson(mealPlan), {headers: this.getHeader()});
+        return this.http.post(this.callbackUrl, MealPlanUtil.asJson(mealPlan));
     }
 
     update(mealPlan: MealPlan) {
-        return this.http.patch(this.callbackUrl + '/' + mealPlan.id, MealPlanUtil.asJson(mealPlan), {headers: this.getHeader()});
+        return this.http.patch(this.callbackUrl + '/' + mealPlan.id, MealPlanUtil.asJson(mealPlan));
     }
 
     delete(mealPlan: MealPlan) {
-        return this.http.delete(this.callbackUrl + '/' + mealPlan.id, {headers: this.getHeader()});
+        return this.http.delete(this.callbackUrl + '/' + mealPlan.id);
     }
 
     updateRecipes(plan: MealPlan, recipes: Recipe[]) {
-        return this.http.patch(this.callbackUrl + '/' + plan.id, RecipeUtil.recipeListAsJson(recipes), {headers: this.getHeader()});
+        return this.http.patch(this.callbackUrl + '/' + plan.id, RecipeUtil.recipeListAsJson(recipes));
     }
 }

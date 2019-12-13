@@ -4,6 +4,8 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from '../guards/auth.guard';
 import { IsAuthorizedDirective } from './directives/is-authorized.directive';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,12 @@ import { IsAuthorizedDirective } from './directives/is-authorized.directive';
     ],
     providers: [
         AuthService,
-        AuthGuard
+        AuthGuard,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
     ]
 })
 export class AuthenticationModule {
