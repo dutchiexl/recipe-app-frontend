@@ -1,9 +1,10 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { AuthService } from '../services/auth.service';
-import { tap } from 'rxjs/operators';
 import { LoginAction, LogoutAction } from './auth.actions';
 import produce from 'immer';
 import { Navigate } from '@ngxs/router-plugin';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 export class AuthStateModel {
     token: string;
@@ -35,16 +36,26 @@ export class AuthState {
     static token(state: AuthStateModel) { return state.token; }
 
     @Action(LoginAction)
-    login(ctx: StateContext<AuthStateModel>, action: LoginAction) {
-        return this.authService.login(action.username, action.password).pipe(tap((result: { token: string, redirect }) => {
-            ctx.setState(
-                produce(ctx.getState(), (draft) => {
-                    draft.username = action.username;
-                    draft.token = result.token;
-                }),
-            );
-            ctx.dispatch(new Navigate(['']));
-        }));
+    login(ctx: StateContext<AuthStateModel>, action: LoginAction): Observable<any> {
+        return this.authService.login(action.username, action.password).pipe(
+            catchError((error, caught) => {
+                if (error.status === 401) {
+                } else {
+                    return throwError(error);
+                }
+            }),
+            tap((result) => {
+                    ctx.setState(
+                        produce(ctx.getState(), (draft) => {
+                            draft.username = action.username;
+                            draft.token = result.token;
+                        }),
+                    );
+                    ctx.dispatch(new Navigate(['']));
+                    return EMPTY;
+                }
+            )
+        );
     }
 
     @Action(LogoutAction)
