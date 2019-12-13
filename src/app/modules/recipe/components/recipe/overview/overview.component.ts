@@ -14,7 +14,10 @@ export class OverviewComponent implements OnInit {
 
     constructor(private store: Store) {
         store.select(AppState.getRecipes).subscribe((recipes) => {
-            this.recipes = recipes;
+            this.recipes = [...recipes];
+            this.recipes.sort((a: Recipe, b: Recipe) => {
+                return b.creationDate.getTime() - a.creationDate.getTime();
+            });
         });
     }
 

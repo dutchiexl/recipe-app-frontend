@@ -44,7 +44,6 @@ export class RecipeUtil {
                 return rawItem;
             }),
             imagePath: recipe.imagePath,
-            creationDate: new Date(),
             equipment: [],
             nutrients: []
         };
