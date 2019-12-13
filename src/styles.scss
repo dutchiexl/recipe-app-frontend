@@ -12,6 +12,7 @@ mat-toolbar {
     background-color: $primary-color;
     color: black;
   }
+
   &.secondary {
     background-color: $secondary-color;
   }
@@ -198,3 +199,18 @@ mat-list {
   align-items: center;
   justify-content: center;
 }
+
+.wrapper {
+  width: 100%;
+}
+
+.mat-sidenav-container {
+  min-height: 100vh;
+
+  mat-sidenav {
+    width: 350px;
+    padding: 70px 30px 30px;
+    border: none;
+  }
+}
+

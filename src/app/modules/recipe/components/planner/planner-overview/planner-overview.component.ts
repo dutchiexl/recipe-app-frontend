@@ -3,7 +3,7 @@ import { MealPlan } from '../../../interfaces/planner/meal-plan';
 import { Store } from '@ngxs/store';
 import { AppState } from '../../../store/app.state';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
-import {NavigateAction, showArchivedMealPlansAction} from '../../../store/app.actions';
+import {NavigateAction, ShowArchivedMealPlansAction} from '../../../store/app.actions';
 
 @Component({
     selector: 'app-planner-overview',
@@ -51,6 +51,6 @@ export class PlannerOverviewComponent implements OnInit {
     }
 
     showArchived() {
-        this.store.dispatch(new showArchivedMealPlansAction(!this.toggleArchivedMealPlans));
+        this.store.dispatch(new ShowArchivedMealPlansAction(!this.toggleArchivedMealPlans));
     }
 }
