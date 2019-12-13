@@ -40,8 +40,9 @@ export class AuthState {
         return this.authService.login(action.username, action.password).pipe(
             catchError((error, caught) => {
                 if (error.status === 401) {
+                    return throwError('User or password incorrect');
                 } else {
-                    return throwError(error);
+                    throw new Error('Login failed');
                 }
             }),
             tap((result) => {

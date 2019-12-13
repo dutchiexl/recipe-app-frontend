@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { LoginAction } from '../../../../core/authentication/store/auth.actions';
+import { catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
     selector: 'app-login',
@@ -13,12 +16,10 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store,
-        private actions$: Actions
+        private store: Store
     ) {}
 
     ngOnInit() {
-        this.actions$.pipe(ofActionSuccessful(LoginAction)).subscribe(() => alert('Item deleted'));
         this.loginForm = this.formBuilder.group({
             username: [undefined, Validators.required],
             password: [undefined, Validators.required]
@@ -33,10 +34,16 @@ export class LoginComponent implements OnInit {
                     this.loginForm.get('username').value,
                     this.loginForm.get('password').value
                 )
-            ).subscribe(
-                x => console.debug('Completed Action Succesfully', x),
-                err => alert('received error! Great"')
-            );
+            ).pipe(
+                catchError((err) => {
+                    this.loginForm.setErrors({auth: 'invalid'});
+                    return EMPTY;
+                })
+            ).subscribe();
         }
+    }
+
+    getErrorMessage() {
+        return this.loginForm.hasError('auth') ? 'Username or password incorrect' : '';
     }
 }
