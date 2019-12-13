@@ -33,7 +33,7 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
                 AuthState
             ],
             {developmentMode: !environment.production}),
-        NgxsReduxDevtoolsPluginModule.forRoot(),
+        NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot()
     ],
     bootstrap: [AppComponent]
