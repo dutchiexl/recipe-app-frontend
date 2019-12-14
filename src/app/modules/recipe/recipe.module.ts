@@ -28,7 +28,7 @@ import { MealPlanService } from './services/meal-plan.service';
 import { UnitService } from './services/unit.service';
 import { IngredientService } from './services/ingredient.service';
 import { IngredientCategoryService } from './services/ingredient-category.service';
-
+import { IngredientsFilterComponent } from './components/recipe/overview/filters/ingredients/ingredients-filter.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +50,8 @@ import { IngredientCategoryService } from './services/ingredient-category.servic
         UnitsComponent,
         ItemComponent,
         CreateIngredientComponent,
-        AssetPipe
+        AssetPipe,
+        IngredientsFilterComponent
     ],
     imports: [
         CommonModule,

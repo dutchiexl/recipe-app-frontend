@@ -30,10 +30,22 @@ export class LoadMealPlansAction {
 export class ArchiveMealPlanAction {
     public static readonly type = '[Recipe] Archive meal plan';
 
-    constructor(public mealPlan:MealPlan, public archive: boolean) { }
+    constructor(public mealPlan: MealPlan, public archive: boolean) { }
 }
 
-export class showArchivedMealPlansAction {
+export class SetRecipeSearchFilterValue{
+    public static readonly type = '[Recipe] Set recipe search filter value';
+
+    constructor(public searchValue: string) { }
+}
+
+export class SetRecipeIngredientFilterValue{
+    public static readonly type = '[Recipe] Set recipe ingredient filter value';
+
+    constructor(public ingredients: Ingredient[]) { }
+}
+
+export class ShowArchivedMealPlansAction {
     public static readonly type = '[Recipe] show/hide archived meal plans';
 
     constructor(public show: boolean) { }

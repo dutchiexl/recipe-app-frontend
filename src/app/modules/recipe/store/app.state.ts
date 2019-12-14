@@ -13,7 +13,9 @@ import {
     NavigateAction,
     SetMealplanAction,
     SetModeAction,
-    showArchivedMealPlansAction,
+    SetRecipeIngredientFilterValue,
+    SetRecipeSearchFilterValue,
+    ShowArchivedMealPlansAction,
     UpdateOrCreateMealPlanAction,
     UpdateOrCreateRecipeAction
 } from './app.actions';
@@ -33,10 +35,12 @@ import { UnitService } from '../services/unit.service';
 import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
 import { MealPlanUtil } from '../utils/mealPlanUtil';
+import { RecipeFilters } from '../interfaces/filters/recipe-filters.interface';
 
 export interface AppStateModel {
     mode: AppModeEnum;
     selectedMealplan: MealPlan;
+    recipeFilters: RecipeFilters;
     showArchivedMealplans: boolean;
     isLoaded: boolean;
     recipes: Recipe[];
@@ -51,6 +55,10 @@ export interface AppStateModel {
     defaults: {
         mode: AppModeEnum.RECIPES,
         selectedMealplan: undefined,
+        recipeFilters: {
+            search: undefined,
+            ingredients: []
+        },
         showArchivedMealplans: false,
         isLoaded: false,
         recipes: undefined,
@@ -84,6 +92,11 @@ export class AppState {
     @Selector()
     public static getLoadedState(state: AppStateModel) {
         return state.isLoaded;
+    }
+
+    @Selector()
+    public static getRecipeFilters(state: AppStateModel): RecipeFilters {
+        return state.recipeFilters;
     }
 
     @Selector()
@@ -183,7 +196,7 @@ export class AppState {
 
     @Action(ArchiveMealPlanAction)
     public archiveMealPlan(ctx: StateContext<AppStateModel>, action: ArchiveMealPlanAction) {
-        let manipulatedMealPlan: MealPlan = MealPlanUtil.createEmpty(action.mealPlan);
+        const manipulatedMealPlan: MealPlan = MealPlanUtil.createEmpty(action.mealPlan);
         manipulatedMealPlan.archived = action.archive;
 
         this.mealPlanService.update(manipulatedMealPlan).subscribe(() => {
@@ -192,8 +205,26 @@ export class AppState {
         });
     }
 
-    @Action(showArchivedMealPlansAction)
-    public showArchivedMealPlans(ctx: StateContext<AppStateModel>, action: showArchivedMealPlansAction) {
+    @Action(SetRecipeSearchFilterValue)
+    public setRecipeSearchFilterValue(ctx: StateContext<AppStateModel>, action: SetRecipeSearchFilterValue) {
+        ctx.setState(
+            produce(ctx.getState(), (draft) => {
+                draft.recipeFilters.search = action.searchValue;
+            }),
+        );
+    }
+
+    @Action(SetRecipeIngredientFilterValue)
+    public setRecipeIngredientFilterValue(ctx: StateContext<AppStateModel>, action: SetRecipeIngredientFilterValue) {
+        ctx.setState(
+            produce(ctx.getState(), (draft) => {
+                draft.recipeFilters.ingredients = action.ingredients;
+            }),
+        );
+    }
+
+    @Action(ShowArchivedMealPlansAction)
+    public showArchivedMealPlans(ctx: StateContext<AppStateModel>, action: ShowArchivedMealPlansAction) {
         ctx.setState(
             produce(ctx.getState(), (draft) => {
                 draft.showArchivedMealplans = action.show;
