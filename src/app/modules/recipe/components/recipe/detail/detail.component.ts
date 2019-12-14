@@ -27,8 +27,9 @@ export class DetailComponent implements OnInit {
         this.route.paramMap.subscribe((params) => {
             this.store.select(AppState.getRecipes).subscribe((recipes) => {
                 this.recipes = recipes;
-                let recipeId = params.get('recipeId');
+                const recipeId = params.get('recipeId');
                 this.recipe = RecipeListUtil.findRecipeById(this.recipes, recipeId);
+                console.log(this.recipe);
             });
         });
     }

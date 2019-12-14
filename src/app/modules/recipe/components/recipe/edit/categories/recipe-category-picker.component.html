@@ -1,4 +1,4 @@
-<mat-form-field class="filter-chip-list">
+<mat-form-field class="full-width">
     <mat-chip-list #chipList>
         <mat-chip
                 *ngFor="let listItem of list"
@@ -9,7 +9,7 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
         <input
-                placeholder=""
+                placeholder="Categories"
                 #categoryInput
                 [formControl]="formControl"
                 [matAutocomplete]="auto"

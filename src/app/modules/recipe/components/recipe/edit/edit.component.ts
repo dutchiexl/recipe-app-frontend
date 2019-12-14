@@ -14,7 +14,7 @@ import { Item } from '../../../interfaces/recipe/item.interface';
 import { ItemUtil } from '../../../utils/item.util';
 import { UpdateOrCreateRecipeAction } from '../../../store/app.actions';
 import { AssetUtil } from '../../../utils/asset.util';
-import { MatChipListChange } from '@angular/material';
+import { RecipeCategory } from '../../../interfaces/recipe/recipe-category';
 
 @Component({
     selector: 'app-edit',
@@ -27,6 +27,7 @@ export class EditComponent implements OnInit {
     itemFormGroup: FormArray = new FormArray([]);
     stepFormGroup: FormArray = new FormArray([]);
     preview = AssetUtil.getPlaceholder();
+    selectedCategories: RecipeCategory[];
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(
@@ -63,7 +64,7 @@ export class EditComponent implements OnInit {
             recipeToSubmit.items = this.cleanItems(this.form.get('items').value);
             recipeToSubmit.steps = this.cleanSteps(this.form.get('steps').value);
             recipeToSubmit.imagePath = this.form.get('imagePath').value;
-            //recipeToSubmit.categories =
+            recipeToSubmit.categories = this.selectedCategories;
 
             if (this.recipe.id) {
                 recipeToSubmit.id = this.recipe.id;
@@ -136,7 +137,7 @@ export class EditComponent implements OnInit {
         });
     }
 
-    setCategories($event: MatChipListChange) {
-        console.log($event.value);
+    setCategories(categories: RecipeCategory[]) {
+        this.selectedCategories = categories;
     }
 }
