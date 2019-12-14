@@ -39,6 +39,12 @@ export class SetRecipeSearchFilterValue{
     constructor(public searchValue: string) { }
 }
 
+export class SetRecipeIngredientFilterValue{
+    public static readonly type = '[Recipe] Set recipe ingredient filter value';
+
+    constructor(public ingredients: Ingredient[]) { }
+}
+
 export class ShowArchivedMealPlansAction {
     public static readonly type = '[Recipe] show/hide archived meal plans';
 

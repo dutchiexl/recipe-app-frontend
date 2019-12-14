@@ -4,6 +4,7 @@ import {
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -11,7 +12,8 @@ import {
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatSelectModule, MatSidenavModule,
+    MatSelectModule,
+    MatSidenavModule,
     MatToolbarModule
 } from '@angular/material';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
@@ -34,6 +36,7 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         MatAutocompleteModule,
         MatSelectModule,
         MatSidenavModule,
+        MatChipsModule,
         EcoFabSpeedDialModule
     ],
     exports: [
@@ -50,6 +53,7 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         MatAutocompleteModule,
         MatSelectModule,
         MatSidenavModule,
+        MatChipsModule,
         EcoFabSpeedDialModule
     ]
 })

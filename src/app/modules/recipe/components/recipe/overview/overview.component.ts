@@ -32,16 +32,28 @@ export class OverviewComponent implements OnInit {
     }
 
     private updateFilteredRecipes() {
-        if (this.recipeFilter.search && this.recipeFilter.search !== '') {
-            this.filteredRecipes = this.recipes.filter((recipe) => {
-                return recipe.name.indexOf(this.recipeFilter.search) !== -1;
-            });
-        } else {
-            this.filteredRecipes = this.recipes;
+        let filteredRecipes = this.recipes;
+        if (this.recipeFilter) {
+            if (this.recipeFilter.search && this.recipeFilter.search !== '') {
+                filteredRecipes = filteredRecipes.filter((recipe) => {
+                    return recipe.name.indexOf(this.recipeFilter.search) !== -1;
+                });
+            }
+            if (this.recipeFilter.ingredients && this.recipeFilter.ingredients.length > 0) {
+                filteredRecipes = filteredRecipes.filter((recipe) => {
+                    const ingredientIds = recipe.items.map((item) => item.ingredient.id);
+                    const filteredIngredientIds = this.recipeFilter.ingredients.map((ingredient) => ingredient.id);
+                    return ingredientIds.some(r => filteredIngredientIds.indexOf(r) >= 0);
+                });
+            }
+
+            this.filteredRecipes = filteredRecipes;
         }
-        this.filteredRecipes.sort((a: Recipe, b: Recipe) => {
-            return b.creationDate.getTime() - a.creationDate.getTime();
-        });
+        if (this.filteredRecipes) {
+            this.filteredRecipes.sort((a: Recipe, b: Recipe) => {
+                return b.creationDate.getTime() - a.creationDate.getTime();
+            });
+        }
     }
 
     ngOnInit() {

@@ -12,7 +12,9 @@ import {
     LoadUnitsAction,
     NavigateAction,
     SetMealplanAction,
-    SetModeAction, SetRecipeSearchFilterValue,
+    SetModeAction,
+    SetRecipeIngredientFilterValue,
+    SetRecipeSearchFilterValue,
     ShowArchivedMealPlansAction,
     UpdateOrCreateMealPlanAction,
     UpdateOrCreateRecipeAction
@@ -54,7 +56,8 @@ export interface AppStateModel {
         mode: AppModeEnum.RECIPES,
         selectedMealplan: undefined,
         recipeFilters: {
-            search: undefined
+            search: undefined,
+            ingredients: []
         },
         showArchivedMealplans: false,
         isLoaded: false,
@@ -203,12 +206,19 @@ export class AppState {
     }
 
     @Action(SetRecipeSearchFilterValue)
-    public SetRecipeSearchFilterValue(ctx: StateContext<AppStateModel>, action: SetRecipeSearchFilterValue) {
+    public setRecipeSearchFilterValue(ctx: StateContext<AppStateModel>, action: SetRecipeSearchFilterValue) {
         ctx.setState(
             produce(ctx.getState(), (draft) => {
-                draft.recipeFilters = {
-                    search: action.searchValue
-                };
+                draft.recipeFilters.search = action.searchValue;
+            }),
+        );
+    }
+
+    @Action(SetRecipeIngredientFilterValue)
+    public setRecipeIngredientFilterValue(ctx: StateContext<AppStateModel>, action: SetRecipeIngredientFilterValue) {
+        ctx.setState(
+            produce(ctx.getState(), (draft) => {
+                draft.recipeFilters.ingredients = action.ingredients;
             }),
         );
     }
