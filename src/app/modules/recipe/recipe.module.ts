@@ -29,6 +29,8 @@ import { UnitService } from './services/unit.service';
 import { IngredientService } from './services/ingredient.service';
 import { IngredientCategoryService } from './services/ingredient-category.service';
 import { IngredientsFilterComponent } from './components/recipe/overview/filters/ingredients/ingredients-filter.component';
+import { RecipeCategoryService } from './services/recipe-category.service';
+import { RecipeCategoryPickerComponent } from './components/recipe/edit/categories/recipe-category-picker.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +53,8 @@ import { IngredientsFilterComponent } from './components/recipe/overview/filters
         ItemComponent,
         CreateIngredientComponent,
         AssetPipe,
-        IngredientsFilterComponent
+        IngredientsFilterComponent,
+        RecipeCategoryPickerComponent
     ],
     imports: [
         CommonModule,
@@ -66,7 +69,8 @@ import { IngredientsFilterComponent } from './components/recipe/overview/filters
         MealPlanService,
         UnitService,
         IngredientService,
-        IngredientCategoryService
+        IngredientCategoryService,
+        RecipeCategoryService
     ],
     entryComponents: [
         ConfirmationComponent,

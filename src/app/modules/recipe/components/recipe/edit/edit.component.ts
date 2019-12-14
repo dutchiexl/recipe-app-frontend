@@ -14,6 +14,7 @@ import { Item } from '../../../interfaces/recipe/item.interface';
 import { ItemUtil } from '../../../utils/item.util';
 import { UpdateOrCreateRecipeAction } from '../../../store/app.actions';
 import { AssetUtil } from '../../../utils/asset.util';
+import { MatChipListChange } from '@angular/material';
 
 @Component({
     selector: 'app-edit',
@@ -62,6 +63,7 @@ export class EditComponent implements OnInit {
             recipeToSubmit.items = this.cleanItems(this.form.get('items').value);
             recipeToSubmit.steps = this.cleanSteps(this.form.get('steps').value);
             recipeToSubmit.imagePath = this.form.get('imagePath').value;
+            //recipeToSubmit.categories =
 
             if (this.recipe.id) {
                 recipeToSubmit.id = this.recipe.id;
@@ -105,7 +107,8 @@ export class EditComponent implements OnInit {
             description: [this.recipe.description, Validators.required],
             imagePath: [this.recipe.imagePath, Validators.required],
             items: this.itemFormGroup,
-            steps: this.stepFormGroup
+            steps: this.stepFormGroup,
+            categories: [this.recipe.categories],
         });
     }
 
@@ -131,5 +134,9 @@ export class EditComponent implements OnInit {
         return steps.filter((step) => {
             return !!step.text && !!step.name;
         });
+    }
+
+    setCategories($event: MatChipListChange) {
+        console.log($event.value);
     }
 }

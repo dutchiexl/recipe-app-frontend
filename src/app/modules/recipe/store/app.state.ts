@@ -7,7 +7,7 @@ import {
     LoadApplicationAction,
     LoadIngredientCategoriesAction,
     LoadIngredientsAction,
-    LoadMealPlansAction,
+    LoadMealPlansAction, LoadRecipeCategoriesAction,
     LoadRecipesAction,
     LoadUnitsAction,
     NavigateAction,
@@ -36,6 +36,8 @@ import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
 import { MealPlanUtil } from '../utils/mealPlanUtil';
 import { RecipeFilters } from '../interfaces/filters/recipe-filters.interface';
+import { RecipeCategoryService } from '../services/recipe-category.service';
+import { RecipeCategory } from '../interfaces/recipe/recipe-category';
 
 export interface AppStateModel {
     mode: AppModeEnum;
@@ -48,6 +50,7 @@ export interface AppStateModel {
     units: Unit[];
     ingredients: Ingredient[];
     ingredientCategories: IngredientCategory[];
+    recipeCategories: RecipeCategory[];
 }
 
 @State<AppStateModel>({
@@ -65,7 +68,8 @@ export interface AppStateModel {
         mealPlans: undefined,
         units: undefined,
         ingredients: undefined,
-        ingredientCategories: undefined
+        ingredientCategories: undefined,
+        recipeCategories: undefined
     }
 })
 export class AppState {
@@ -75,7 +79,8 @@ export class AppState {
         private mealPlanService: MealPlanService,
         private unitService: UnitService,
         private ingredientService: IngredientService,
-        private ingredientCategoryService: IngredientCategoryService
+        private ingredientCategoryService: IngredientCategoryService,
+        private recipeCategoryService: RecipeCategoryService
     ) {
     }
 
@@ -134,6 +139,11 @@ export class AppState {
         return state.ingredientCategories;
     }
 
+    @Selector()
+    public static getRecipeCategories(state: AppStateModel): RecipeCategory[] {
+        return state.recipeCategories;
+    }
+
     @Action(SetModeAction)
     public setMode(ctx: StateContext<AppStateModel>, action: SetModeAction) {
         ctx.setState(
@@ -162,6 +172,7 @@ export class AppState {
             ctx.dispatch(new LoadMealPlansAction());
             ctx.dispatch(new LoadUnitsAction());
             ctx.dispatch(new LoadIngredientCategoriesAction());
+            ctx.dispatch(new LoadRecipeCategoriesAction());
             ctx.dispatch(new LoadIngredientsAction());
         } else {
             this.setLoadedState(ctx, true);
@@ -265,6 +276,19 @@ export class AppState {
             ctx.setState(
                 produce(ctx.getState(), (draft) => {
                     draft.ingredientCategories = ingredientCategories;
+                }),
+            );
+            this.checkLoadedState(ctx);
+        });
+    }
+
+    @Action(LoadRecipeCategoriesAction)
+    public loadRecipeCategories(ctx: StateContext<AppStateModel>, {}: LoadRecipeCategoriesAction) {
+        this.setLoadedState(ctx, false);
+        this.recipeCategoryService.getAll().subscribe((recipeCategories) => {
+            ctx.setState(
+                produce(ctx.getState(), (draft) => {
+                    draft.recipeCategories = recipeCategories;
                 }),
             );
             this.checkLoadedState(ctx);

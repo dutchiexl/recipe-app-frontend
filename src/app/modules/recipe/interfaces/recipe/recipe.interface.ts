@@ -1,5 +1,6 @@
 import { Step } from './step.interface';
 import { Item } from './item.interface';
+import { RecipeCategory } from './recipe-category';
 
 export interface Recipe {
     id?: string,
@@ -10,6 +11,7 @@ export interface Recipe {
     source?: string;
     steps: Step[];
     items: Item[];
+    categories: RecipeCategory[];
     equipment: [];
     creationDate: Date;
 }
