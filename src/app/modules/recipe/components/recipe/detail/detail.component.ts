@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import { DeleteRecipeAction, NavigateAction } from '../../../store/app.actions';
+import {DeleteRecipeAction, NavigateAction, ShareRecipeAction} from '../../../store/app.actions';
+import {ShareComponent} from "../../shared/share/share.component";
 
 @Component({
     selector: 'app-detail',
@@ -45,6 +46,18 @@ export class DetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.store.dispatch(new DeleteRecipeAction(this.recipe));
+            }
+        });
+    }
+
+    shareRecipe() {
+        const dialogRef = this.dialog.open(ShareComponent, {
+            width: '400px',
+        });
+
+        dialogRef.afterClosed().subscribe(userId => {
+            if (userId) {
+                this.store.dispatch(new ShareRecipeAction(this.recipe.id, userId));
             }
         });
     }

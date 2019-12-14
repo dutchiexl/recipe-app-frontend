@@ -57,6 +57,12 @@ export class LoadUnitsAction {
     constructor() { }
 }
 
+export class LoadSharedUsersAction {
+    public static readonly type = '[Recipe] Load users';
+
+    constructor() { }
+}
+
 export class LoadIngredientsAction {
     public static readonly type = '[Recipe] Load ingredients';
 
@@ -79,6 +85,12 @@ export class DeleteRecipeAction {
     public static readonly type = '[Recipe] Delete a recipe';
 
     constructor(public recipe: Recipe) { }
+}
+
+export class ShareRecipeAction {
+    public static readonly type = '[Recipe] share a recipe';
+
+    constructor(public recipeId: string, public userId: string) { }
 }
 
 export class SetMealplanAction {

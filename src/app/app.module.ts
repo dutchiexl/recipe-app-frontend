@@ -15,11 +15,15 @@ import { AuthenticationModule } from './core/authentication/authentication.modul
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { LoadApplicationAction } from './modules/recipe/store/app.actions';
+import { ShareComponent } from './modules/recipe/components/shared/share/share.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
-        FormGroupDirective
+        FormGroupDirective,
+        ShareComponent
     ],
     imports: [
         BrowserModule,
@@ -34,7 +38,9 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
             ],
             {developmentMode: !environment.production}),
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
-        NgxsRouterPluginModule.forRoot()
+        NgxsRouterPluginModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule
     ],
     bootstrap: [AppComponent]
 })

@@ -11,5 +11,6 @@ export interface RawRecipe {
     steps: RawStep[],
     items: RawItem[],
     nutrients: [],
-    equipment: []
+    equipment: [],
+    user: string
 }

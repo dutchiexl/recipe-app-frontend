@@ -12,4 +12,5 @@ export interface Recipe {
     items: Item[];
     equipment: [];
     creationDate: Date;
+    userId: string;
 }

@@ -10,9 +10,10 @@ import {
     LoadMealPlansAction,
     LoadRecipesAction,
     LoadUnitsAction,
+    LoadSharedUsersAction,
     NavigateAction,
     SetMealplanAction,
-    SetModeAction,
+    SetModeAction, ShareRecipeAction,
     SetRecipeIngredientFilterValue,
     SetRecipeSearchFilterValue,
     ShowArchivedMealPlansAction,
@@ -36,6 +37,11 @@ import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
 import { MealPlanUtil } from '../utils/mealPlanUtil';
 import { RecipeFilters } from '../interfaces/filters/recipe-filters.interface';
+import {SharedRecipesService} from "../services/shared-recipes.service";
+import {SharedRecipesUtil} from "../utils/shared-recipes.util";
+import {SharedRecipe} from "../interfaces/recipe/shared-recipe.interface";
+import {SharedUserService} from "../services/shared-user.service";
+import {SharedUser} from "../interfaces/user/shared-user.interface";
 
 export interface AppStateModel {
     mode: AppModeEnum;
@@ -48,6 +54,7 @@ export interface AppStateModel {
     units: Unit[];
     ingredients: Ingredient[];
     ingredientCategories: IngredientCategory[];
+    sharedUsers: SharedUser[];
 }
 
 @State<AppStateModel>({
@@ -65,17 +72,20 @@ export interface AppStateModel {
         mealPlans: undefined,
         units: undefined,
         ingredients: undefined,
-        ingredientCategories: undefined
+        ingredientCategories: undefined,
+        sharedUsers: undefined
     }
 })
 export class AppState {
 
     constructor(
         private recipeService: RecipeService,
+        private sharedRecipesService: SharedRecipesService,
         private mealPlanService: MealPlanService,
         private unitService: UnitService,
         private ingredientService: IngredientService,
-        private ingredientCategoryService: IngredientCategoryService
+        private ingredientCategoryService: IngredientCategoryService,
+        private sharedUserService: SharedUserService
     ) {
     }
 
@@ -134,6 +144,11 @@ export class AppState {
         return state.ingredientCategories;
     }
 
+    @Selector()
+    public static getSharedUsers(state: AppStateModel): SharedUser[] {
+        return state.sharedUsers;
+    }
+
     @Action(SetModeAction)
     public setMode(ctx: StateContext<AppStateModel>, action: SetModeAction) {
         ctx.setState(
@@ -161,6 +176,7 @@ export class AppState {
             ctx.dispatch(new LoadRecipesAction());
             ctx.dispatch(new LoadMealPlansAction());
             ctx.dispatch(new LoadUnitsAction());
+            ctx.dispatch(new LoadSharedUsersAction());
             ctx.dispatch(new LoadIngredientCategoriesAction());
             ctx.dispatch(new LoadIngredientsAction());
         } else {
@@ -245,6 +261,19 @@ export class AppState {
         });
     }
 
+    @Action(LoadSharedUsersAction)
+    public loadSharedUsers(ctx: StateContext<AppStateModel>, {}: LoadSharedUsersAction) {
+        this.setLoadedState(ctx, false);
+        this.sharedUserService.getAll().subscribe((sharedUsers) => {
+            ctx.setState(
+                produce(ctx.getState(), (draft) => {
+                    draft.sharedUsers = sharedUsers;
+                }),
+            );
+            this.checkLoadedState(ctx);
+        });
+    }
+
     @Action(LoadIngredientsAction)
     public loadIngredients(ctx: StateContext<AppStateModel>, {}: LoadIngredientsAction) {
         this.setLoadedState(ctx, false);
@@ -286,6 +315,12 @@ export class AppState {
                 ctx.dispatch(new NavigateAction(['recipe', recipe._id]));
             });
         }
+    }
+
+    @Action(ShareRecipeAction)
+    public shareRecipeAction(ctx: StateContext<AppStateModel>, action: ShareRecipeAction) {
+        let sharedRecipe: SharedRecipe = SharedRecipesUtil.createShareObject(action.recipeId, action.userId);
+        this.sharedRecipesService.shareRecipe(sharedRecipe).subscribe();
     }
 
     @Action(DeleteRecipeAction)
