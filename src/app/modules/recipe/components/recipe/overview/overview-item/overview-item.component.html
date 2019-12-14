@@ -1,7 +1,7 @@
 <mat-card class="grid-item">
     <mat-card-header>
         <mat-card-title>{{ recipe.name }}</mat-card-title>
-        <mat-card-subtitle>{{recipe.nameAddition }}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="recipe.nameAddition">{{ recipe.nameAddition }}</mat-card-subtitle>
     </mat-card-header>
     <img *ngIf="recipe.imagePath" alt="{{ recipe.name }}" mat-card-image src="{{ recipe.imagePath | asset}}">
     <img *ngIf="!recipe.imagePath" alt="{{ recipe.name }}" mat-card-image

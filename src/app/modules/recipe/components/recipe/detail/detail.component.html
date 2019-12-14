@@ -8,7 +8,7 @@
                 <h1>
                     {{ recipe.name }}
                 </h1>
-                <h2>
+                <h2 *ngIf="recipe.nameAddition">
                     {{ recipe.nameAddition }}
                 </h2>
             </div>
