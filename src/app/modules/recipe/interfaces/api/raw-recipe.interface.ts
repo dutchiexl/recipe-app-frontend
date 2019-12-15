@@ -11,7 +11,7 @@ export interface RawRecipe {
     createdAt?: Date;
     steps: RawStep[];
     items: RawItem[];
-    categories: RawRecipeCategory[];
+    categories?: RawRecipeCategory[];
     nutrients: [];
     equipment: [];
 }

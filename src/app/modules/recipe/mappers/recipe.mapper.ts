@@ -21,12 +21,12 @@ export class RecipeMapper {
                     ingredient: ingredients.find((ingredient) => ingredient.id === rawItem.ingredient)
                 };
             }),
-            categories: rawData.categories.map((rawItem) => {
+            categories: rawData.categories ? rawData.categories.map((rawItem) => {
                 return {
                     id: rawItem._id,
                     name: rawItem.name,
                 };
-            }),
+            }) : [],
             steps: rawData.steps.map((rawStep) => StepMapper.toModel(rawStep)),
             equipment: [],
             source: ''
