@@ -18,6 +18,8 @@
                 <mat-form-field>
                     <textarea formControlName="description" matInput placeholder="Description"></textarea>
                 </mat-form-field>
+                <app-recipe-category-picker [currentCategories]="recipe.categories"
+                                            (selectionChanges)="setCategories($event)"></app-recipe-category-picker>
             </div>
         </div>
         <mat-divider></mat-divider>
