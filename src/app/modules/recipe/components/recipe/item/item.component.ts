@@ -9,7 +9,7 @@ import { ShoppinglistItem } from '../../../interfaces/shoppinglist/shoppinglist-
 export class ItemComponent implements OnInit {
     @Input() item: ShoppinglistItem;
 
-    constructor() { }
+    constructor() {}
 
     ngOnInit() {
     }

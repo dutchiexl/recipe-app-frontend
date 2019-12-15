@@ -19,7 +19,6 @@ export class AuthService {
     login(username: string, password: string): Observable<AuthResponse> {
         return this.http.post(this.callbackUrl, {username: username, password: password}).pipe(
             map((authResponse: AuthResponse) => {
-                console.log(authResponse);
                 return authResponse;
             })
         );

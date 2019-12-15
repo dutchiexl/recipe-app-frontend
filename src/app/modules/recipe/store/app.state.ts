@@ -7,7 +7,8 @@ import {
     LoadApplicationAction,
     LoadIngredientCategoriesAction,
     LoadIngredientsAction,
-    LoadMealPlansAction, LoadRecipeCategoriesAction,
+    LoadMealPlansAction,
+    LoadRecipeCategoriesAction,
     LoadRecipesAction,
     LoadUnitsAction,
     NavigateAction,
@@ -358,7 +359,6 @@ export class AppState {
 
     @Action(CreateIngredientAction)
     public createIngredient(ctx: StateContext<AppStateModel>, action: CreateIngredientAction) {
-        console.log(action.ingredient);
         return this.ingredientService.create(action.ingredient).subscribe((ingredient) => {
             ctx.setState(
                 produce(ctx.getState(), (draft) => {

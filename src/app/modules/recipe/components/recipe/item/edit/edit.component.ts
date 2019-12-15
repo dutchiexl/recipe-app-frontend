@@ -4,14 +4,14 @@ import { Store } from '@ngxs/store';
 import { Unit } from '../../../../interfaces/unit/unit';
 import { AppState } from '../../../../store/app.state';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { ItemUtil } from '../../../../utils/item.util';
 import { Item } from '../../../../interfaces/recipe/item.interface';
 import { Ingredient } from '../../../../interfaces/recipe/ingredient.interface';
-import { IngredientUtil } from '../../../../utils/ingredient.util';
 import { MatDialog } from '@angular/material';
 import { CreateIngredientComponent } from '../../ingredient/create/create.component';
 import { RecipeValidator } from '../../../../validators/recipe.validator';
+import { IngredientUtil } from '../../../../utils/ingredient.util';
 
 @Component({
     selector: 'app-edit-item',
@@ -36,6 +36,7 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
     @Output() addItem = new EventEmitter();
     itemForm: FormGroup;
     enteredValue: string;
+    showAddButton = false;
 
     units: Unit[];
     ingredients: Ingredient[];
@@ -75,6 +76,13 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
 
         this.filteredIngredients = this.itemForm.get('ingredient').valueChanges.pipe(
             startWith(''),
+            tap(value => {
+                if (typeof value === 'string' && value && value !== '') {
+                    this.showAddButton = !this.ingredients.some((ingredient) => ingredient.name === value);
+                } else {
+                    this.showAddButton = false;
+                }
+            }),
             map(value => this._filterIngredients(value))
         );
     }
@@ -132,12 +140,8 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
     }
 
     updateIngredient(ingredient: Ingredient) {
-        if (!ingredient.id) {
-            this.openCreateDialog(ingredient);
-        } else {
-            this.itemForm.get('ingredient').setValue(ingredient);
-            this.updateItem(null);
-        }
+        this.itemForm.get('ingredient').setValue(ingredient);
+        this.updateItem(null);
     }
 
     updateItem($event: Event) {
@@ -159,27 +163,22 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
         if (typeof value === 'string') {
             const filterValue = value.toLowerCase();
 
-            let ingredients = this.ingredients.filter(option => option.name.toLowerCase().includes(filterValue));
-            if (ingredients.length < 1) {
-                const newIngredient = IngredientUtil.createEmpty();
-                this.enteredValue = value;
-                newIngredient.name = `Add '${value}'?`;
-                ingredients = [newIngredient];
-            }
-            return ingredients;
+            this.enteredValue = value;
+            return this.ingredients.filter(option => option.name.toLowerCase().includes(filterValue));
         }
     }
 
-    private openCreateDialog(ingredient: Ingredient) {
-        ingredient.name = this.enteredValue;
+    private openCreateDialog(value: string) {
+        const newIngredient = IngredientUtil.createEmpty();
+        newIngredient.name = value;
         const dialogRef = this.dialog.open(CreateIngredientComponent, {
             width: '400px',
-            data: ingredient
+            data: newIngredient
         });
 
-        dialogRef.afterClosed().subscribe(newIngredient => {
-            if (newIngredient) {
-                this.itemForm.get('ingredient').setValue(newIngredient);
+        dialogRef.afterClosed().subscribe(ingredient => {
+            if (ingredient) {
+                this.itemForm.get('ingredient').setValue(ingredient);
                 this.updateItem(null);
             }
         });

@@ -17,7 +17,12 @@
         <input [matAutocomplete]="ingredientsAutoComplete" formControlName="ingredient" matInput placeholder="Naam"
                type="text">
         <mat-autocomplete #ingredientsAutoComplete="matAutocomplete" [displayWith]="displayIngredient()">
-            <mat-option (onSelectionChange)="updateIngredient(ingredient)" *ngFor="let ingredient of filteredIngredients | async"
+            <mat-option (click)="openCreateDialog( enteredValue )" *ngIf="showAddButton">
+                <mat-icon>add</mat-icon>
+                Add <b>{{ enteredValue }}</b> ?
+            </mat-option>
+            <mat-option (onSelectionChange)="updateIngredient(ingredient)"
+                        *ngFor="let ingredient of filteredIngredients | async"
                         [value]="ingredient">
                 {{ingredient.name}}
             </mat-option>

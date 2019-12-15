@@ -29,7 +29,6 @@ export class DetailComponent implements OnInit {
                 this.recipes = recipes;
                 const recipeId = params.get('recipeId');
                 this.recipe = RecipeListUtil.findRecipeById(this.recipes, recipeId);
-                console.log(this.recipe);
             });
         });
     }

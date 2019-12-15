@@ -24,6 +24,7 @@ export class UnitUtil {
             const amount = item.amount * item.unit.parentRatio;
             convertedItem.unit = parentUnit;
             convertedItem.amount = amount;
+            convertedItem.ingredient = item.ingredient;
             return convertedItem;
         }
         return item;

@@ -52,6 +52,7 @@ mat-toolbar {
 .flex-row {
   display: flex;
   flex: 0 0 100%;
+  flex-wrap: wrap;
 
   .columns-2 {
     flex: 0 0 calc(20% - 20px);
