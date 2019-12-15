@@ -104,7 +104,7 @@ export class EditComponent implements OnInit {
     private createForm() {
         this.form = this.formBuilder.group({
             name: [this.recipe.name, Validators.required],
-            nameAddition: [this.recipe.nameAddition, Validators.required],
+            nameAddition: [this.recipe.nameAddition],
             description: [this.recipe.description, Validators.required],
             imagePath: [this.recipe.imagePath, Validators.required],
             items: this.itemFormGroup,

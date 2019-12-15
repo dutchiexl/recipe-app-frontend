@@ -3,9 +3,9 @@ import { Item } from './item.interface';
 import { RecipeCategory } from './recipe-category';
 
 export interface Recipe {
-    id?: string,
-    name: string
-    nameAddition: string;
+    id?: string;
+    name: string;
+    nameAddition?: string;
     description: string;
     imagePath?: string;
     source?: string;
