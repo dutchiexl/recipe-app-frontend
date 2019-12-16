@@ -28,6 +28,7 @@ export class EditComponent implements OnInit {
     stepFormGroup: FormArray = new FormArray([]);
     preview = AssetUtil.getPlaceholder();
     selectedCategories: RecipeCategory[];
+    serveOptions = [1, 2, 3, 4, 5, 6];
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(
@@ -62,6 +63,7 @@ export class EditComponent implements OnInit {
             recipeToSubmit.name = this.form.get('name').value;
             recipeToSubmit.nameAddition = this.form.get('nameAddition').value;
             recipeToSubmit.description = this.form.get('description').value;
+            recipeToSubmit.serves = this.form.get('serves').value;
             recipeToSubmit.items = this.cleanItems(this.form.get('items').value);
             recipeToSubmit.steps = this.cleanSteps(this.form.get('steps').value);
             recipeToSubmit.imagePath = this.form.get('imagePath').value;
@@ -108,6 +110,7 @@ export class EditComponent implements OnInit {
             nameAddition: [this.recipe.nameAddition],
             description: [this.recipe.description, Validators.required],
             imagePath: [this.recipe.imagePath, Validators.required],
+            serves: [this.recipe.serves, Validators.required],
             items: this.itemFormGroup,
             steps: this.stepFormGroup,
             categories: [this.recipe.categories],
