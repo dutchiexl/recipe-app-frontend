@@ -320,7 +320,7 @@ export class AppState {
                 return recipe.id === action.recipe.id;
             });
         }).forEach((plan) => {
-            let recipes = plan.recipes.filter((recipe) => {
+            const recipes = plan.recipes.filter((recipe) => {
                 return recipe.id !== action.recipe.id;
             });
             this.mealPlanService.updateRecipes(plan, recipes).subscribe();

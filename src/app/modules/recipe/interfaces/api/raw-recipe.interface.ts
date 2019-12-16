@@ -7,6 +7,7 @@ export interface RawRecipe {
     name: string;
     nameAddition: string;
     description: string;
+    serves: number;
     imagePath?: string;
     serves?: number;
     createdAt?: Date;
