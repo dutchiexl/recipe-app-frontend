@@ -151,6 +151,22 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
         this.onChange(this.formItem);
     }
 
+    openCreateDialog(value: string) {
+        const newIngredient = IngredientUtil.createEmpty();
+        newIngredient.name = value;
+        const dialogRef = this.dialog.open(CreateIngredientComponent, {
+            width: '400px',
+            data: newIngredient
+        });
+
+        dialogRef.afterClosed().subscribe(ingredient => {
+            if (ingredient) {
+                this.itemForm.get('ingredient').setValue(ingredient);
+                this.updateItem(null);
+            }
+        });
+    }
+
     private _filterUnits(value: string): Unit[] {
         if (typeof value === 'string') {
             const filterValue = value.toLowerCase();
@@ -166,21 +182,5 @@ export class EditItemComponent implements ControlValueAccessor, OnChanges, OnIni
             this.enteredValue = value;
             return this.ingredients.filter(option => option.name.toLowerCase().includes(filterValue));
         }
-    }
-
-    private openCreateDialog(value: string) {
-        const newIngredient = IngredientUtil.createEmpty();
-        newIngredient.name = value;
-        const dialogRef = this.dialog.open(CreateIngredientComponent, {
-            width: '400px',
-            data: newIngredient
-        });
-
-        dialogRef.afterClosed().subscribe(ingredient => {
-            if (ingredient) {
-                this.itemForm.get('ingredient').setValue(ingredient);
-                this.updateItem(null);
-            }
-        });
     }
 }
