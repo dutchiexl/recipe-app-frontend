@@ -8,6 +8,7 @@ export interface RawRecipe {
     nameAddition: string;
     description: string;
     imagePath?: string;
+    serves?: number;
     createdAt?: Date;
     steps: RawStep[];
     items: RawItem[];

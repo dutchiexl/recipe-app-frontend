@@ -10,6 +10,7 @@ export class RecipeUtil {
             nameAddition: null,
             imagePath: null,
             description: null,
+            serves: null,
             creationDate: null,
             steps: [],
             items: [],
@@ -24,6 +25,7 @@ export class RecipeUtil {
             name: recipe.name,
             nameAddition: recipe.nameAddition,
             description: recipe.description,
+            serves: recipe.serves,
             steps: recipe.steps.map((step) => {
                 const recipeStep = {
                     name: step.name,
