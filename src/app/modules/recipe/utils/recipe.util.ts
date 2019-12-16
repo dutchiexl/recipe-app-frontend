@@ -12,7 +12,6 @@ export class RecipeUtil {
             description: null,
             serves: null,
             creationDate: null,
-            serves: null,
             steps: [],
             items: [],
             equipment: [],

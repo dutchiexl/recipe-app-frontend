@@ -9,7 +9,6 @@ export interface RawRecipe {
     description: string;
     serves: number;
     imagePath?: string;
-    serves?: number;
     createdAt?: Date;
     steps: RawStep[];
     items: RawItem[];
