@@ -1,0 +1,250 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary-color: #fff;
+$secondary-color: #edf2f7;
+$tertiary-color: #fafafa;
+$orange-light: #FFB92B;
+
+@mixin for-large-screens {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-medium-screens {
+  @media (min-width: 667px) {
+    @content;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto';
+  background-color: $tertiary-color;
+}
+
+mat-toolbar {
+  &.primary {
+    background-color: $primary-color;
+    color: black;
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+  }
+}
+
+.mat-card-header-text {
+  margin: 0;
+
+  .mat-card-title {
+    font-size: 1.3rem;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-row {
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+
+  .columns-2 {
+    flex: 0 0 calc(20% - 20px);
+  }
+
+  .columns-3 {
+    flex: 0 0 calc(100% / 3 - 20px);
+  }
+
+  .columns-6 {
+    flex: 0 0 calc(50% - 20px);
+  }
+
+  .columns-9 {
+    flex: 0 0 calc(100% / 3 * 2 - 20px);
+  }
+
+  .columns-10 {
+    flex: 0 0 calc(80% - 20px);
+  }
+}
+
+.list-overview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+  width: 100%;
+
+  .list-item {
+    flex: 1 0 calc(100%);
+    max-width: calc(100%);
+    margin: 0 10px;
+
+    @include for-medium-screens {
+      flex: 1 0 calc(100% / 2 - 20px);
+      max-width: calc(100% / 2 - 20px);
+    }
+
+    @include for-large-screens {
+      flex: 1 0 calc(25% - 20px);
+      max-width: calc(25% - 20px)
+    }
+
+    .mat-card-header-text {
+      margin: 0;
+    }
+
+    mat-card {
+      height: 90%;
+    }
+
+    mat-card-content {
+      line-height: 1.5rem;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+  }
+
+  &.columns-3 {
+    flex: 1 0 calc((100% / 3 - 20px) * 2);
+    max-width: calc((100% / 3 - 20px) * 2);
+
+    .list-item {
+      flex: 1 0 calc(100% / 3 - 20px);
+      max-width: calc(100% / 3 - 20px);
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+eco-fab-speed-dial {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.grid {
+  display: flex;
+
+  .one-third {
+    flex: 1 0 calc(100% / 3 - 20px);
+    display: flex;
+  }
+
+  .two-third {
+    flex: 1 0 calc(200% / 3 - 20px);
+    display: flex;
+  }
+
+  .one-fourth {
+    flex: 1 0 calc(100% / 4 - 20px);
+    display: flex;
+  }
+
+  .two-fourth {
+    flex: 1 0 calc(100% / 2 - 20px);
+    display: flex;
+  }
+
+  .three {
+    flex: 1 0 calc(100% * 3 / 4 - 20px);
+    display: flex;
+  }
+}
+
+.top-spacing {
+  margin-top: 50px;
+}
+
+.header-image {
+  text-align: center;
+
+  img {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+}
+
+.head {
+  margin: 40px 0 40px 0;
+
+  h1 {
+    margin: 0;
+  }
+
+  h2 {
+    font-weight: normal;
+  }
+}
+
+mat-list {
+  &.flex {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0;
+
+    .mat-list-item {
+      display: flex;
+      height: auto;
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+
+      .mat-card-header-text {
+        font-size: 0.7rem;
+        margin: 0;
+      }
+
+      .list-item {
+        padding-bottom: 0;
+      }
+
+      img {
+        height: 50px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.mat-sidenav-container {
+  min-height: 100vh;
+
+  mat-sidenav {
+    width: 350px;
+    padding: 70px 30px 30px;
+    border: none;
+  }
+}
+
+eco-fab-speed-dial {
+  z-index: 100;
+}
+
+.full-width {
+  width: 100%;
+}

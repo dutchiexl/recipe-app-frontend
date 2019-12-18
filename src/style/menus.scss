@@ -1,0 +1,70 @@
+@import "palette";
+
+.mat-toolbar.main-navigation {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  padding: 0;
+  height: 90px;
+  color: $color-grey;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
+
+  button {
+    color: inherit;
+  }
+
+  .menu-item {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .main {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    flex: 1 0 0;
+    justify-content: center;
+
+    .logo {
+      width: 40px;
+      position: absolute;
+      left: calc(50% - 20px);
+    }
+  }
+
+  .right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .push {
+    margin-left: auto;
+  }
+
+  .search {
+    margin-right: 40px;
+
+    .mat-form-field-wrapper {
+      padding: 0 25px;
+    }
+
+    .mat-form-field-outline {
+      .mat-form-field-outline-start {
+          border-radius: 40px 0 0 40px;
+      }
+
+      .mat-form-field-outline-end {
+        border-radius: 0 40px 40px 0;
+      }
+    }
+  }
+
+  .sidebar-toggle {
+    padding: 0 30px;
+    border-right: 2px solid $color-accent-grey;
+  }
+}
+
