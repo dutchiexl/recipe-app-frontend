@@ -10,8 +10,12 @@ import { ShoppinglistComponent } from './modules/recipe/components/shoppinglist/
 import { UnitsComponent } from './modules/recipe/components/settings/units/units.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './shared/login/components/login/login.component';
+import { RecipeOverviewComponent } from './modules/themeing/components/recipe-overview/recipe-overview.component';
 
 const routes: Routes = [
+    {
+        path: 'themeing/overview', component: RecipeOverviewComponent
+    },
     {
         path: '', component: OverviewComponent, canActivate: [AuthGuard]
     },

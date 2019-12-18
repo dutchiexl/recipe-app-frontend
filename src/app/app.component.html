@@ -1,19 +1,19 @@
-<mat-toolbar class="primary">
-    <button (click)="goToOverview()" mat-button>Overview</button>
-    <span class="spacer"></span>
-    <button (click)="goToShoppingList()" *ngIf="selectedMealPlan" mat-button>Boodschappenlijstje</button>
-    <button [matMenuTriggerFor]="menu" mat-button *isAuthorized>{{ mode }}</button>
-    <mat-menu #menu="matMenu" b>
-        <button (click)="setMode(stateEnum.RECIPES)" mat-menu-item>Recepten</button>
-        <button (click)="setMode(stateEnum.MEALPLANS)" mat-menu-item>Planner</button>
-    </mat-menu>
-    <button [matMenuTriggerFor]="optionsMenu" aria-label="" mat-icon-button *isAuthorized>
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #optionsMenu="matMenu">
-        <button (click)="logout()" mat-menu-item>
-            <span>Logout</span>
-        </button>
-    </mat-menu>
-</mat-toolbar>
-<router-outlet *ngIf="isLoaded"></router-outlet>
+<!--<mat-toolbar class="primary">-->
+<!--    <button (click)="goToOverview()" mat-button>Overview</button>-->
+<!--    <span class="spacer"></span>-->
+<!--    <button (click)="goToShoppingList()" *ngIf="selectedMealPlan" mat-button>Boodschappenlijstje</button>-->
+<!--    <button [matMenuTriggerFor]="menu" mat-button *isAuthorized>{{ mode }}</button>-->
+<!--    <mat-menu #menu="matMenu" b>-->
+<!--        <button (click)="setMode(stateEnum.RECIPES)" mat-menu-item>Recepten</button>-->
+<!--        <button (click)="setMode(stateEnum.MEALPLANS)" mat-menu-item>Planner</button>-->
+<!--    </mat-menu>-->
+<!--    <button [matMenuTriggerFor]="optionsMenu" aria-label="" mat-icon-button *isAuthorized>-->
+<!--        <mat-icon>more_vert</mat-icon>-->
+<!--    </button>-->
+<!--    <mat-menu #optionsMenu="matMenu">-->
+<!--        <button (click)="logout()" mat-menu-item>-->
+<!--            <span>Logout</span>-->
+<!--        </button>-->
+<!--    </mat-menu>-->
+<!--</mat-toolbar>-->
+<router-outlet></router-outlet>

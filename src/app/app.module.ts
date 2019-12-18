@@ -15,6 +15,7 @@ import { AuthenticationModule } from './core/authentication/authentication.modul
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { LoadApplicationAction } from './modules/recipe/store/app.actions';
+import { ThemeingModule } from './modules/themeing/themeing.module';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
         RecipeModule,
         AuthenticationModule,
         SharedModule,
+        ThemeingModule,
         NgxsModule.forRoot([
                 AppState,
                 AuthState
