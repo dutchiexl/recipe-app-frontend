@@ -11,10 +11,18 @@ import { UnitsComponent } from './modules/recipe/components/settings/units/units
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './shared/login/components/login/login.component';
 import { RecipeOverviewComponent } from './modules/themeing/components/recipe-overview/recipe-overview.component';
+import { RecipeItemComponent } from './modules/themeing/components/recipe-item/recipe-item.component';
+import { RecipeItemNoDescriptionComponent } from './modules/themeing/components/recipe-item-no-description/recipe-item-no-description.component';
 
 const routes: Routes = [
     {
         path: 'themeing/overview', component: RecipeOverviewComponent
+    },
+    {
+        path: 'themeing/item', component: RecipeItemComponent
+    },
+    {
+        path: 'themeing/item-no-description', component: RecipeItemNoDescriptionComponent
     },
     {
         path: '', component: OverviewComponent, canActivate: [AuthGuard]

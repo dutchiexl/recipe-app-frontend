@@ -1,9 +1,85 @@
-// Import library functions for theme creation.
-@import '~@angular/material/theming';
+@import "grid";
 
-// Define a mixin that accepts a theme and outputs the theme-specific styles.
-@mixin recipe-theme($theme) {
-  // Extract the palettes you need from the theme definition.
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
+.container {
+  .container__header {
+    overflow: hidden;
+    display: flex;
+    height: 435px;
+
+    .header__content {
+      @extend .container__col-sm-12;
+    }
+  }
+
+  .header--with-description {
+    overflow: hidden;
+    display: flex;
+    height: 420px;
+
+    .header__image {
+      @extend .container__col-sm-12;
+      @extend .container__col-md-6;
+      @extend .container__col-lg-6;
+
+      img {
+        height: 420px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .header__content {
+      @extend .container__col-sm-12;
+      @extend .container__col-md-6;
+      @extend .container__col-lg-6;
+    }
+  }
+}
+
+.recipe-detail {
+  margin-top: 50px;
+
+  &__ingredient-list {
+    display: flex;
+    @extend .container__col-sm-12;
+    @extend .container__col-md-6;
+    @extend .container__col-lg-3;
+  }
+
+  .step-list {
+    display: flex;
+    @extend .container__col-sm-12;
+    @extend .container__col-md-6;
+    @extend .container__col-lg-9;
+  }
+}
+
+.step-list {
+  flex-wrap: wrap;
+
+  &__item {
+    @extend .container__row;
+    @extend .rounded-border;
+    margin-bottom: $grid__gutter * 2px;
+    flex: 0 0 100%;
+    min-height: 200px;
+    overflow: hidden;
+
+    &__image-wrapper {
+      @extend .container__col-sm-12;
+      @extend .container__col-md-4;
+      background-size: cover;
+    }
+
+    &__content {
+      @extend .container__col-sm-12;
+      @extend .container__col-md-8;
+      background-color: white;
+
+
+      &__wrapper {
+        padding: $grid__gutter * 2.5px;
+      }
+    }
+  }
 }

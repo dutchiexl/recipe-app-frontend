@@ -72,6 +72,10 @@ $map-grid-props: (
     margin-top: $grid__gutter * 8px;
   }
 
+  &--top-spacing-small {
+    margin-top: $grid__gutter * 2px;
+  }
+
   &__row {
     display: flex;
     flex-wrap: wrap;
