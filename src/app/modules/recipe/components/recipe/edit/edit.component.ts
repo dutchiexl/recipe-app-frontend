@@ -14,6 +14,7 @@ import { Item } from '../../../interfaces/recipe/item.interface';
 import { ItemUtil } from '../../../utils/item.util';
 import { UpdateOrCreateRecipeAction } from '../../../store/app.actions';
 import { AssetUtil } from '../../../utils/asset.util';
+import { RecipeCategory } from '../../../interfaces/recipe/recipe-category';
 
 @Component({
     selector: 'app-edit',
@@ -26,6 +27,8 @@ export class EditComponent implements OnInit {
     itemFormGroup: FormArray = new FormArray([]);
     stepFormGroup: FormArray = new FormArray([]);
     preview = AssetUtil.getPlaceholder();
+    selectedCategories: RecipeCategory[];
+    serveOptions = [1, 2, 3, 4, 5, 6];
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(
@@ -39,6 +42,7 @@ export class EditComponent implements OnInit {
         const recipeIdParameter = this.route.snapshot.paramMap.get('recipeId');
         if (recipeIdParameter) {
             this.recipe = RecipeListUtil.findRecipeById(this.store.selectSnapshot(AppState.getRecipes), recipeIdParameter);
+            this.selectedCategories = this.recipe.categories;
 
             if (this.recipe) {
                 if (this.recipe.imagePath) {
@@ -59,9 +63,11 @@ export class EditComponent implements OnInit {
             recipeToSubmit.name = this.form.get('name').value;
             recipeToSubmit.nameAddition = this.form.get('nameAddition').value;
             recipeToSubmit.description = this.form.get('description').value;
+            recipeToSubmit.serves = this.form.get('serves').value;
             recipeToSubmit.items = this.cleanItems(this.form.get('items').value);
             recipeToSubmit.steps = this.cleanSteps(this.form.get('steps').value);
             recipeToSubmit.imagePath = this.form.get('imagePath').value;
+            recipeToSubmit.categories = this.selectedCategories;
 
             if (this.recipe.id) {
                 recipeToSubmit.id = this.recipe.id;
@@ -101,11 +107,13 @@ export class EditComponent implements OnInit {
     private createForm() {
         this.form = this.formBuilder.group({
             name: [this.recipe.name, Validators.required],
-            nameAddition: [this.recipe.nameAddition, Validators.required],
+            nameAddition: [this.recipe.nameAddition],
             description: [this.recipe.description, Validators.required],
             imagePath: [this.recipe.imagePath, Validators.required],
+            serves: [this.recipe.serves, Validators.required],
             items: this.itemFormGroup,
-            steps: this.stepFormGroup
+            steps: this.stepFormGroup,
+            categories: [this.recipe.categories],
         });
     }
 
@@ -131,5 +139,9 @@ export class EditComponent implements OnInit {
         return steps.filter((step) => {
             return !!step.text && !!step.name;
         });
+    }
+
+    setCategories(categories: RecipeCategory[]) {
+        this.selectedCategories = categories;
     }
 }

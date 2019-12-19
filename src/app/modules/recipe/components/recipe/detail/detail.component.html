@@ -8,17 +8,24 @@
                 <h1>
                     {{ recipe.name }}
                 </h1>
-                <h2>
+                <h2 *ngIf="recipe.nameAddition">
                     {{ recipe.nameAddition }}
                 </h2>
             </div>
             <div class="description columns-6">
                 {{recipe.description }}
+                <div class="categories">
+                    <span class="label">Categories:</span>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let category of recipe.categories">{{ category.name }}</mat-chip>
+                    </mat-chip-list>
+                </div>
             </div>
         </div>
         <div class="details flex-row">
             <div class="info columns-2">
                 <div class="ingredients">
+                    <div>Serves: {{ recipe.serves }}</div>
                     <h3>
                         Ingredienten
                     </h3>

@@ -75,6 +75,12 @@ export class LoadIngredientCategoriesAction {
     constructor() { }
 }
 
+export class LoadRecipeCategoriesAction {
+    public static readonly type = '[Recipe] Load recipe categories';
+
+    constructor() { }
+}
+
 export class UpdateOrCreateRecipeAction {
     public static readonly type = '[Recipe] Update or create a recipe';
 

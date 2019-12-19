@@ -12,6 +12,7 @@ export class RecipeMapper {
             name: rawData.name,
             nameAddition: rawData.nameAddition,
             description: rawData.description,
+            serves: rawData.serves,
             imagePath: rawData.imagePath,
             creationDate: new Date(rawData.createdAt),
             items: rawData.items.map((rawItem) => {
@@ -21,6 +22,12 @@ export class RecipeMapper {
                     ingredient: ingredients.find((ingredient) => ingredient.id === rawItem.ingredient)
                 };
             }),
+            categories: rawData.categories ? rawData.categories.map((rawItem) => {
+                return {
+                    id: rawItem._id,
+                    name: rawItem.name,
+                };
+            }) : [],
             steps: rawData.steps.map((rawStep) => StepMapper.toModel(rawStep)),
             equipment: [],
             source: '',

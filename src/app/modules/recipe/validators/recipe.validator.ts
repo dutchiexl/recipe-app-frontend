@@ -21,10 +21,7 @@ export class RecipeValidator {
     static isIngredient(ingredients: Ingredient[]): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
             if (control.value && control.value.id) {
-                const selectedUnit = ingredients.find((ingredient) => ingredient.id === control.value.id);
-                if (selectedUnit) {
-                    return null;
-                }
+                return null;
             }
             return {
                 invalid: true

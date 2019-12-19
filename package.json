@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "start": "node server.js",
     "frontend": "ng serve --proxy-config proxy.conf.json",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod --optimization=false"
   },
   "private": true,
   "dependencies": {
@@ -56,5 +56,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "engines": {
+    "node": "^13.3",
+    "npm": "^6.5"
   }
 }

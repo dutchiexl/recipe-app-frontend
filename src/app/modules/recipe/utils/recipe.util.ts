@@ -1,6 +1,7 @@
 import { Recipe } from '../interfaces/recipe/recipe.interface';
 import { RawRecipe } from '../interfaces/api/raw-recipe.interface';
 import { RawItem } from '../interfaces/api/raw-item.interface';
+import { RawRecipeCategory } from '../interfaces/api/raw-recipe-category.interface';
 
 export class RecipeUtil {
     public static createEmpty(): Recipe {
@@ -9,12 +10,14 @@ export class RecipeUtil {
             nameAddition: null,
             imagePath: null,
             description: null,
+            serves: null,
             creationDate: null,
             steps: [],
             items: [],
             equipment: [],
             source: null,
-            userId: ''
+            userId: '',
+            categories: [],
         };
     }
 
@@ -23,8 +26,9 @@ export class RecipeUtil {
             name: recipe.name,
             nameAddition: recipe.nameAddition,
             description: recipe.description,
+            serves: recipe.serves,
             steps: recipe.steps.map((step) => {
-                let recipeStep = {
+                const recipeStep = {
                     name: step.name,
                     text: step.text,
                     imagePath: step.imagePath
@@ -37,12 +41,19 @@ export class RecipeUtil {
                 return step;
             }),
             items: recipe.items.map((item) => {
-                let rawItem: RawItem = {
+                const rawItem: RawItem = {
                     amount: item.amount,
                     unit: item.unit.id,
                     ingredient: item.ingredient.id
                 };
                 return rawItem;
+            }),
+            categories: recipe.categories.map((item) => {
+                const rawCategory: RawRecipeCategory = {
+                    _id: item.id,
+                    name: item.name
+                };
+                return rawCategory;
             }),
             imagePath: recipe.imagePath,
             equipment: [],

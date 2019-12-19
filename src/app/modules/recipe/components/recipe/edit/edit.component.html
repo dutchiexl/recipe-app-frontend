@@ -18,27 +18,40 @@
                 <mat-form-field>
                     <textarea formControlName="description" matInput placeholder="Description"></textarea>
                 </mat-form-field>
+                <app-recipe-category-picker [currentCategories]="recipe.categories"
+                                            (selectionChanges)="setCategories($event)"></app-recipe-category-picker>
             </div>
         </div>
         <mat-divider></mat-divider>
         <div class="details container">
             <div class="info">
-                <div class="ingredients">
-                    <h3>
-                        Ingredienten
-                    </h3>
-                    <div [formGroup]="itemFormGroup" formArrayName="items">
-                        <div *ngFor="let item of itemFormGroup.controls; let i = index;">
-                            <app-edit-item
-                                    (addItem)="addItem()"
-                                    [item]="item.value"
-                                    formControlName="{{ i }}">
-                            </app-edit-item>
+                <div class="info-block">
+                    <mat-form-field>
+                        <mat-label>Serves</mat-label>
+                        <mat-select formControlName="serves">
+                            <mat-option *ngFor="let serveOption of serveOptions" [value]="serveOption">{{ serveOption }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="info-block">
+                    <div>
+                        <h3>
+                            Ingredienten
+                        </h3>
+                        <div [formGroup]="itemFormGroup" formArrayName="items">
+                            <div *ngFor="let item of itemFormGroup.controls; let i = index;">
+                                <app-edit-item
+                                        (addItem)="addItem()"
+                                        [item]="item.value"
+                                        formControlName="{{ i }}">
+                                </app-edit-item>
+                            </div>
                         </div>
+                        <a (click)="addItem()" color="primary" mat-raised-button>Voeg ingredient toe</a>
                     </div>
-                    <a (click)="addItem()" color="primary" mat-raised-button>Voeg ingredient toe</a>
                 </div>
             </div>
+
             <div class="steps list-overview columns-3" formArrayName="steps">
                 <div *ngFor="let step of stepFormGroup.controls; let i = index;" class="list-item">
                     <app-edit-step
