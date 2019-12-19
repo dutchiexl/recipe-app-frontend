@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Share with another</h1>
+<div mat-dialog-content>
+    <p>Find a user by username</p>
+    <mat-form-field class="example-full-width">
+        <input type="text" placeholder="username" aria-label="Number" matInput [matAutocomplete]="auto" [formControl]="searchSharedUserControl">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySharedUser" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let sharedUser of filteredSharedUsers" [value]="sharedUser">
+                {{sharedUser.username}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>Cancel</button>
+    <button (click)="share()" cdkFocusInitial mat-button>Share</button>
+</div>

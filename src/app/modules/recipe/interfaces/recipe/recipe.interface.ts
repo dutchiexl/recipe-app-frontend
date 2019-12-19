@@ -15,4 +15,5 @@ export interface Recipe {
     categories: RecipeCategory[];
     equipment: [];
     creationDate: Date;
+    userId: string;
 }

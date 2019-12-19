@@ -15,4 +15,5 @@ export interface RawRecipe {
     categories?: RawRecipeCategory[];
     nutrients: [];
     equipment: [];
+    user: string;
 }

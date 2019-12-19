@@ -26,9 +26,12 @@ import { MaterialModule } from '../../core/material/material.module';
 import { RecipeService } from './services/recipe.service';
 import { MealPlanService } from './services/meal-plan.service';
 import { UnitService } from './services/unit.service';
+import { SharedUserService } from './services/shared-user.service';
 import { IngredientService } from './services/ingredient.service';
 import { IngredientCategoryService } from './services/ingredient-category.service';
 import { IngredientsFilterComponent } from './components/recipe/overview/filters/ingredients/ingredients-filter.component';
+import {ShareComponent} from "./components/shared/share/share.component";
+import {SharedRecipesService} from "./services/shared-recipes.service";
 import { RecipeCategoryService } from './services/recipe-category.service';
 import { RecipeCategoryPickerComponent } from './components/recipe/edit/categories/recipe-category-picker.component';
 
@@ -66,14 +69,17 @@ import { RecipeCategoryPickerComponent } from './components/recipe/edit/categori
     ],
     providers: [
         RecipeService,
+        SharedRecipesService,
         MealPlanService,
         UnitService,
+        SharedUserService,
         IngredientService,
         IngredientCategoryService,
         RecipeCategoryService
     ],
     entryComponents: [
         ConfirmationComponent,
+        ShareComponent,
         CreateIngredientComponent
     ]
 })
