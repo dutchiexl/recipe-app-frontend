@@ -15,7 +15,7 @@ import {RecipeValidator} from "../../../validators/recipe.validator";
     styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
-    chosenUserId: string = '';
+    chosenUser: SharedUser = null;
     sharedUsers: SharedUser[] = [];
     filteredSharedUsers: SharedUser[] = [];
     searchSharedUserControl: FormControl;
@@ -63,12 +63,12 @@ export class ShareComponent implements OnInit {
     share() {
         this.searchSharedUserControl.markAsTouched();
         if (this.searchSharedUserControl.valid) {
-            this.dialogRef.close(this.chosenUserId);
+            this.dialogRef.close(this.chosenUser);
         }
     }
 
     selected($event: MatAutocompleteSelectedEvent) {
         const sharedUser: SharedUser = $event.option.value;
-        this.chosenUserId = sharedUser.id;
+        this.chosenUser = sharedUser;
     }
 }

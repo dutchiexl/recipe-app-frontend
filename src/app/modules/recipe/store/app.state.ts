@@ -344,7 +344,7 @@ export class AppState {
 
     @Action(ShareRecipeAction)
     public shareRecipeAction(ctx: StateContext<AppStateModel>, action: ShareRecipeAction) {
-        let sharedRecipe: SharedRecipe = SharedRecipesUtil.createShareObject(action.recipeId, action.userId);
+        let sharedRecipe: SharedRecipe = SharedRecipesUtil.createShareObject(action.recipe, action.user);
         this.sharedRecipesService.shareRecipe(sharedRecipe).subscribe();
     }
 

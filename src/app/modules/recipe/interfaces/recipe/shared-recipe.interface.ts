@@ -1,4 +1,7 @@
+import {Recipe} from "./recipe.interface";
+import {SharedUser} from "../user/shared-user.interface";
+
 export interface SharedRecipe {
-    recipeId: string;
-    userId: string;
+    recipe: Recipe;
+    sharedUser: SharedUser;
 }

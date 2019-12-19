@@ -55,9 +55,9 @@ export class DetailComponent implements OnInit {
             width: '400px',
         });
 
-        dialogRef.afterClosed().subscribe(userId => {
-            if (userId) {
-                this.store.dispatch(new ShareRecipeAction(this.recipe.id, userId));
+        dialogRef.afterClosed().subscribe(sharedUser => {
+            if (sharedUser) {
+                this.store.dispatch(new ShareRecipeAction(this.recipe, sharedUser));
             }
         });
     }

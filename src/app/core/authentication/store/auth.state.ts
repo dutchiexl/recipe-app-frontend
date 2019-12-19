@@ -45,7 +45,7 @@ export class AuthState {
         return this.authService.login(action.username, action.password).pipe(
             catchError((error, caught) => {
                 if (error.status === 401) {
-                    return throwError('UserInterface or password incorrect');
+                    return throwError('User or password incorrect');
                 } else {
                     throw new Error('Login failed');
                 }
