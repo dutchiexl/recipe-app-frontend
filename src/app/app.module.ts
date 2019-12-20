@@ -19,12 +19,14 @@ import { ShareComponent } from './modules/recipe/components/shared/share/share.c
 import {ReactiveFormsModule} from "@angular/forms";
 import { FormsModule } from '@angular/forms';
 import { ThemeingModule } from './modules/themeing/themeing.module';
+import { BackgroundImageDirective } from './modules/recipe/directives/background-image.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         FormGroupDirective,
-        ShareComponent
+        ShareComponent,
+        BackgroundImageDirective
     ],
     imports: [
         BrowserModule,
