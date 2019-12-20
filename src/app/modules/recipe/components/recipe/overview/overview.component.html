@@ -1,41 +1,48 @@
-<mat-sidenav-container fixedInViewport="true">
-    <mat-sidenav #sidenav mode="side" [(opened)]="sidenavOpen">
-        <h3>Filters</h3>
-        <h4>Ingredients</h4>
-        <app-ingredients-filter></app-ingredients-filter>
-    </mat-sidenav>
+<!--<mat-sidenav-container fixedInViewport="true">-->
+<!--    <mat-sidenav #sidenav mode="side" [(opened)]="sidenavOpen">-->
+<!--        <h3>Filters</h3>-->
+<!--        <h4>Ingredients</h4>-->
+<!--        <app-ingredients-filter></app-ingredients-filter>-->
+<!--    </mat-sidenav>-->
 
-    <mat-sidenav-content>
-        <div class="container">
-            <div class="top-spacing wrapper">
-                <button mat-icon-button aria-label="sidebar" class="sidebar-toggle" (click)="toggleSidebar()">
-                    <mat-icon>menu</mat-icon>
-                </button>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Search" [(ngModel)]="searchValue"
-                           (ngModelChange)="updateSearchValue()">
-                </mat-form-field>
-                <div class="list-overview flex-row">
-                    <app-overview-item
-                            (click)="goToRecipe(recipe)"
-                            *ngFor="let recipe of filteredRecipes" [recipe]="recipe"
-                            class="list-item clickable"
-                    ></app-overview-item>
-                </div>
-            </div>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
-<eco-fab-speed-dial>
-    <eco-fab-speed-dial-trigger>
-        <button color="primary" mat-fab>
-            <mat-icon>menu</mat-icon>
-        </button>
-    </eco-fab-speed-dial-trigger>
+<!--    <mat-sidenav-content>-->
+<!--        <div class="container">-->
+<!--            <div class="top-spacing wrapper">-->
+<!--                <button mat-icon-button aria-label="sidebar" class="sidebar-toggle" (click)="toggleSidebar()">-->
+<!--                    <mat-icon>menu</mat-icon>-->
+<!--                </button>-->
+<!--                <mat-form-field class="example-full-width">-->
+<!--                    <input matInput placeholder="Search" [(ngModel)]="searchValue"-->
+<!--                           (ngModelChange)="updateSearchValue()">-->
+<!--                </mat-form-field>-->
+<!--                <div class="list-overview flex-row">-->
+<!--                    <app-overview-item-->
+<!--                            (click)="goToRecipe(recipe)"-->
+<!--                            *ngFor="let recipe of filteredRecipes" [recipe]="recipe"-->
+<!--                            class="list-item clickable"-->
+<!--                    ></app-overview-item>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->
+<!--<eco-fab-speed-dial>-->
+<!--    <eco-fab-speed-dial-trigger>-->
+<!--        <button color="primary" mat-fab>-->
+<!--            <mat-icon>menu</mat-icon>-->
+<!--        </button>-->
+<!--    </eco-fab-speed-dial-trigger>-->
 
-    <eco-fab-speed-dial-actions>
-        <button (click)="createRecipe()" color="primary" mat-mini-fab>
-            <mat-icon>add</mat-icon>
-        </button>
-    </eco-fab-speed-dial-actions>
-</eco-fab-speed-dial>
+<!--    <eco-fab-speed-dial-actions>-->
+<!--        <button (click)="createRecipe()" color="primary" mat-mini-fab>-->
+<!--            <mat-icon>add</mat-icon>-->
+<!--        </button>-->
+<!--    </eco-fab-speed-dial-actions>-->
+<!--</eco-fab-speed-dial>-->
+<div class="grid grid--gutter">
+    <app-overview-item
+            *ngFor="let recipe of filteredRecipes"
+            (click)="goToRecipe(recipe)"
+            [recipe]="recipe">
+    </app-overview-item>
+</div>

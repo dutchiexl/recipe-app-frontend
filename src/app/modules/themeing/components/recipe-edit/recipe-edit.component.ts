@@ -33,6 +33,10 @@ export class RecipeEditComponent implements OnInit {
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     selection = new SelectionModel<PeriodicElement>(true, []);
 
+    ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
+
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
         const numSelected = this.selection.selected.length;

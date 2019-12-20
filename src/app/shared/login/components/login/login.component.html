@@ -1,25 +1,28 @@
-<div class="container">
-    <div class="flex-row centered">
-        <form (ngSubmit)="submitForm()" [formGroup]="loginForm" class="ingredient-form">
-            <mat-card class="login top-spacing columns-3">
-                <mat-card-header>
-                    <mat-card-title>Login</mat-card-title>
-                </mat-card-header>
+<div class="container--fluid container--top-spacing--large">
+    <div class="container__row">
+        <div class="login-block">
+            <mat-card class="form-card">
                 <mat-card-content>
-                    <mat-form-field class="amount">
-                        <mat-label>Username</mat-label>
-                        <input formControlName="username" id="username" matInput placeholder="Username">
-                    </mat-form-field>
-                    <mat-form-field class="password">
-                        <mat-label>Password</mat-label>
-                        <input formControlName="password" id="password" matInput placeholder="Password" type="password">
-                    </mat-form-field>
-                    <mat-error *ngIf="loginForm.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-card-header>
+                        <mat-card-title>Login</mat-card-title>
+                    </mat-card-header>
+                    <form (ngSubmit)="submitForm()" [formGroup]="loginForm" class="ingredient-form">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Username</mat-label>
+                            <mat-icon matPrefix>email</mat-icon>
+                            <input formControlName="username" id="username" matInput placeholder="Username">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Password</mat-label>
+                            <mat-icon matPrefix>lock</mat-icon>
+                            <input formControlName="password" id="password" matInput placeholder="Password"
+                                   type="password">
+                        </mat-form-field>
+                        <mat-error *ngIf="loginForm.invalid">{{getErrorMessage()}}</mat-error>
+                        <button mat-flat-button color="primary">Primary</button>
+                    </form>
                 </mat-card-content>
-                <mat-card-actions>
-                    <button mat-button>Login</button>
-                </mat-card-actions>
             </mat-card>
-        </form>
+        </div>
     </div>
 </div>

@@ -16,4 +16,16 @@
 <!--        </button>-->
 <!--    </mat-menu>-->
 <!--</mat-toolbar>-->
+<mat-toolbar class="main-navigation">
+    <div class="sidebar-toggle border-right menu-item">
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div class="main">
+        <img src="assets/theme/logo.png" class="logo" alt="" (click)="goToOverview()">
+    </div>
+    <div class="right push">
+    </div>
+</mat-toolbar>
 <router-outlet></router-outlet>
