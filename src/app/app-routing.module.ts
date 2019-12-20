@@ -13,6 +13,7 @@ import { LoginComponent } from './shared/login/components/login/login.component'
 import { RecipeOverviewComponent } from './modules/themeing/components/recipe-overview/recipe-overview.component';
 import { RecipeItemComponent } from './modules/themeing/components/recipe-item/recipe-item.component';
 import { RecipeItemNoDescriptionComponent } from './modules/themeing/components/recipe-item-no-description/recipe-item-no-description.component';
+import { RecipeLoginComponent } from './modules/themeing/components/login/login.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,9 @@ const routes: Routes = [
     },
     {
         path: 'themeing/item', component: RecipeItemComponent
+    },
+    {
+        path: 'themeing/login', component: RecipeLoginComponent
     },
     {
         path: 'themeing/item-no-description', component: RecipeItemNoDescriptionComponent

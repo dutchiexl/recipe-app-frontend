@@ -1,33 +1,33 @@
 $recipe-palette: (
-        50: #ffebee,
-        100: #ffcdd2,
-        200: #ef9a9a,
-        300: #e57373,
-        400: #ef5350,
-        500: #f44336,
-        600: #e53935,
-        700: #d32f2f,
-        800: #c62828,
-        900: #b71c1c,
-        A100: #ff8a80,
-        A200: #ff5252,
-        A400: #ff1744,
-        A700: #d50000,
+        50 : #e3eefd,
+        100 : #bad6fb,
+        200 : #8cbaf8,
+        300 : #5d9ef5,
+        400 : #3b8af2,
+        500 : #1875f0,
+        600 : #156dee,
+        700 : #1162ec,
+        800 : #0e58e9,
+        900 : #0845e5,
+        A100 : #ffffff,
+        A200 : #dae3ff,
+        A400 : #a7bbff,
+        A700 : #8ea8ff,
         contrast: (
-                50: $dark-primary-text,
-                100: $dark-primary-text,
-                200: $dark-primary-text,
-                300: $dark-primary-text,
-                400: $dark-primary-text,
-                500: $light-primary-text,
-                600: $light-primary-text,
-                700: $light-primary-text,
-                800: $light-primary-text,
-                900: $light-primary-text,
-                A100: $dark-primary-text,
-                A200: $light-primary-text,
-                A400: $light-primary-text,
-                A700: $light-primary-text,
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #000000,
         )
 );
 
@@ -64,6 +64,7 @@ $recipe-red: (
         )
 );
 
+$color-text: #666;
 $color-light-grey: #FAFAFA;
 $color-accent-grey: #F5F5F5;
 $color-grey: #999;

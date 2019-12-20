@@ -59,6 +59,16 @@ $map-grid-props: (
   }
 }
 
+.has-gutters {
+  margin-left: $grid__gutter *-1px;
+  margin-right: $grid__gutter *-1px;
+}
+
+.with-gutters {
+  margin: 0 $grid__gutter *1px;
+}
+
+
 .container {
   max-width: $grid__bp-lg * 1px;
   margin: 0 auto;
@@ -70,10 +80,14 @@ $map-grid-props: (
 
   &--top-spacing {
     margin-top: $grid__gutter * 8px;
-  }
 
-  &--top-spacing-small {
-    margin-top: $grid__gutter * 2px;
+    &--small {
+      margin-top: $grid__gutter * 2px;
+    }
+
+    &--large {
+      margin-top: $grid__gutter * 10px;
+    }
   }
 
   &__row {
@@ -90,8 +104,7 @@ $map-grid-props: (
   @extend .container__row;
 
   &--gutter {
-    margin-left: $grid__gutter *-1px;
-    margin-right: $grid__gutter *-1px;
+    @extend .has-gutters;
   }
 
   .grid__item {
@@ -100,7 +113,7 @@ $map-grid-props: (
     @extend .container__col-lg-3--gutter;
 
     &--gutter {
-      margin: 0 $grid__gutter *1px;
+      @extend .with-gutters;
     }
   }
 }

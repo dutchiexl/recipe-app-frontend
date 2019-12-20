@@ -1,0 +1,38 @@
+<mat-toolbar class="main-navigation">
+    <div class="sidebar-toggle border-right menu-item">
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div class="main">
+        <img src="assets/theme/logo.png" class="logo" alt="">
+    </div>
+    <div class="right push">
+    </div>
+</mat-toolbar>
+<div class="container--fluid container--top-spacing--large">
+    <div class="container__row">
+        <div class="login-block">
+            <mat-card class="form-card">
+                <mat-card-content>
+                    <mat-card-header>
+                        <mat-card-title>Sign in</mat-card-title>
+                    </mat-card-header>
+                    <form action="">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Username</mat-label>
+                            <mat-icon matPrefix>email</mat-icon>
+                            <input matInput placeholder="Username">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Password</mat-label>
+                            <mat-icon matPrefix>lock</mat-icon>
+                            <input matInput type="password" placeholder="Password">
+                        </mat-form-field>
+                        <button mat-flat-button color="primary">Primary</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

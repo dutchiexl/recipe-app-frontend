@@ -4,10 +4,11 @@ import { RecipeOverviewComponent } from './components/recipe-overview/recipe-ove
 import { MaterialModule } from '../../core/material/material.module';
 import { RecipeItemComponent } from './components/recipe-item/recipe-item.component';
 import { RecipeItemNoDescriptionComponent } from './components/recipe-item-no-description/recipe-item-no-description.component';
+import { RecipeLoginComponent } from './components/login/login.component';
 
 
 @NgModule({
-    declarations: [RecipeOverviewComponent, RecipeItemComponent, RecipeItemNoDescriptionComponent],
+    declarations: [RecipeOverviewComponent, RecipeItemComponent, RecipeItemNoDescriptionComponent, RecipeLoginComponent],
     imports: [
         CommonModule,
         MaterialModule

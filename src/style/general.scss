@@ -1,9 +1,19 @@
 @import "palette";
 
+$border-width: 2px;
+$border-style: solid;
+$border-color: $color-accent-grey;
+
+@mixin border($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+
 body {
   padding: 100px 0 0;
   margin: 0;
   background-color: $color-light-grey;
+  color: $color-text;
+  font-family: 'Roboto';
 }
 
 mat-form-field {
@@ -25,7 +35,20 @@ mat-form-field {
   }
 }
 
-
 .push {
   margin-left: auto;
+}
+
+.border {
+  &-top {
+    @include border('top', $border-width, $border-style, $border-color);
+  }
+
+  &-bottom {
+    @include border('bottom', $border-width, $border-style, $border-color);
+  }
+}
+
+.full-width {
+  width: 100%;
 }

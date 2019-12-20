@@ -1,4 +1,5 @@
 @import "grid";
+@import "general";
 
 .container {
   .container__header {
@@ -8,6 +9,12 @@
 
     .header__content {
       @extend .container__col-sm-12;
+      padding: $grid__gutter *5px;
+
+      h1 {
+        color: white;
+        font-weight: lighter;
+      }
     }
   }
 
@@ -39,18 +46,19 @@
 .recipe-detail {
   margin-top: 50px;
 
-  &__ingredient-list {
-    display: flex;
-    @extend .container__col-sm-12;
-    @extend .container__col-md-6;
-    @extend .container__col-lg-3;
+  .ingredient-list {
+    display: block;
+    height: 100%;
+    @extend .container__col-sm-12--gutter;
+    @extend .container__col-md-6--gutter;
+    @extend .container__col-lg-3--gutter;
   }
 
   .step-list {
     display: flex;
-    @extend .container__col-sm-12;
-    @extend .container__col-md-6;
-    @extend .container__col-lg-9;
+    @extend .container__col-sm-12--gutter;
+    @extend .container__col-md-6--gutter;
+    @extend .container__col-lg-9--gutter;
   }
 }
 
@@ -80,6 +88,55 @@
       &__wrapper {
         padding: $grid__gutter * 2.5px;
       }
+    }
+  }
+}
+
+.ingredient-list {
+  background-color: white;
+  color: $color-grey;
+  flex-wrap: wrap;
+
+  &--rounded-borders {
+    @extend .rounded-border;
+  }
+
+  &__header {
+    height: 60px;
+    display: flex;
+    flex: 1 0 100%;
+    padding: 0 $grid__gutter *2px;
+    @extend .border-bottom;
+
+    .icon-wrapper {
+      font-size: 1.1em;
+
+      .suffix {
+        margin-left: $grid__gutter *1.5px;
+      }
+    }
+
+    .mat-icon {
+      font-size: 33px;
+      width: 33px;
+      height: 33px;
+    }
+  }
+
+  &__items {
+    margin: $grid__gutter *2px 0;
+    padding: 0 $grid__gutter *2px;
+    display: flex;
+    flex: 1 0 100%;
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      line-height: 1.5em;
     }
   }
 }

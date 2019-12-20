@@ -1,0 +1,10 @@
+.login-block {
+  flex: 0 0 20%;
+  @extend .container__col-sm-12--gutter;
+  @extend .container__col-md-6--gutter;
+  @extend .container__col-lg-4--gutter;
+  margin: 0 auto;
+
+  .mat-card {
+  }
+}

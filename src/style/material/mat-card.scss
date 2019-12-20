@@ -4,6 +4,7 @@
     padding: 0;
     background-color: white;
     margin-bottom: $grid__gutter *2px;
+    overflow: hidden;
 
     img {
       margin: 0;
@@ -31,7 +32,7 @@
     display: flex;
     padding: $grid__gutter * 0.5px $grid__gutter * 2px;
     margin: 0;
-    border-top: 2px solid $color-accent-grey;
+    @extend .border-top;
     color: $color-grey-60;
     font-size: 0.9em;
 
