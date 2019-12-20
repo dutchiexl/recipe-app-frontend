@@ -15,8 +15,9 @@ export class RecipeUtil {
             steps: [],
             items: [],
             equipment: [],
+            source: null,
+            userId: '',
             categories: [],
-            source: null
         };
     }
 
@@ -56,7 +57,8 @@ export class RecipeUtil {
             }),
             imagePath: recipe.imagePath,
             equipment: [],
-            nutrients: []
+            nutrients: [],
+            user: recipe.userId
         };
     }
 

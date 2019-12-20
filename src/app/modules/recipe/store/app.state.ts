@@ -11,9 +11,10 @@ import {
     LoadRecipeCategoriesAction,
     LoadRecipesAction,
     LoadUnitsAction,
+    LoadSharedUsersAction,
     NavigateAction,
     SetMealplanAction,
-    SetModeAction,
+    SetModeAction, ShareRecipeAction,
     SetRecipeIngredientFilterValue,
     SetRecipeSearchFilterValue,
     ShowArchivedMealPlansAction,
@@ -37,6 +38,11 @@ import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { IngredientService } from '../services/ingredient.service';
 import { MealPlanUtil } from '../utils/mealPlanUtil';
 import { RecipeFilters } from '../interfaces/filters/recipe-filters.interface';
+import {SharedRecipesService} from "../services/shared-recipes.service";
+import {SharedRecipesUtil} from "../utils/shared-recipes.util";
+import {SharedRecipe} from "../interfaces/recipe/shared-recipe.interface";
+import {SharedUserService} from "../services/shared-user.service";
+import {SharedUser} from "../interfaces/user/shared-user.interface";
 import { RecipeCategoryService } from '../services/recipe-category.service';
 import { RecipeCategory } from '../interfaces/recipe/recipe-category';
 
@@ -51,6 +57,7 @@ export interface AppStateModel {
     units: Unit[];
     ingredients: Ingredient[];
     ingredientCategories: IngredientCategory[];
+    sharedUsers: SharedUser[];
     recipeCategories: RecipeCategory[];
 }
 
@@ -70,6 +77,7 @@ export interface AppStateModel {
         units: undefined,
         ingredients: undefined,
         ingredientCategories: undefined,
+        sharedUsers: undefined,
         recipeCategories: undefined
     }
 })
@@ -77,10 +85,12 @@ export class AppState {
 
     constructor(
         private recipeService: RecipeService,
+        private sharedRecipesService: SharedRecipesService,
         private mealPlanService: MealPlanService,
         private unitService: UnitService,
         private ingredientService: IngredientService,
         private ingredientCategoryService: IngredientCategoryService,
+        private sharedUserService: SharedUserService,
         private recipeCategoryService: RecipeCategoryService
     ) {
     }
@@ -141,6 +151,11 @@ export class AppState {
     }
 
     @Selector()
+    public static getSharedUsers(state: AppStateModel): SharedUser[] {
+        return state.sharedUsers;
+    }
+  
+    @Selector()
     public static getRecipeCategories(state: AppStateModel): RecipeCategory[] {
         return state.recipeCategories;
     }
@@ -172,6 +187,7 @@ export class AppState {
             ctx.dispatch(new LoadRecipesAction());
             ctx.dispatch(new LoadMealPlansAction());
             ctx.dispatch(new LoadUnitsAction());
+            ctx.dispatch(new LoadSharedUsersAction());
             ctx.dispatch(new LoadIngredientCategoriesAction());
             ctx.dispatch(new LoadRecipeCategoriesAction());
             ctx.dispatch(new LoadIngredientsAction());
@@ -257,6 +273,19 @@ export class AppState {
         });
     }
 
+    @Action(LoadSharedUsersAction)
+    public loadSharedUsers(ctx: StateContext<AppStateModel>, {}: LoadSharedUsersAction) {
+        this.setLoadedState(ctx, false);
+        this.sharedUserService.getAll().subscribe((sharedUsers) => {
+            ctx.setState(
+                produce(ctx.getState(), (draft) => {
+                    draft.sharedUsers = sharedUsers;
+                }),
+            );
+            this.checkLoadedState(ctx);
+        });
+    }
+
     @Action(LoadIngredientsAction)
     public loadIngredients(ctx: StateContext<AppStateModel>, {}: LoadIngredientsAction) {
         this.setLoadedState(ctx, false);
@@ -311,6 +340,12 @@ export class AppState {
                 ctx.dispatch(new NavigateAction(['recipe', recipe._id]));
             });
         }
+    }
+
+    @Action(ShareRecipeAction)
+    public shareRecipeAction(ctx: StateContext<AppStateModel>, action: ShareRecipeAction) {
+        let sharedRecipe: SharedRecipe = SharedRecipesUtil.createShareObject(action.recipe, action.user);
+        this.sharedRecipesService.shareRecipe(sharedRecipe).subscribe();
     }
 
     @Action(DeleteRecipeAction)

@@ -30,7 +30,8 @@ export class RecipeMapper {
             }) : [],
             steps: rawData.steps.map((rawStep) => StepMapper.toModel(rawStep)),
             equipment: [],
-            source: ''
+            source: '',
+            userId: rawData.user
         };
     }
 }
