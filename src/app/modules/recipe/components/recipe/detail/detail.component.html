@@ -1,61 +1,92 @@
-<div *ngIf="recipe" class="recipe-detail">
-    <div class="header-image">
-        <img *ngIf="recipe.imagePath" alt="header" src="{{recipe.imagePath | asset}}">
-    </div>
-    <div class="container">
-        <div class="head flex-row">
-            <div class="name columns-6">
-                <h1>
-                    {{ recipe.name }}
-                </h1>
-                <h2 *ngIf="recipe.nameAddition">
-                    {{ recipe.nameAddition }}
-                </h2>
-            </div>
-            <div class="description columns-6">
-                {{recipe.description }}
-                <div class="categories">
-                    <span class="label">Categories:</span>
-                    <mat-chip-list>
-                        <mat-chip *ngFor="let category of recipe.categories">{{ category.name }}</mat-chip>
-                    </mat-chip-list>
-                </div>
+<!--<div *ngIf="recipe" class="recipe-detail">-->
+<!--    <div class="header-image">-->
+<!--        <img *ngIf="recipe.imagePath" alt="header" src="{{recipe.imagePath | asset}}">-->
+<!--    </div>-->
+<!--    <div class="container">-->
+<!--        <div class="head flex-row">-->
+<!--            <div class="name columns-6">-->
+<!--                <h1>-->
+<!--                    {{ recipe.name }}-->
+<!--                </h1>-->
+<!--                <h2 *ngIf="recipe.nameAddition">-->
+<!--                    {{ recipe.nameAddition }}-->
+<!--                </h2>-->
+<!--            </div>-->
+<!--            <div class="description columns-6">-->
+<!--                {{recipe.description }}-->
+<!--                <div class="categories">-->
+<!--                    <span class="label">Categories:</span>-->
+<!--                    <mat-chip-list>-->
+<!--                        <mat-chip *ngFor="let category of recipe.categories">{{ category.name }}</mat-chip>-->
+<!--                    </mat-chip-list>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="details flex-row">-->
+<!--            <div class="info columns-2">-->
+<!--                <div class="ingredients">-->
+<!--                    <div>Serves: {{ recipe.serves }}</div>-->
+<!--                    <h3>-->
+<!--                        Ingredienten-->
+<!--                    </h3>-->
+<!--                    <ul>-->
+<!--                        <app-item *ngFor="let item of recipe.items" [item]="item"></app-item>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="steps list-overview columns-10">-->
+<!--                <app-step *ngFor="let step of recipe.steps" [step]="step" class="list-item"></app-step>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<eco-fab-speed-dial>-->
+<!--    <eco-fab-speed-dial-trigger>-->
+<!--        <button color="primary" mat-fab>-->
+<!--            <mat-icon>menu</mat-icon>-->
+<!--        </button>-->
+<!--    </eco-fab-speed-dial-trigger>-->
+
+<!--    <eco-fab-speed-dial-actions>-->
+<!--        <button (click)="delete()" color="warn" mat-mini-fab>-->
+<!--            <mat-icon>delete</mat-icon>-->
+<!--        </button>-->
+<!--        <button (click)="shareRecipe()" mat-mini-fab>-->
+<!--            <mat-icon>share</mat-icon>-->
+<!--        </button>-->
+<!--        <button (click)="editRecipe(recipe)" color="primary" mat-mini-fab>-->
+<!--            <mat-icon>edit</mat-icon>-->
+<!--        </button>-->
+<!--    </eco-fab-speed-dial-actions>-->
+<!--</eco-fab-speed-dial>-->
+
+<div class="container container--fluid container--top-spacing-small" *ngIf="recipe">
+    <div class="container__header header--with-description rounded-border"
+         [ngStyle]="{ backgroundImage: getImagePath()  }">
+        <div class="header__content">
+            <h1>
+                {{ recipe.name }}
+            </h1>
+            <div class="header__footer">
             </div>
         </div>
-        <div class="details flex-row">
-            <div class="info columns-2">
-                <div class="ingredients">
-                    <div>Serves: {{ recipe.serves }}</div>
-                    <h3>
-                        Ingredienten
-                    </h3>
-                    <ul>
-                        <app-item *ngFor="let item of recipe.items" [item]="item"></app-item>
-                    </ul>
+    </div>
+    <div class="recipe-detail container__row has-gutters">
+        <div class="ingredient-list ingredient-list--rounded-borders with-gutters">
+            <div class="ingredient-list__header">
+                <div class="icon-wrapper space-right">
+                    <mat-icon>list</mat-icon>
+                    <span class="suffix">Ingredienten</span>
                 </div>
             </div>
-            <div class="steps list-overview columns-10">
-                <app-step *ngFor="let step of recipe.steps" [step]="step" class="list-item"></app-step>
+            <div class="ingredient-list__items">
+                <ul>
+                    <app-item *ngFor="let item of recipe.items" [item]="item"></app-item>
+                </ul>
             </div>
+        </div>
+        <div class="step-list with-gutters">
+            <app-step *ngFor="let step of recipe.steps" [step]="step" class="step-list__item"></app-step>
         </div>
     </div>
 </div>
-<eco-fab-speed-dial>
-    <eco-fab-speed-dial-trigger>
-        <button color="primary" mat-fab>
-            <mat-icon>menu</mat-icon>
-        </button>
-    </eco-fab-speed-dial-trigger>
-
-    <eco-fab-speed-dial-actions>
-        <button (click)="delete()" color="warn" mat-mini-fab>
-            <mat-icon>delete</mat-icon>
-        </button>
-        <button (click)="shareRecipe()" mat-mini-fab>
-            <mat-icon>share</mat-icon>
-        </button>
-        <button (click)="editRecipe(recipe)" color="primary" mat-mini-fab>
-            <mat-icon>edit</mat-icon>
-        </button>
-    </eco-fab-speed-dial-actions>
-</eco-fab-speed-dial>

@@ -18,6 +18,7 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
 import { ShareComponent } from './modules/recipe/components/shared/share/share.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { FormsModule } from '@angular/forms';
+import { ThemeingModule } from './modules/themeing/themeing.module';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
         RecipeModule,
         AuthenticationModule,
         SharedModule,
+        ThemeingModule,
         NgxsModule.forRoot([
                 AppState,
                 AuthState

@@ -6,8 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import {DeleteRecipeAction, NavigateAction, ShareRecipeAction} from '../../../store/app.actions';
-import {ShareComponent} from "../../shared/share/share.component";
+import { DeleteRecipeAction, NavigateAction, ShareRecipeAction } from '../../../store/app.actions';
+import { ShareComponent } from '../../shared/share/share.component';
+import { AssetUtil } from '../../../utils/asset.util';
 
 @Component({
     selector: 'app-detail',
@@ -27,9 +28,11 @@ export class DetailComponent implements OnInit {
     ngOnInit() {
         this.route.paramMap.subscribe((params) => {
             this.store.select(AppState.getRecipes).subscribe((recipes) => {
-                this.recipes = recipes;
-                const recipeId = params.get('recipeId');
-                this.recipe = RecipeListUtil.findRecipeById(this.recipes, recipeId);
+                if (recipes) {
+                    this.recipes = recipes;
+                    const recipeId = params.get('recipeId');
+                    this.recipe = RecipeListUtil.findRecipeById(this.recipes, recipeId);
+                }
             });
         });
     }
@@ -60,5 +63,9 @@ export class DetailComponent implements OnInit {
                 this.store.dispatch(new ShareRecipeAction(this.recipe, sharedUser));
             }
         });
+    }
+
+    getImagePath() {
+        return ` url('${AssetUtil.getAssetUrl(this.recipe.imagePath)}')`;
     }
 }

@@ -1,11 +1,11 @@
-<mat-card *ngIf="step">
-    <img alt="{{ step.name }}" mat-card-image src="{{ step.imagePath | asset }}">
-    <mat-card-header>
-        <mat-card-title>{{ step.name }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p>
-            {{ step.text }}
-        </p>
-    </mat-card-content>
-</mat-card>
+<ng-container *ngIf="step">
+    <div class="step-list__item__image-wrapper"
+         [ngStyle]="{ backgroundImage: getImagePath()  }">
+    </div>
+    <div class="step-list__item__content">
+        <div class="step-list__item__content__wrapper">
+            <h4>{{ step.name }}</h4>
+            <p>{{ step.text }}</p>
+        </div>
+    </div>
+</ng-container>

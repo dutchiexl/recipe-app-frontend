@@ -1,41 +1,42 @@
-<div class="grid__item grid__item--gutter">
-    <mat-card>
-        <button mat-icon-button class="corner-button">
-            <mat-icon>reply</mat-icon>
-        </button>
-        <img mat-card-image src="{{ recipe.imagePath | asset}}">
-        <mat-card-content>
-            <h3>
-                {{ recipe.name }}
-            </h3>
-            <p *ngIf="recipe.nameAddition">
-                {{ recipe.nameAddition }}
-            </p>
-        </mat-card-content>
-        <mat-card-footer>
-                            <span class="icon-wrapper space-right">
-                                <mat-icon>group</mat-icon>
-                                <span class="suffix">2</span>
-                            </span>
-            <span class="icon-wrapper">
-                                <mat-icon>timer</mat-icon>
-                                <span class="suffix">45</span>
-                            </span>
-            <div class="icon-wrapper push menu-actions">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
+<mat-card>
+    <button mat-icon-button
+            class="corner-button"
+            (click)="goToRecipe(recipe)"
+    >
+        <mat-icon>reply</mat-icon>
+    </button>
+    <img mat-card-image src="{{ recipe.imagePath | asset}}">
+    <mat-card-content>
+        <h3>
+            {{ recipe.name }}
+        </h3>
+        <p *ngIf="recipe.nameAddition">
+            {{ recipe.nameAddition }}
+        </p>
+    </mat-card-content>
+    <mat-card-footer>
+        <div class="icon-wrapper space-right">
+            <mat-icon>group</mat-icon>
+            <span class="suffix">{{ recipe.serves }}</span>
+        </div>
+        <div class="icon-wrapper">
+            <mat-icon>timer</mat-icon>
+            <span class="suffix">45</span>
+        </div>
+        <div class="icon-wrapper push menu-actions">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>delete</span>
                 </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>delete</mat-icon>
-                        <span>delete</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>edit</mat-icon>
-                        <span>pensil</span>
-                    </button>
-                </mat-menu>
-            </div>
-        </mat-card-footer>
-    </mat-card>
-</div>
+                <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>pensil</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-card-footer>
+</mat-card>

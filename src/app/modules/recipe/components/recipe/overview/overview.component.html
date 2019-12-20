@@ -39,10 +39,13 @@
 <!--        </button>-->
 <!--    </eco-fab-speed-dial-actions>-->
 <!--</eco-fab-speed-dial>-->
-<div class="grid grid--gutter">
-    <app-overview-item
-            *ngFor="let recipe of filteredRecipes"
-            (click)="goToRecipe(recipe)"
-            [recipe]="recipe">
-    </app-overview-item>
+<div class="container--fluid container--top-spacing">
+    <div class="grid grid--gutter">
+        <app-overview-item
+                *ngFor="let recipe of filteredRecipes"
+                [recipe]="recipe"
+                class="grid__item grid__item--gutter"
+        >
+        </app-overview-item>
+    </div>
 </div>

@@ -12,7 +12,7 @@ import { RecipeFilters } from '../../../interfaces/filters/recipe-filters.interf
 })
 export class OverviewComponent implements OnInit {
     recipes: Recipe[];
-    filteredRecipes: Recipe[];
+    filteredRecipes: Recipe[] = [];
     searchValue: string;
     recipeFilter: RecipeFilters;
     sidenavOpen = false;
@@ -21,8 +21,10 @@ export class OverviewComponent implements OnInit {
         this.searchValue = store.selectSnapshot(AppState.getRecipeFilters).search;
 
         store.select(AppState.getRecipes).subscribe((recipes) => {
-            this.recipes = [...recipes];
-            this.updateFilteredRecipes();
+            if (recipes) {
+                this.recipes = [...recipes];
+                this.updateFilteredRecipes();
+            }
         });
 
         store.select(AppState.getRecipeFilters).subscribe((recipeFilters) => {
@@ -57,10 +59,6 @@ export class OverviewComponent implements OnInit {
     }
 
     ngOnInit() {
-    }
-
-    goToRecipe(recipe: Recipe) {
-        this.store.dispatch(new NavigateAction(['recipe', recipe.id]));
     }
 
     createRecipe() {
