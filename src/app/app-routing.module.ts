@@ -14,6 +14,7 @@ import { RecipeOverviewComponent } from './modules/themeing/components/recipe-ov
 import { RecipeItemComponent } from './modules/themeing/components/recipe-item/recipe-item.component';
 import { RecipeItemNoDescriptionComponent } from './modules/themeing/components/recipe-item-no-description/recipe-item-no-description.component';
 import { RecipeLoginComponent } from './modules/themeing/components/login/login.component';
+import { RecipeEditComponent } from './modules/themeing/components/recipe-edit/recipe-edit.component';
 
 const routes: Routes = [
     {
@@ -24,6 +25,9 @@ const routes: Routes = [
     },
     {
         path: 'themeing/login', component: RecipeLoginComponent
+    },
+    {
+        path: 'themeing/edit', component: RecipeEditComponent
     },
     {
         path: 'themeing/item-no-description', component: RecipeItemNoDescriptionComponent

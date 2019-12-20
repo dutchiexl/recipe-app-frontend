@@ -12,17 +12,17 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$recipe-app-primary: mat-palette($recipe-palette);
-$recipe-app-accent:  mat-palette($recipe-palette, A200, A100, A400);
-$recipe-app-warn:    mat-palette($recipe-red);
+$recipe-app-primary: mat-palette($recipe-foreground);
+$recipe-app-accent: mat-palette($recipe-foreground, A200, A100, A400);
+$recipe-app-warn: mat-palette($mat-red);
 
-$my-dark-theme-background: (
+$recipe-background: (
         status-bar: green,
-        app-bar:    map_get($mat-blue, 900),
+        app-bar: map_get($mat-blue, 900),
         background: orange,
-        hover:      rgba(white, 0.04),
-        card:       map_get($mat-red, 800),
-        dialog:     map_get($mat-grey, 800),
+        hover: rgba(white, 0.04),
+        card: $light-primary-text,
+        dialog: $light-primary-text,
         disabled-button: $white-12-opacity,
         raised-button: map-get($mat-grey, 800),
         focused-button: $white-6-opacity,
@@ -33,22 +33,40 @@ $my-dark-theme-background: (
         disabled-list-option: black,
 );
 
-$my-dark-theme-foreground: (
-        base:              yellow,
-        divider:           black,
-        dividers:          $color-grey-90,
-        disabled:          rgba($color-text, 0.3),
-        disabled-button:   rgba($color-text, 0.3),
-        disabled-text:     rgba($color-text, 0.3),
-        hint-text:         rgba($color-text, 0.3),
-        secondary-text:    rgba($color-text, 0.7),
-        icon:              $color-grey-60,
-        icons:             $color-grey-60,
-        text:              $color-text,
-        slider-min:        white,
-        slider-off:        rgba(white, 0.3),
+$recipe-foreground: (
+        base: white,
+        divider: $color-grey-90,
+        dividers: $color-grey-90,
+        disabled: rgba($color-text, 0.3),
+        disabled-button: rgba($color-text, 0.3),
+        disabled-text: rgba($color-text, 0.3),
+        hint-text: rgba($color-text, 0.3),
+        secondary-text: rgba($color-text, 0.7),
+        icon: $color-grey-60,
+        icons: $color-grey-60,
+        text: $color-text,
+        slider-min: white,
+        slider-off: rgba(white, 0.3),
         slider-off-active: rgba(white, 0.3),
 );
+
+$recipe-form-foreground: (
+        base: white,
+        divider: black,
+        dividers: black,
+        disabled: rgba($color-text, 0.3),
+        disabled-button: rgba($color-text, 0.3),
+        disabled-text: rgba($color-text, 0.3),
+        hint-text: rgba($color-text, 0.3),
+        secondary-text: rgba($color-text, 0.7),
+        icon: $color-grey-60,
+        icons: $color-grey-60,
+        text: $color-text,
+        slider-min: white,
+        slider-off: rgba(white, 0.3),
+        slider-off-active: rgba(white, 0.3),
+);
+
 
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
@@ -58,17 +76,72 @@ $my-dark-theme-foreground: (
           accent: $accent,
           warn: $warn,
           is-dark: false,
-          foreground: $my-dark-theme-foreground,
-          background: $my-dark-theme-background,
+          foreground: $recipe-foreground,
+          background: $recipe-background,
+  );
+}
+
+@function create-recipe-form-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+          primary: $primary,
+          accent: $accent,
+          warn: $warn,
+          is-dark: false,
+          foreground: $recipe-form-foreground,
+          background: $recipe-background,
   );
 }
 
 // Create the theme object (a Sass map containing all of the palettes).
 $recipe-app-theme: create-recipe-theme($recipe-app-primary, $recipe-app-accent, $recipe-app-warn);
+$recipe-app-form-theme: create-recipe-form-theme($recipe-app-primary, $recipe-app-accent, $recipe-app-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($recipe-app-theme);
+
+@mixin recipe-material-theme($theme) {
+  @include mat-core-theme($theme);
+  @include mat-autocomplete-theme($theme);
+  @include mat-badge-theme($theme);
+  @include mat-bottom-sheet-theme($theme);
+  @include mat-button-theme($theme);
+  @include mat-button-toggle-theme($theme);
+  @include mat-card-theme($theme);
+  @include mat-checkbox-theme($theme);
+  @include mat-chips-theme($theme);
+  @include mat-table-theme($theme);
+  @include mat-datepicker-theme($theme);
+  @include mat-dialog-theme($theme);
+  @include mat-divider-theme($theme);
+  @include mat-expansion-panel-theme($theme);
+  @include mat-grid-list-theme($theme);
+  @include mat-icon-theme($theme);
+  @include mat-input-theme($theme);
+  @include mat-list-theme($theme);
+  @include mat-menu-theme($theme);
+  @include mat-paginator-theme($theme);
+  @include mat-progress-bar-theme($theme);
+  @include mat-progress-spinner-theme($theme);
+  @include mat-radio-theme($theme);
+  @include mat-select-theme($theme);
+  @include mat-sidenav-theme($theme);
+  @include mat-slide-toggle-theme($theme);
+  @include mat-slider-theme($theme);
+  @include mat-stepper-theme($theme);
+  @include mat-sort-theme($theme);
+  @include mat-tabs-theme($theme);
+  @include mat-toolbar-theme($theme);
+  @include mat-tooltip-theme($theme);
+  @include mat-tree-theme($theme);
+  @include mat-snack-bar-theme($theme);
+}
+
+@mixin recipe-material-form-theme($theme) {
+  @include mat-form-field-theme($theme);
+}
+
+@include recipe-material-theme($recipe-app-theme);
+@include recipe-material-form-theme($recipe-app-form-theme);
 //@include recipe-theme($recipe-app-theme);
 
 @import "grid";

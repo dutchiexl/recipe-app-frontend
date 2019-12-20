@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import {
     MatAutocompleteModule,
     MatButtonModule,
-    MatCardModule,
+    MatCardModule, MatCheckboxModule,
     MatChipsModule,
     MatDialogModule,
-    MatDividerModule,
+    MatDividerModule, MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
     MatSelectModule,
-    MatSidenavModule,
+    MatSidenavModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
@@ -37,7 +37,10 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         MatSelectModule,
         MatSidenavModule,
         MatChipsModule,
-        EcoFabSpeedDialModule
+        EcoFabSpeedDialModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatTableModule
     ],
     exports: [
         MatToolbarModule,
@@ -54,7 +57,10 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         MatSelectModule,
         MatSidenavModule,
         MatChipsModule,
-        EcoFabSpeedDialModule
+        EcoFabSpeedDialModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatTableModule
     ]
 })
 export class MaterialModule {

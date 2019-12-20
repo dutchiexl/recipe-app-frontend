@@ -1,0 +1,13 @@
+.mat-expansion-panel.form-block {
+  margin-bottom: $grid__gutter * 2px;
+
+  .mat-expansion-panel-body {
+    padding: 25px;
+  }
+
+  &--no-padding {
+    .mat-expansion-panel-body {
+      padding: $grid__gutter *2px 0;
+    }
+  }
+}
