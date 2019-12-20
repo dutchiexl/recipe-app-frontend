@@ -3,7 +3,7 @@
     <span class="spacer"></span>
     <button (click)="goToShoppingList()" *ngIf="selectedMealPlan" mat-button>Boodschappenlijstje</button>
     <button [matMenuTriggerFor]="menu" mat-button *isAuthorized>{{ mode }}</button>
-    <mat-menu #menu="matMenu" b>
+    <mat-menu #menu="matMenu">
         <button (click)="setMode(stateEnum.RECIPES)" mat-menu-item>Recepten</button>
         <button (click)="setMode(stateEnum.MEALPLANS)" mat-menu-item>Planner</button>
     </mat-menu>

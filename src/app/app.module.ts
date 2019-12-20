@@ -18,12 +18,14 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
 import { ShareComponent } from './modules/recipe/components/shared/share/share.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { FormsModule } from '@angular/forms';
+import { BackgroundImageDirective } from './modules/recipe/directives/background-image.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         FormGroupDirective,
-        ShareComponent
+        ShareComponent,
+        BackgroundImageDirective
     ],
     imports: [
         BrowserModule,
