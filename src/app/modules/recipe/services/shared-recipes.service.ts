@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Recipe } from '../interfaces/recipe/recipe.interface';
-import {RecipeUtil} from "../utils/recipe.util";
-import {SharedRecipe} from "../interfaces/recipe/shared-recipe.interface";
-import {SharedRecipesUtil} from "../utils/shared-recipes.util";
+import {SharedRecipe} from '../interfaces/recipe/shared-recipe.interface';
+import {SharedRecipesUtil} from '../utils/shared-recipes.util';
 
 @Injectable()
 export class SharedRecipesService {
