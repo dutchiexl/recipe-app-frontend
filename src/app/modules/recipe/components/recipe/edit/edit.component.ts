@@ -71,6 +71,7 @@ export class EditComponent implements OnInit {
 
             if (this.recipe.id) {
                 recipeToSubmit.id = this.recipe.id;
+                recipeToSubmit.userId = this.recipe.userId;
             }
             this.store.dispatch(new UpdateOrCreateRecipeAction(recipeToSubmit));
         }
