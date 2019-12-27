@@ -24,9 +24,11 @@ export class ShareComponent implements OnInit {
         public dialogRef: MatDialogRef<ShareComponent>,
         private store: Store,
         private formBuilder: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) public data: Confirmation) {
+        @Inject(MAT_DIALOG_DATA) public data: any) {
         this.store.select(AppState.getSharedUsers).subscribe((sharedUsers) => {
-            this.sharedUsers = sharedUsers;
+            this.sharedUsers = sharedUsers.filter((sharedUser) => {
+                return sharedUser.id != data.userId;
+            });
             this.filteredSharedUsers = [...this.sharedUsers];
         });
     }
