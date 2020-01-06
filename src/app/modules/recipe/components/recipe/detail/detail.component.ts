@@ -53,6 +53,9 @@ export class DetailComponent implements OnInit {
     shareRecipe() {
         const dialogRef = this.dialog.open(ShareComponent, {
             width: '400px',
+            data: {
+                userId: this.recipe.userId
+            }
         });
 
         dialogRef.afterClosed().subscribe(sharedUser => {
