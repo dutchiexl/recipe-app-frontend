@@ -5,7 +5,9 @@ import { map } from 'rxjs/operators';
 import { RecipeCategory } from '../interfaces/recipe/recipe-category';
 import { RawRecipeCategory } from '../interfaces/api/raw-recipe-category.interface';
 import { RecipeCategoryMapper } from '../mappers/recipe-category.mapper';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class RecipeCategoryService {
     cache: Observable<RecipeCategory>;
     callbackUrl = environment.apiUrl + 'api/recipe-categories';

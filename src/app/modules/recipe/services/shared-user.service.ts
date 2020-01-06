@@ -1,4 +1,5 @@
 import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import {SharedUser} from "../interfaces/user/shared-user.interface";
 import {RawSharedUser} from "../interfaces/api/raw-shared-user.interface";
 import {SharedUserMapper} from "../mappers/shared-user.mapper";
 
+@Injectable()
 export class SharedUserService {
     callbackUrl = environment.apiUrl + 'api/shared-users';
 

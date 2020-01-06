@@ -5,7 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { RawUnit } from '../interfaces/api/raw-unit.interface';
 import { UnitMapper } from '../mappers/unit.mapper';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class UnitService {
     cache: Observable<Unit>;
     callbackUrl = environment.apiUrl + 'api/units';

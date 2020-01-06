@@ -7,7 +7,9 @@ import { Ingredient } from '../interfaces/recipe/ingredient.interface';
 import { RawIngredient } from '../interfaces/api/raw-ingredient.interface';
 import { IngredientMapper } from '../mappers/ingredient.mapper';
 import { IngredientUtil } from '../utils/ingredient.util';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class IngredientService {
     cache: Observable<IngredientCategory>;
     callbackUrl = environment.apiUrl + 'api/ingredients';
