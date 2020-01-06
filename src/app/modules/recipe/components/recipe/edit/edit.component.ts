@@ -15,6 +15,9 @@ import { ItemUtil } from '../../../utils/item.util';
 import { UpdateOrCreateRecipeAction } from '../../../store/app.actions';
 import { AssetUtil } from '../../../utils/asset.util';
 import { RecipeCategory } from '../../../interfaces/recipe/recipe-category';
+import { MatTableDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import { PeriodicElement } from '../../../../themeing/components/recipe-edit/recipe-edit.component';
 
 @Component({
     selector: 'app-edit',
@@ -29,6 +32,9 @@ export class EditComponent implements OnInit {
     preview = AssetUtil.getPlaceholder();
     selectedCategories: RecipeCategory[];
     serveOptions = [1, 2, 3, 4, 5, 6];
+    displayedColumns: string[] = ['select', 'amount', 'unit', 'ingredient', 'actions'];
+    dataSource = new MatTableDataSource<Item>(this.recipe && this.recipe.items ? this.recipe.items : []);
+    selection = new SelectionModel<Item>(true, []);
     @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
     constructor(
@@ -143,5 +149,27 @@ export class EditComponent implements OnInit {
 
     setCategories(categories: RecipeCategory[]) {
         this.selectedCategories = categories;
+    }
+
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+        const numSelected = this.selection.selected.length;
+        const numRows = this.dataSource.data.length;
+        return numSelected === numRows;
+    }
+
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+        this.isAllSelected() ?
+            this.selection.clear() :
+            this.dataSource.data.forEach(row => this.selection.select(row));
+    }
+
+    /** The label for the checkbox on the passed row */
+    checkboxLabel(row?: Item): string {
+        if (!row) {
+            return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+        }
+        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.ingredient}`;
     }
 }
