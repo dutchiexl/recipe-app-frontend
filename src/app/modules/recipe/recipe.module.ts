@@ -34,6 +34,7 @@ import {ShareComponent} from "./components/shared/share/share.component";
 import {SharedRecipesService} from "./services/shared-recipes.service";
 import { RecipeCategoryService } from './services/recipe-category.service';
 import { RecipeCategoryPickerComponent } from './components/recipe/edit/categories/recipe-category-picker.component';
+import {MessagebarService} from "../messagebar/services/messagebar.service";
 
 @NgModule({
     declarations: [
@@ -57,7 +58,7 @@ import { RecipeCategoryPickerComponent } from './components/recipe/edit/categori
         CreateIngredientComponent,
         AssetPipe,
         IngredientsFilterComponent,
-        RecipeCategoryPickerComponent
+        RecipeCategoryPickerComponent,
     ],
     imports: [
         CommonModule,
@@ -65,7 +66,7 @@ import { RecipeCategoryPickerComponent } from './components/recipe/edit/categori
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         RecipeService,
@@ -75,7 +76,8 @@ import { RecipeCategoryPickerComponent } from './components/recipe/edit/categori
         SharedUserService,
         IngredientService,
         IngredientCategoryService,
-        RecipeCategoryService
+        RecipeCategoryService,
+        MessagebarService
     ],
     entryComponents: [
         ConfirmationComponent,

@@ -18,29 +18,34 @@ import { LoadApplicationAction } from './modules/recipe/store/app.actions';
 import { ShareComponent } from './modules/recipe/components/shared/share/share.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { FormsModule } from '@angular/forms';
+import {MessagebarModule} from "./modules/messagebar/messagebar.module";
+import {MessagebarComponent} from "./modules/messagebar/components/messagebar/messagebar.component";
+
 
 @NgModule({
     declarations: [
         AppComponent,
         FormGroupDirective,
-        ShareComponent
+        ShareComponent,
+        MessagebarComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         MaterialModule,
+        MessagebarModule,
         RecipeModule,
         AuthenticationModule,
         SharedModule,
         NgxsModule.forRoot([
                 AppState,
-                AuthState
+                AuthState,
             ],
             {developmentMode: !environment.production}),
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
     ],
     bootstrap: [AppComponent]
 })

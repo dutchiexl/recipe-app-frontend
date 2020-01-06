@@ -6,8 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../../interfaces/recipe/recipe.interface';
 import { MatDialog } from '@angular/material';
 import { ConfirmationComponent } from '../../shared/confirmation/confirmation.component';
-import {DeleteRecipeAction, NavigateAction, ShareRecipeAction} from '../../../store/app.actions';
+import { Message } from "../../../../messagebar/interfaces/messagebar/message.interface";
+import {
+    DeleteRecipeAction,
+    NavigateAction,
+    ShareRecipeAction
+} from '../../../store/app.actions';
+
 import {ShareComponent} from "../../shared/share/share.component";
+import {MessagebarService} from "../../../../messagebar/services/messagebar.service";
 
 @Component({
     selector: 'app-detail',
@@ -21,7 +28,8 @@ export class DetailComponent implements OnInit {
     constructor(
         private store: Store,
         private route: ActivatedRoute,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private messagebarService: MessagebarService
     ) {}
 
     ngOnInit() {
@@ -61,6 +69,9 @@ export class DetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(sharedUser => {
             if (sharedUser) {
                 this.store.dispatch(new ShareRecipeAction(this.recipe, sharedUser));
+
+                let successMessage: Message = { message: 'Shared recipe with ' + sharedUser.username };
+                this.messagebarService.addMessage(successMessage);
             }
         });
     }
